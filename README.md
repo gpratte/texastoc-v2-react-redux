@@ -8,6 +8,9 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 03 navigation bar
+Added a navigation bar to the top of the page.
+
 ## step 02 bootstrap
 Oh yeah, it's nice to add Bootstrap to the app for two reasons:
 
