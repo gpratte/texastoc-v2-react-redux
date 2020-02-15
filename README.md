@@ -8,6 +8,15 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 04 routing
+Install react router
+* npm install --save react-router-dom
+
+Route to the Home page, Season or Current Game from links on the homepage or 
+from dropdown actions in the navigation bar.
+
+The Season and Game are simple placeholder components (for the time being).
+
 ## step 03 navigation bar
 Added a navigation bar to the top of the page.
 
