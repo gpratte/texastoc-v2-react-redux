@@ -6,9 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import {Route, Switch} from 'react-router-dom';
-import Home from './Home'
-import Season from './season/Season'
-import CurrentGame from './current-game/CurrentGame'
+import Home from './home/Home'
+import SeasonProxy from './season/SeasonProxy'
+import CurrentGameProxy from './current-game/CurrentGameProxy'
 
 function App() {
   return (
@@ -33,8 +33,8 @@ function App() {
           <Col>
             <Switch>
               <Route exact={true} path="/" component={Home}/>
-              <Route path="/season" component={Season}/>
-              <Route path="/current-game" component={CurrentGame}/>
+              <Route path="/season" component={SeasonProxy}/>
+              <Route path="/current-game" component={CurrentGameProxy}/>
             </Switch>
 
           </Col>

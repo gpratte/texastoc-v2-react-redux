@@ -8,14 +8,28 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 05 season and current game
+I have a react/redux application for the current game. It has its own redux store. 
+See https://github.com/gpratte/poker-league-current-game
+
+I also have a react/redux application for a season. It too has its own redux store.
+See https://github.com/gpratte/poker-league-season
+
+Brought them into this application for the SeasonProxy and CurrentGameProxy.
+
+Note: Had to install a couple of libraries
+* npm install --save moment-timezone
+* npm install --save react-redux
+* npm install --save redux
+
 ## step 04 routing
 Install react router
 * npm install --save react-router-dom
 
-Route to the Home page, Season or Current Game from links on the homepage or 
+Route to the Home page, SeasonProxy or Current Game from links on the homepage or 
 from dropdown actions in the navigation bar.
 
-The Season and Game are simple placeholder components (for the time being).
+The SeasonProxy and Game are simple placeholder components (for the time being).
 
 ## step 03 navigation bar
 Added a navigation bar to the top of the page.
