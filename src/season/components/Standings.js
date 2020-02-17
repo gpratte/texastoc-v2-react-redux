@@ -11,7 +11,7 @@ class Standings extends React.Component {
           <td>{place}</td>
           <td>{name}</td>
           <td>{points}</td>
-          { hideEntries ? '' : <td>{entries}</td>}
+          { hideEntries ? <td></td> : <td>{entries}</td>}
         </tr>
       )
     })
@@ -27,7 +27,7 @@ class Standings extends React.Component {
           <th>Place</th>
           <th>Name</th>
           <th>Points</th>
-          { hideEntries ? '' : <th>Entries</th> }
+          { hideEntries ? <th></th> : <th>Entries</th> }
         </tr>
         </thead>
         <tbody>

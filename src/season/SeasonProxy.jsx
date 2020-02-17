@@ -18,12 +18,20 @@ const SeasonContainer = () => {
   )
 }
 
-const SeasonProxy = () => {
-  return (
-    <Provider store={seasonStore}>
-      <SeasonContainer />
-    </Provider>
-  )
+class SeasonProxy extends React.Component {
+
+  componentDidMount() {
+    // TODO get the season from the server
+    console.log('!!! SeasonProxy did mount')
+  }
+
+  render() {
+    return (
+      <Provider store={seasonStore}>
+        <SeasonContainer />
+      </Provider>
+    );
+  }
 }
 
 export default SeasonProxy;

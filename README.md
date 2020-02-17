@@ -8,6 +8,18 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 06 login api
+Wired up the client with the server by calling the login api to get a token.
+
+Installed Axios (https://github.com/axios/axios) to make make API calls
+* npm install --save axios
+
+Created an api.js to initialize axios.
+
+Created a loginClient to use axios to post to the /login api and save the token in the login store.
+
+One note: Brought up the texastoc server locally. Need to enhance its build pipeline to deploy to Heroku.
+
 ## step 05 season and current game
 I have a react/redux application for the current game. It has its own redux store. 
 See https://github.com/gpratte/poker-league-current-game
