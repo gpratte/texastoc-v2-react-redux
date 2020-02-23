@@ -8,6 +8,15 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 08 react router bootstrap
+Needed the navigation links to use react routing instead of doing a page load 
+(because there were href).
+
+Installed react router bootstrap
+* npm install react-router-bootstrap --save
+
+Now the navigation header links used react routing.
+
 ## step 07 league store
 Now using one store (the league store) and hence one connector
 (the league connector).

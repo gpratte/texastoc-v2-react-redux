@@ -5,11 +5,14 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
+import NavLink from 'react-bootstrap/NavLink';
 import {Route, Switch} from 'react-router-dom';
 import Home from '../home/Home'
 import Login from '../login/components/Login'
 import Season from '../season/components/Season'
 import CurrentGame from '../current-game/components/CurrentGame'
+import { LinkContainer } from "react-router-bootstrap";
+import Button from 'react-bootstrap/Button';
 
 class League extends React.Component {
   render() {
@@ -28,9 +31,21 @@ class League extends React.Component {
             </Nav>
             <Nav>
               <NavDropdown title="&nbsp;&nbsp;&nbsp;Actions&nbsp;&nbsp;" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="/home">Home</NavDropdown.Item>
-                <NavDropdown.Item href="/season">Season</NavDropdown.Item>
-                <NavDropdown.Item href="/current-game">Game</NavDropdown.Item>
+                <LinkContainer exact to={"/home"}>
+                  <NavLink>
+                    <Button variant="link">Home</Button>
+                  </NavLink>
+                </LinkContainer>
+                <LinkContainer exact to={"/season"}>
+                  <NavLink>
+                    <Button variant="link">Season</Button>
+                  </NavLink>
+                </LinkContainer>
+                <LinkContainer exact to={"/current-game"}>
+                  <NavLink>
+                    <Button variant="link">Game</Button>
+                  </NavLink>
+                </LinkContainer>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
