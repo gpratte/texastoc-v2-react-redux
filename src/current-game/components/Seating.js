@@ -3,7 +3,7 @@ import {flatMap, map} from 'lodash';
 import Table from 'react-bootstrap/Table';
 import SeatingConfig from "./SeatingConfig";
 import Button from "react-bootstrap/Button";
-import store from "../currentGameStore";
+import leagueStore from '../../league/leagueStore'
 import {TOGGLE_CONFIGURE_SEATING} from "../actions/gameActions";
 
 class Seating extends React.Component {
@@ -42,7 +42,7 @@ class Seating extends React.Component {
           </tbody>
         </Table>
         <Button variant="outline-secondary"
-                onClick={() => store.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: true})}>
+                onClick={() => leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: true})}>
           Configure Seating
         </Button>
         {/*TODO ask about key to remount the react component*/}

@@ -27,7 +27,7 @@ function getPlayerFullName(player) {
 }
 
 // Take the game as the parameter
-function reducer(game, action) {
+function currentGameReducer(game, action) {
 
   let playerId = null;
 
@@ -114,4 +114,4 @@ function reducer(game, action) {
   }
 }
 
-export default reducer
+export default currentGameReducer

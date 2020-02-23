@@ -1,6 +1,6 @@
 import React from 'react'
 import './GamePlayers.css'
-import store from '../currentGameStore'
+import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import {
@@ -26,7 +26,7 @@ class GamePlayers extends React.Component {
           <td>{finish}</td>
           <td>
             <Button variant="link" onClick={() => {
-              store.dispatch({type: EDIT_GAME_PLAYER, id: id});
+              leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: id});
             }}>
               {firstName}{(firstName && lastName) ? ' ' : ''}{lastName}
             </Button>
@@ -72,11 +72,11 @@ class GamePlayers extends React.Component {
         <AddNewPlayer value={game}/>
         <EditGamePlayer value={game}/>
 
-        <Button variant="primary" onClick={() => store.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
+        <Button variant="primary" onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
           Add Player
         </Button>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="primary" onClick={() => store.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: true})}>
+        <Button variant="primary" onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: true})}>
           Add New Player
         </Button>
       </div>

@@ -2,16 +2,15 @@ import {
   LOGGED_IN
 } from '../actions/loginActions'
 
-// Take the token as the parameter
-function reducer(token, action) {
+// Take the league as the parameter
+function loginReducer(league, action) {
   switch (action.type) {
     case LOGGED_IN:
-      token = action.token;
-      break;
+      return Object.assign({}, league, {token: action.token});
     default:
   }
 
-  return token;
+  return league;
 }
 
-export default reducer
+export default loginReducer

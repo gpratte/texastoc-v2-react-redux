@@ -1,7 +1,7 @@
 
 // Take the season as the parameter
-function reducer(state, action) {
+function seasonReducer(state, action) {
   return state
 }
 
-export default reducer
+export default seasonReducer

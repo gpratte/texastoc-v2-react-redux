@@ -19,7 +19,7 @@ class Login extends React.Component {
           <p className={'main-p'}><Link to="/logout">
             <Button variant="outline-secondary"> Log Out </Button> </Link>
           </p>
-          <p className={'main-p'}><Link to="/">
+          <p className={'main-p'}><Link to="/home">
             <Button variant="outline-secondary"> Home </Button> </Link>
           </p>
         </div>

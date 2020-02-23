@@ -1,6 +1,6 @@
 import React from 'react'
 import './GamePlayers.css'
-import store from '../currentGameStore'
+import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -109,14 +109,14 @@ class SeatingConfig extends React.Component {
       }
     })
 
-    store.dispatch({type: SUBMIT_SEATING, seatingConfig})
+    leagueStore.dispatch({type: SUBMIT_SEATING, seatingConfig})
   }
 
   render() {
     return (
       <div>
         <Modal show={this.props.game.showConfigureSeating}
-               onHide={() => store.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})}>
+               onHide={() => leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.requestSeating}>
               <Form.Group as={Row} className="align-items-center">
@@ -142,7 +142,7 @@ class SeatingConfig extends React.Component {
 
               <Modal.Footer>
                 <Button variant="secondary" onClick={() => {
-                  store.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})
+                  leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})
                 }}>
                   Cancel
                 </Button>

@@ -8,6 +8,12 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 07 league store
+Now using one store (the league store) and hence one connector
+(the league connector).
+
+Still using multiple reducers (login, current game and season reducers).
+
 ## step 06 login api
 Wired up the client with the server by calling the login api to get a token.
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import './GamePlayers.css'
-import store from '../currentGameStore'
+import leagueStore from '../../league/leagueStore'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -27,7 +27,7 @@ class EditGamePlayer extends React.Component {
 
   updatePlayer = (e) => {
     e.preventDefault();
-    store.dispatch({type: UPDATE_GAME_PLAYER, gamePlayer: {
+    leagueStore.dispatch({type: UPDATE_GAME_PLAYER, gamePlayer: {
         id: e.target.elements.gamePlayerId.value,
         buyInCollected: e.target.elements.buyInId.checked,
         annualTocCollected: e.target.elements.tocId.checked,
@@ -46,7 +46,7 @@ class EditGamePlayer extends React.Component {
 
     return (
       <div>
-        <Modal show={this.props.value.editGamePlayerId !== null} onHide={() => store.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
+        <Modal show={this.props.value.editGamePlayerId !== null} onHide={() => leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
           <Modal.Body>
             <p className="text-center">
               {gamePlayer ? gamePlayer.firstName : ''}
@@ -109,13 +109,13 @@ class EditGamePlayer extends React.Component {
                   // eslint-disable-next-line no-restricted-globals
                   const doit = confirm('are you sure?');
                   if (doit) {
-                    store.dispatch({type: DELETE_GAME_PLAYER, id: gamePlayer ? gamePlayer.id : 0})
+                    leagueStore.dispatch({type: DELETE_GAME_PLAYER, id: gamePlayer ? gamePlayer.id : 0})
                   }
                 }}>
                   Delete
                 </Button>
                 <Button variant="secondary" onClick={() => {
-                  store.dispatch({type: EDIT_GAME_PLAYER, id: null})
+                  leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})
                 }}>
                   Cancel
                 </Button>

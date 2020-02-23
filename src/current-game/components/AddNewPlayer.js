@@ -1,6 +1,6 @@
 import React from 'react'
 import './GamePlayers.css'
-import store from '../currentGameStore'
+import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -13,7 +13,7 @@ class AddNewPlayer extends React.Component {
 
   addNewPlayer = (e) => {
     e.preventDefault();
-    store.dispatch({type: ADD_NEW_PLAYER_TO_GAME, player: {
+    leagueStore.dispatch({type: ADD_NEW_PLAYER_TO_GAME, player: {
         firstName: e.target.elements.firstNameId.value,
         lastName: e.target.elements.lastNameId.value,
         email: e.target.elements.emailId.value,
@@ -27,7 +27,7 @@ class AddNewPlayer extends React.Component {
   render() {
     return (
       <div>
-        <Modal show={this.props.value.showAddNewPlayer} onHide={() => store.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
+        <Modal show={this.props.value.showAddNewPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.addNewPlayer}>
               <Form.Group>
@@ -59,7 +59,7 @@ class AddNewPlayer extends React.Component {
               />
               <Modal.Footer>
                 <Button variant="secondary" onClick={() => {
-                  store.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})
+                  leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})
                 }}>
                   Cancel
                 </Button>
