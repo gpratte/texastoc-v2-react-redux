@@ -8,13 +8,17 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## Branches
+* [step 09 must be logged in](step-09-must-be-logged-in)
+* [step 08 react router bootstrap](step-08-react-router-bootstrap)
+
 ## step 09 must be logged in
 Did a few things
 * added the ability to log out.
 * passing the league in the props to all components.
 * deny access to some components (e.g. Season, CurrentGame) if the user has not logged in.
 
-To deny access added a check and redirect in the render 
+To deny access added a check and redirect in the render
 ```
    if (this.props.league.token === null || this.props.league.token.token === null ) {
      // Must be logged in to view this component
@@ -25,7 +29,7 @@ To deny access added a check and redirect in the render
 ```
 
 ## step 08 react router bootstrap
-Needed the navigation links to use react routing instead of doing a page load 
+Needed the navigation links to use react routing instead of doing a page load
 (because there were href).
 
 Installed react router bootstrap
@@ -52,7 +56,7 @@ Created a loginClient to use axios to post to the /login api and save the token 
 One note: Brought up the texastoc server locally. Need to enhance its build pipeline to deploy to Heroku.
 
 ## step 05 season and current game
-I have a react/redux application for the current game. It has its own redux store. 
+I have a react/redux application for the current game. It has its own redux store.
 See https://github.com/gpratte/poker-league-current-game
 
 I also have a react/redux application for a season. It too has its own redux store.
@@ -69,7 +73,7 @@ Note: Had to install a couple of libraries
 Install react router
 * npm install --save react-router-dom
 
-Route to the Home page, SeasonProxy or Current Game from links on the homepage or 
+Route to the Home page, SeasonProxy or Current Game from links on the homepage or
 from dropdown actions in the navigation bar.
 
 The SeasonProxy and Game are simple placeholder components (for the time being).
