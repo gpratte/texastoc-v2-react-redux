@@ -11,8 +11,15 @@ Each step can be found on the cooresponding branch.
 ## Branches
 * [step 09 must be logged in](#step-09-must-be-logged-in)
 * [step 08 react router bootstrap](#step-08-react-router-bootstrap)
+* [step 07 league store](#step-07-league-store)
+* [step 06 login api](#step-06-login-api)
+* [step 05 season and current game](#step-05-season-and-current-game)
+* [step 04 routing](#step-04-routing)
+* [step 03 navigation bar](#step-03-navigation-bar)
+* [step 02 bootstrap](#step-02-bootstrap)
+* [step 01 create development environment](#step-01-create-development-environment)
 
-##step 09 must be logged in
+## step 09 must be logged in
 Did a few things
 * added the ability to log out.
 * passing the league in the props to all components.
