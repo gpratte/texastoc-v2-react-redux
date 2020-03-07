@@ -9,10 +9,10 @@ The following shows what I did step by step.
 Each step can be found on the cooresponding branch.
 
 ## Branches
-* [step 09 must be logged in](step-09-must-be-logged-in)
-* [step 08 react router bootstrap](step-08-react-router-bootstrap)
+* [step 09 must be logged in](#step-09-must-be-logged-in)
+* [step 08 react router bootstrap](#step-08-react-router-bootstrap)
 
-## step 09 must be logged in
+##step 09 must be logged in
 Did a few things
 * added the ability to log out.
 * passing the league in the props to all components.
