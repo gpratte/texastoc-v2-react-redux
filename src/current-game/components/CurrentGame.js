@@ -2,7 +2,7 @@ import React from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import {Redirect} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
 import GamePlayersRemaining from './GamePlayersRemaining'
@@ -10,7 +10,14 @@ import Seating from './Seating'
 
 class CurrentGame extends React.Component {
   render() {
-    const game = this.props.game;
+    if (this.props.league.token === null || this.props.league.token.token === null ) {
+      // Must be logged in to view this component
+      return (
+        <Redirect to='/login'/>
+      )
+    }
+
+    const game = this.props.league.game;
     return (
       <div>
         <Accordion>

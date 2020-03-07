@@ -10,14 +10,20 @@ import SeasonDetails from './SeasonDetails'
 import Standings from './Standings'
 import Quarters from './Quarters'
 import Games from './Games'
+import {Redirect} from "react-router-dom";
 
 class Season extends React.Component {
   render() {
-    const season = this.props.season;
+    if (this.props.league.token === null || this.props.league.token.token === null ) {
+      // Must be logged in to view this component
+      return (
+        <Redirect to='/login'/>
+      )
+    }
 
+    const season = this.props.league.season;
     const startDate = moment(season.start).tz('America/Chicago').format('YYYY')
     const endDate = moment(season.end).tz('America/Chicago').format('YYYY')
-
 
     return (
       <div>

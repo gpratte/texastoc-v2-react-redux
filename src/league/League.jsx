@@ -26,7 +26,11 @@ class League extends React.Component {
             </Nav>
             <Nav>
               <NavDropdown title="&nbsp;&nbsp;&nbsp;User&nbsp;&nbsp;" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="/login">Log In/Out</NavDropdown.Item>
+                <LinkContainer exact to={"/login"}>
+                  <NavLink>
+                    <Button variant="link">Log In/Out</Button>
+                  </NavLink>
+                </LinkContainer>
               </NavDropdown>
             </Nav>
             <Nav>
@@ -54,26 +58,21 @@ class League extends React.Component {
           <Row className="justify-content-center text-center gp">
             <Col>
               <Switch>
-                <Route
-                  exact path='/'
-                  render={(props) => <Home token={this.props.league.token}/>}
-                />
-                <Route
-                  path='/home'
-                  render={(props) => <Home token={this.props.league.token}/>}
-                />
-                <Route
-                  path='/login'
-                  render={(props) => <Login token={this.props.league.token}/>}
-                />
-                <Route
-                  path='/season'
-                  render={(props) => <Season token={this.props.league.token} season={this.props.league.season}/>}
-                />
-                <Route
-                  path='/current-game'
-                  render={(props) => <CurrentGame token={this.props.league.token} game={this.props.league.game}/>}
-                />
+                <Route exact path='/'>
+                  <Home league={this.props.league}/>
+                </Route>
+                <Route path='/home'>
+                  <Home league={this.props.league}/>
+                </Route>
+                <Route path='/login'>
+                  <Login token={this.props.league.token}/>
+                </Route>
+                <Route path='/season'>
+                  <Season league={this.props.league}/>
+                </Route>
+                <Route path='/current-game'>
+                  <CurrentGame league={this.props.league}/>
+                </Route>
               </Switch>
             </Col>
           </Row>

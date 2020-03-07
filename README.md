@@ -8,6 +8,22 @@ The following shows what I did step by step.
 
 Each step can be found on the cooresponding branch.
 
+## step 09 must be logged in
+Did a few things
+* added the ability to log out.
+* passing the league in the props to all components.
+* deny access to some components (e.g. Season, CurrentGame) if the user has not logged in.
+
+To deny access added a check and redirect in the render 
+```
+   if (this.props.league.token === null || this.props.league.token.token === null ) {
+     // Must be logged in to view this component
+     return (
+       <Redirect to='/login'/>
+     )
+   }
+```
+
 ## step 08 react router bootstrap
 Needed the navigation links to use react routing instead of doing a page load 
 (because there were href).
