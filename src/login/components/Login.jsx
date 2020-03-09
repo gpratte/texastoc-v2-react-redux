@@ -43,7 +43,7 @@ class Login extends React.Component {
       <div>
         <br/>
         <h2>You are Logged In</h2>
-        <p className={'main-p'}><Link>
+        <p className={'main-p'}><Link to={"/login"}>
           <Button variant="outline-secondary" onClick={() => this.logout() }> Log Out </Button>
         </Link>
         </p>
