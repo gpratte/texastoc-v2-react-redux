@@ -431,7 +431,8 @@ const league = {
         ]
       }
     ]
-  }
+  },
+  apiError: null
 }
 
 const store = createStore(leagueReducer, league);

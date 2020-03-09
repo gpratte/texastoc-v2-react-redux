@@ -9,6 +9,7 @@ The following shows what I did step by step.
 Each step can be found on the cooresponding branch.
 
 ## Branches
+* [step 10 api error handler](#step-10-api-error-handler)
 * [step 09 must be logged in](#step-09-must-be-logged-in)
 * [step 08 react router bootstrap](#step-08-react-router-bootstrap)
 * [step 07 league store](#step-07-league-store)
@@ -18,6 +19,15 @@ Each step can be found on the cooresponding branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step 10 api error handler
+Handle an error when calling an api by
+* dispatch an action in the api call catch block
+* set the error message in the league store
+* show the error message in the Error component
+* dismiss the error in the Error component by dispatching an action that clears the error message
+
+Also added the [fontawesome](https://fontawesome.com/) to the project for some nice icons.
 
 ## step 09 must be logged in
 Did a few things

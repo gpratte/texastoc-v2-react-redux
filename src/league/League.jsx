@@ -1,4 +1,5 @@
 import React from 'react';
+import './league.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,6 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/NavLink';
 import {Route, Switch} from 'react-router-dom';
+import Error from './Error'
 import Home from '../home/Home'
 import Login from '../login/components/Login'
 import Season from '../season/components/Season'
@@ -55,6 +57,11 @@ class League extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <Container className="main-view">
+          <Row className="justify-content-center text-center gp">
+            <Col>
+              <Error league={this.props.league}/>
+            </Col>
+          </Row>
           <Row className="justify-content-center text-center gp">
             <Col>
               <Switch>
