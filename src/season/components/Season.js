@@ -10,10 +10,34 @@ import SeasonDetails from './SeasonDetails'
 import Standings from './Standings'
 import Quarters from './Quarters'
 import Games from './Games'
-import NewSeason from './NewSeason'
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import leagueStore from "../../league/leagueStore";
+import {GETTING_SEASON} from "../actions/seasonActions";
+import {getCurrentSeason} from "../apis/seasonClient";
 
 class Season extends React.Component {
+
+  shouldInitialize = (league) => {
+    const shouldInitialize = league.token !== null &&
+      league.token.token !== null &&
+      league.season.data === null &&
+      league.season.gettingSeason === false &&
+      league.season.seasonNotFound === false;
+    if (shouldInitialize) {
+      leagueStore.dispatch({type: GETTING_SEASON, flag: true})
+      getCurrentSeason(league.token.token);
+    }
+  }
+
+  componentDidMount() {
+    this.shouldInitialize(this.props.league);
+  }
+
+  componentDidUpdate() {
+    this.shouldInitialize(this.props.league);
+  }
+
+
   render() {
     if (this.props.league.token === null || this.props.league.token.token === null ) {
       // Must be logged in to view this component
@@ -22,13 +46,33 @@ class Season extends React.Component {
       )
     }
 
-    if (!this.props.league.season.start) {
+    if (this.props.league.season.seasonNotFound === true) {
       return (
-        <NewSeason/>
-      )
+        <div>
+          <br/>
+          <p>Current season does not exist.</p>
+          <p><Link to="/season/new">
+            <Button variant="outline-secondary"> Create a new season </Button> </Link>
+          </p>
+          <p className={'main-p'}><Link to="/home">
+            <Button variant="outline-secondary"> Home </Button> </Link>
+          </p>
+          <br/>
+        </div>
+      );
     }
 
-    const season = this.props.league.season;
+    if (this.props.league.season.data == null) {
+      return (
+        <div>
+          <br/>
+          <h2>Initializing...</h2>
+          <br/>
+        </div>
+      );
+    }
+
+    const season = this.props.league.season.data;
     const startDate = moment(season.start).tz('America/Chicago').format('YYYY')
     const endDate = moment(season.end).tz('America/Chicago').format('YYYY')
 

@@ -18,7 +18,7 @@ class Login extends React.Component {
   }
 
   render() {
-    if (this.props.token === null || this.props.token.token === null) {
+    if (this.props.league.token === null || this.props.league.token.token === null) {
       return (
         <div>
           <br/>
@@ -39,6 +39,7 @@ class Login extends React.Component {
         </div>
       );
     }
+
     return (
       <div>
         <br/>

@@ -8,12 +8,11 @@ function leagueReducer(league, action) {
     case API_ERROR:
       return Object.assign({}, league, {apiError: action.message});
     default:
-      return {
-        apiError: null,
-        token: loginReducer(league.token, action),
-        game: currentGameReducer(league.game, action),
-        season: seasonReducer(league.season, action)
-      }
+      return Object.assign({}, league,
+        {apiError: null},
+        {token: loginReducer(league.token, action)},
+        {game: currentGameReducer(league.game, action)},
+        {season: seasonReducer(league.season, action)});
   }
 }
 

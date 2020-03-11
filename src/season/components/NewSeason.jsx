@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {addNewSeason} from '../apis/seasonClient'
 
 class NewSeason extends React.Component {
@@ -15,6 +15,19 @@ class NewSeason extends React.Component {
 
 
   render() {
+    if (this.props.league.token === null || this.props.league.token.token === null ) {
+      // Must be logged in to view this component
+      return (
+        <Redirect to='/login'/>
+      )
+    }
+
+    if (this.props.league.season.data !== null) {
+      return (
+        <Redirect to='/season'/>
+      )
+    }
+
     return (
       <div>
         <h1>New Season</h1>
