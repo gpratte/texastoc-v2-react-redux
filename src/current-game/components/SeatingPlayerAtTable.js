@@ -13,7 +13,7 @@ class SeatingPlayerAtTable extends React.Component {
 
     let enableSeatingRequests = false;
     _.forEach(this.props.seating.tableRequests, (tableRequest) => {
-      if (tableRequest.playerId) {
+      if (tableRequest.gamePlayerId) {
         enableSeatingRequests = true;
       }
     });
@@ -53,7 +53,7 @@ class SeatingPlayerAtTable extends React.Component {
         <Form.Group key={index}>
           <Form.Label>Seat a Player at a Table</Form.Label>
           <Form.Control as="select"
-                        defaultValue={tableRequest.playerId}
+                        defaultValue={tableRequest.gamePlayerId}
                         id={'playerRequestId-' + index}
                         onChange={(e) => handlePlayerRequesting(e, index)}>
             <option key={-1} value={-1} tablerequestindex={index}></option>

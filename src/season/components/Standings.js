@@ -4,17 +4,19 @@ import Table from 'react-bootstrap/Table';
 class Standings extends React.Component {
 
   renderStandings(players, hideEntries) {
-    return players.map((player, index) => {
-      const {id, place, name, points, entries} = player
-      return (
-        <tr key={id}>
-          <td>{place}</td>
-          <td>{name}</td>
-          <td>{points}</td>
-          { hideEntries ? <td></td> : <td>{entries}</td>}
-        </tr>
-      )
-    })
+    if (players) {
+      return players.map((player, index) => {
+        const {id, place, name, points, entries} = player
+        return (
+          <tr key={id}>
+            <td>{place}</td>
+            <td>{name}</td>
+            <td>{points}</td>
+            { hideEntries ? <td></td> : <td>{entries}</td>}
+          </tr>
+        )
+      })
+    }
   }
 
   render() {

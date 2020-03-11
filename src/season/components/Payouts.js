@@ -4,15 +4,17 @@ import Table from 'react-bootstrap/Table';
 class Payouts extends React.Component {
 
   renderPayouts(payouts) {
-    return payouts.map((payout, index) => {
-      const {id, place, amount} = payout
-      return (
-        <tr key={id}>
-          <td>{place}</td>
-          <td>${amount}</td>
-        </tr>
-      )
-    })
+    if (payouts) {
+      return payouts.map((payout, index) => {
+        const {id, place, amount} = payout
+        return (
+          <tr key={id}>
+            <td>{place}</td>
+            <td>${amount}</td>
+          </tr>
+        )
+      })
+    }
   }
 
   render() {

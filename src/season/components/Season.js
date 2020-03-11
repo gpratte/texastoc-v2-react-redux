@@ -10,6 +10,7 @@ import SeasonDetails from './SeasonDetails'
 import Standings from './Standings'
 import Quarters from './Quarters'
 import Games from './Games'
+import NewSeason from './NewSeason'
 import {Redirect} from "react-router-dom";
 
 class Season extends React.Component {
@@ -18,6 +19,12 @@ class Season extends React.Component {
       // Must be logged in to view this component
       return (
         <Redirect to='/login'/>
+      )
+    }
+
+    if (!this.props.league.season.start) {
+      return (
+        <NewSeason/>
       )
     }
 
