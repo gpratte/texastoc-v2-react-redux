@@ -9,6 +9,7 @@ The following shows what I did step by step.
 Each step can be found on the cooresponding branch.
 
 ## Branches
+* [step-11-create-new-season](#step-11-create-new-season)
 * [step 10 api error handler](#step-10-api-error-handler)
 * [step 09 must be logged in](#step-09-must-be-logged-in)
 * [step 08 react router bootstrap](#step-08-react-router-bootstrap)
@@ -19,6 +20,12 @@ Each step can be found on the cooresponding branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-11-create-new-season
+Check for a current season. If there is one show it. If not, allow the user to create one.
+
+If the user trying to create the season does not have an administrative role
+then the api will return a 401. In this case show an unauthorized error message;
 
 ## step 10 api error handler
 Handle an error when calling an api by

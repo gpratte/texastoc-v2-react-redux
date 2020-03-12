@@ -20,7 +20,13 @@ export function addNewSeason(month, day, year) {
       leagueStore.dispatch({type: ADDED_NEW_SEASON, season: result.data})
     })
     .catch(function (error) {
-      leagueStore.dispatch({type: API_ERROR, message: (error.message ? error.message : error.toString())})
+      let message;
+      if (error.response && error.response.status && error.response.status === 403) {
+        message = "You are not authorized to create a season";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
+      leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
 
