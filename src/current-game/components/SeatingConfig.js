@@ -75,7 +75,7 @@ class SeatingConfig extends React.Component {
 
   handleAddAnotherRequest() {
     const tableRequests = [...this.state.seating.tableRequests];
-    tableRequests.push({playerId: null, tableNum: 1});
+    tableRequests.push({gamePlayerId: null, tableNum: 1});
     const newSeating = (Object.assign({}, this.state.seating,
       {tableRequests: tableRequests}))
     this.setState({seating: newSeating})
@@ -83,7 +83,7 @@ class SeatingConfig extends React.Component {
 
   handlePlayerRequesting(e, requestNum) {
     const tableRequests = [...this.state.seating.tableRequests];
-    tableRequests[requestNum].playerId = parseInt('' + e.target.value);
+    tableRequests[requestNum].gamePlayerId = parseInt('' + e.target.value);
     const newSeating = (Object.assign({}, this.state.seating,
       {tableRequests: tableRequests}))
     this.setState({seating: newSeating})
@@ -104,7 +104,7 @@ class SeatingConfig extends React.Component {
 
     seatingConfig['tableRequests'] = []
     _.forEach(this.state.seating.tableRequests, function(tableRequest) {
-      if (tableRequest.playerId) {
+      if (tableRequest.gamePlayerId) {
         seatingConfig.tableRequests.push(tableRequest);
       }
     })

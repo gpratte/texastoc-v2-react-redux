@@ -17,7 +17,7 @@ class Error extends React.Component {
           <Button variant="link" className={'far fa-window-close'} onClick={() => {
             leagueStore.dispatch({type: API_ERROR_DONE, message: ''})
           }}/>
-          There was an error {this.props.league.apiError}
+          There was an error: {this.props.league.apiError}
         </p>
       </div>
     );
