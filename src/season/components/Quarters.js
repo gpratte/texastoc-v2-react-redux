@@ -7,7 +7,6 @@ import QuarterlySeason from "./QuarterlySeason";
 class Quarters extends React.Component {
 
   quarterlyName(value) {
-    console.log('!!! ' + value)
     switch (value) {
       case "FIRST":
         return '1st Quarter';

@@ -4,7 +4,7 @@ import './GamePlayers.css'
 class GamePlayersRemaining extends React.Component {
 
   render() {
-    const {paidPlayers, paidPlayersRemaining, averageStack} = this.props.value;
+    const {paidPlayers, paidPlayersRemaining, averageStack} = this.props.game.data;
 
     return (
       <div>

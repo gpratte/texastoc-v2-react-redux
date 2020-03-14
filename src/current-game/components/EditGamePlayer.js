@@ -40,13 +40,13 @@ class EditGamePlayer extends React.Component {
   }
 
   render() {
-    const game = this.props.value;
-    let gamePlayer = _.find(game.gamePlayers, {'id': game.editGamePlayerId});
+    const game = this.props.game;
+    let gamePlayer = _.find(game.data.gamePlayers, {'id': game.editGamePlayerId});
     const finished = gamePlayer ? gamePlayer.finish : 11
 
     return (
       <div>
-        <Modal show={this.props.value.editGamePlayerId !== null} onHide={() => leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
+        <Modal show={game.editGamePlayerId !== null} onHide={() => leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
           <Modal.Body>
             <p className="text-center">
               {gamePlayer ? gamePlayer.firstName : ''}
@@ -94,7 +94,7 @@ class EditGamePlayer extends React.Component {
                 <Col>
                   <Form.Control as="select" defaultValue={finished} id="finishId">
                     <option key={11} value={11}> </option>
-                    {this.renderPlaces(game.gamePlayers)}
+                    {this.renderPlaces(game.data.gamePlayers)}
                   </Form.Control>
                 </Col>
               </Form.Group>

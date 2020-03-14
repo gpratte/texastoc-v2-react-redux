@@ -7,7 +7,11 @@ import {
   EDIT_GAME_PLAYER,
   UPDATE_GAME_PLAYER,
   DELETE_GAME_PLAYER,
-  SUBMIT_SEATING
+  SUBMIT_SEATING,
+  GETTING_CURRENT_GAME,
+  CURRENT_GAME_NOT_FOUND,
+  ADDED_NEW_GAME,
+  GOT_CURRENT_GAME
 } from '../actions/gameActions'
 import _ from 'lodash';
 
@@ -53,7 +57,7 @@ function currentGameReducer(game, action) {
       player['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.quarterlyTocCost : null;
 
       let gameWithAddedPlayer = Object.assign({}, game, {showAddExistingPlayer: false});
-      gameWithAddedPlayer.gamePlayers.push(player);
+      gameWithAddedPlayer.data.gamePlayers.push(player);
       return gameWithAddedPlayer;
     case ADD_NEW_PLAYER_TO_GAME:
       let newPlayer = action.player;
@@ -63,7 +67,7 @@ function currentGameReducer(game, action) {
       newPlayer['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.quarterlyTocCost : null;
 
       let gameWithNewPlayer = Object.assign({}, game, {showAddNewPlayer: false});
-      gameWithNewPlayer.gamePlayers.push(newPlayer);
+      gameWithNewPlayer.data.gamePlayers.push(newPlayer);
       return gameWithNewPlayer;
     case EDIT_GAME_PLAYER:
       return Object.assign({}, game, {editGamePlayerId: action.id});
@@ -74,8 +78,8 @@ function currentGameReducer(game, action) {
       const gamePlayerId = parseInt('' + action.gamePlayer.id);
       const finish = parseInt('' + action.gamePlayer.finish);
 
-      const indexOfGamePlayer = _.findIndex(gameWithUpdatedPlayer.gamePlayers, {'id': gamePlayerId});
-      const gamePlayerToUpdate = gameWithUpdatedPlayer.gamePlayers[indexOfGamePlayer];
+      const indexOfGamePlayer = _.findIndex(gameWithUpdatedPlayer.data.gamePlayers, {'id': gamePlayerId});
+      const gamePlayerToUpdate = gameWithUpdatedPlayer.data.gamePlayers[indexOfGamePlayer];
       gamePlayerToUpdate['buyInCollected'] = action.gamePlayer.buyInCollected ? game.buyInCost : null;
       gamePlayerToUpdate['annualTocCollected'] = action.gamePlayer.annualTocCollected ? game.annualTocCost : null;
       gamePlayerToUpdate['quarterlyTocCollected'] = action.gamePlayer.quarterlyTocCollected ? game.quarterlyTocCost : null;
@@ -86,7 +90,7 @@ function currentGameReducer(game, action) {
       return gameWithUpdatedPlayer;
     case DELETE_GAME_PLAYER:
       let gameWithDeletedPlayer = Object.assign({}, game, {editGamePlayerId: null});
-      _.remove(gameWithDeletedPlayer.gamePlayers, function (gp) {
+      _.remove(gameWithDeletedPlayer.data.gamePlayers, function (gp) {
         return gp.id === action.id;
       });
       return gameWithDeletedPlayer;
@@ -107,8 +111,18 @@ function currentGameReducer(game, action) {
           currentTable = 0;
         }
       });
-      return Object.assign({}, game, {seating: action.seatingConfig},
-        {showConfigureSeating: false}, {tables: tables});
+      let gameWithSeating = Object.assign({}, game, {showConfigureSeating: false});
+      gameWithSeating.data.seating = action.seatingConfig;
+      gameWithSeating.data.tables = tables;
+      return gameWithSeating;
+    case ADDED_NEW_GAME:
+      return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
+    case GOT_CURRENT_GAME:
+      return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
+    case GETTING_CURRENT_GAME:
+      return Object.assign({}, game, {data: null}, {gettingCurrentGame: true}, {currentGameNotFound: false});
+    case CURRENT_GAME_NOT_FOUND:
+      return Object.assign({}, game, {data: null}, {gettingCurrentGame: false}, {currentGameNotFound: true});
     default:
       return game;
   }
