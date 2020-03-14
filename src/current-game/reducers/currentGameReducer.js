@@ -2,7 +2,6 @@ import {
   TOGGLE_ADD_EXISTING_PLAYER_TO_GAME,
   TOGGLE_ADD_NEW_PLAYER_TO_GAME,
   TOGGLE_CONFIGURE_SEATING,
-  ADD_EXISTING_PLAYER_TO_GAME,
   ADD_NEW_PLAYER_TO_GAME,
   EDIT_GAME_PLAYER,
   UPDATE_GAME_PLAYER,
@@ -11,6 +10,7 @@ import {
   GETTING_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND,
   ADDED_NEW_GAME,
+  UPDATED_GAME,
   GOT_CURRENT_GAME
 } from '../actions/gameActions'
 import _ from 'lodash';
@@ -33,8 +33,6 @@ function getPlayerFullName(player) {
 // Take the game as the parameter
 function currentGameReducer(game, action) {
 
-  let playerId = null;
-
   switch (action.type) {
     case TOGGLE_ADD_EXISTING_PLAYER_TO_GAME:
       return Object.assign({}, game, {showAddExistingPlayer: action.show});
@@ -44,27 +42,12 @@ function currentGameReducer(game, action) {
       return Object.assign({}, game,
         {showConfigureSeating: action.show},
         {showConfigureSeatingKey: new Date().getTime()});
-    case ADD_EXISTING_PLAYER_TO_GAME:
-      // Make sure its a primitive
-      playerId = parseInt('' + action.player.id);
-
-      // Find the player in the list of all the league players
-      let player = _.find(game.players, {'id': playerId});
-      player = Object.assign({}, player);
-      player['playerId'] = playerId;
-      player['buyInCollected'] = action.player.buyInCollected ? game.buyInCost : null;
-      player['annualTocCollected'] = action.player.annualTocCollected ? game.annualTocCost : null;
-      player['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.quarterlyTocCost : null;
-
-      let gameWithAddedPlayer = Object.assign({}, game, {showAddExistingPlayer: false});
-      gameWithAddedPlayer.data.gamePlayers.push(player);
-      return gameWithAddedPlayer;
     case ADD_NEW_PLAYER_TO_GAME:
       let newPlayer = action.player;
       newPlayer['id'] = new Date().getTime();
-      newPlayer['buyInCollected'] = action.player.buyInCollected ? game.buyInCost : null;
-      newPlayer['annualTocCollected'] = action.player.annualTocCollected ? game.annualTocCost : null;
-      newPlayer['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.quarterlyTocCost : null;
+      newPlayer['buyInCollected'] = action.player.buyInCollected ? game.data.buyInCost : null;
+      newPlayer['annualTocCollected'] = action.player.annualTocCollected ? game.data.annualTocCost : null;
+      newPlayer['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.data.quarterlyTocCost : null;
 
       let gameWithNewPlayer = Object.assign({}, game, {showAddNewPlayer: false});
       gameWithNewPlayer.data.gamePlayers.push(newPlayer);
@@ -102,7 +85,7 @@ function currentGameReducer(game, action) {
       }
       // Add players to the tables
       let currentTable = 0;
-      _.forEach(game.gamePlayers, function(gamePlayer) {
+      _.forEach(game.data.gamePlayers, function(gamePlayer) {
         tables[currentTable].seats.push({seatNumber: (tables[currentTable].seats.length+1),
           tableNumber: currentTable + 1,
           gamePlayerId: gamePlayer.id,
@@ -117,6 +100,8 @@ function currentGameReducer(game, action) {
       return gameWithSeating;
     case ADDED_NEW_GAME:
       return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
+    case UPDATED_GAME:
+      return Object.assign({}, game, {data: action.game});
     case GOT_CURRENT_GAME:
       return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
     case GETTING_CURRENT_GAME:

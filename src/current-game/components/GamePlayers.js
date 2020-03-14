@@ -20,7 +20,7 @@ class GamePlayers extends React.Component {
     }
     return gamePlayers.map((gamePlayer, index) => {
       const {
-        id, firstName, lastName, buyInCollected, rebuyAddOnCollected, annualTocCollected,
+        id, name, buyInCollected, rebuyAddOnCollected, annualTocCollected,
         quarterlyTocCollected, chop, points, finish, knockedOut
       } = gamePlayer;
       return (
@@ -31,7 +31,7 @@ class GamePlayers extends React.Component {
             <Button variant="link" onClick={() => {
               leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: id});
             }}>
-              {firstName}{(firstName && lastName) ? ' ' : ''}{lastName}
+              {name}
             </Button>
           </td>
           <td>{buyInCollected ? String.fromCharCode(10004) : ''}</td>
@@ -47,7 +47,7 @@ class GamePlayers extends React.Component {
 
   render() {
     const game = this.props.game;
-    const {gamePlayers} = game.data;
+    const gamePlayers = game.data.players;
     const players = this.props.players;
 
     return (
