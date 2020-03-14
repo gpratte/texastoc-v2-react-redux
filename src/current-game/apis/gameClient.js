@@ -32,18 +32,15 @@ export function addNewGame(month, day, year, hostId, transport) {
 }
 
 export function getCurrentGame(token) {
-  console.log('!!! getCurrentGame')
   API.get('/api/v2/games/current', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
   })
     .then(result => {
-      console.log('!!! getCurrentGame found')
       leagueStore.dispatch({type: GOT_CURRENT_GAME, game: result.data})
     })
     .catch(function (error) {
-      console.log('!!! getCurrentGame not found')
       if (error.response && error.response.status && error.response.status === 404) {
         leagueStore.dispatch({type: CURRENT_GAME_NOT_FOUND, flag: true})
       } else {

@@ -25,8 +25,8 @@ class Seating extends React.Component {
   }
 
   render() {
-    const game = this.props.value;
-    const {tables} = game;
+    const game = this.props.game;
+    const {tables} = game.data.seating;
     return (
       <div>
         <Table striped bordered size="sm">

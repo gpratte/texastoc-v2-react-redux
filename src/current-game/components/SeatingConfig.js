@@ -20,12 +20,6 @@ class SeatingConfig extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      gamePlayers: props.game.gamePlayers,
-      seating: Object.assign({}, props.game.seating,
-        {numSeatsPerTable: [...props.game.seating.numSeatsPerTable]},
-        {tableRequests: [...props.game.seating.tableRequests]})
-    };
     this.handleChangeSeatsPerTables = this.handleChangeSeatsPerTables.bind(this);
     this.handleAddAnotherRequest = this.handleAddAnotherRequest.bind(this);
     this.handlePlayerRequesting = this.handlePlayerRequesting.bind(this);
@@ -113,9 +107,10 @@ class SeatingConfig extends React.Component {
   }
 
   render() {
+    const game = this.props.game;
     return (
       <div>
-        <Modal show={this.props.game.showConfigureSeating}
+        <Modal show={game.showConfigureSeating}
                onHide={() => leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.requestSeating}>
@@ -123,7 +118,7 @@ class SeatingConfig extends React.Component {
                 <Form.Label>&nbsp;&nbsp;Number of Tables</Form.Label>
                 <Col>
                   <Form.Control as="select"
-                                defaultValue={this.state.seating.numTables}
+                                defaultValue={game.data.seating.numTables}
                                 id="tablesId"
                                 onChange={(e) => this.handleChangeNumTables(e)}>
                     {this.renderNumberOfTables()}
@@ -131,11 +126,11 @@ class SeatingConfig extends React.Component {
                 </Col>
               </Form.Group>
 
-              <SeatingSeatsPerTable seating={this.state.seating}
+              <SeatingSeatsPerTable seating={game.data.seating}
                                     handleChangeSeatsPerTables={this.handleChangeSeatsPerTables}/>
 
-              <SeatingPlayerAtTable gamePlayers={this.state.gamePlayers}
-                                    seating={this.state.seating}
+              <SeatingPlayerAtTable gamePlayers={game.data.gamePlayers}
+                                    seating={game.data.seating}
                                     handleAddAnotherRequest={this.handleAddAnotherRequest}
                                     handlePlayerRequesting={this.handlePlayerRequesting}
                                     handleTableRequesting={this.handleTableRequesting}/>

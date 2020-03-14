@@ -42,12 +42,13 @@ class AddExistingPlayer extends React.Component {
   }
 
   render() {
-    const game = this.props.value;
-    const {players, gamePlayers} = game;
+    const game = this.props.game;
+    const players = this.props.players;
+    const {gamePlayers} = game.data;
 
     return (
       <div>
-        <Modal show={this.props.value.showAddExistingPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})}>
+        <Modal show={game.showAddExistingPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.addExistingPlayer}>
               <Form.Group>

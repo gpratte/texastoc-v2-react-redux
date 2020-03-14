@@ -46,8 +46,9 @@ class GamePlayers extends React.Component {
   }
 
   render() {
-    const game = this.props.value;
-    const {gamePlayers} = game;
+    const game = this.props.game;
+    const {gamePlayers} = game.data;
+    const players = this.props.players;
 
     return (
       <div>
@@ -71,9 +72,9 @@ class GamePlayers extends React.Component {
           </tbody>
         </Table>
 
-        <AddExistingPlayer value={game}/>
-        <AddNewPlayer value={game}/>
-        <EditGamePlayer value={game}/>
+        <AddExistingPlayer game={game} players={players}/>
+        <AddNewPlayer game={game}/>
+        <EditGamePlayer game={game}/>
 
         <Button variant="primary" onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
           Add Player

@@ -10,7 +10,8 @@ import {
   SUBMIT_SEATING,
   GETTING_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND,
-  ADDED_NEW_GAME
+  ADDED_NEW_GAME,
+  GOT_CURRENT_GAME
 } from '../actions/gameActions'
 import _ from 'lodash';
 
@@ -114,12 +115,14 @@ function currentGameReducer(game, action) {
       gameWithSeating.data.seating = action.seatingConfig;
       gameWithSeating.data.tables = tables;
       return gameWithSeating;
+    case ADDED_NEW_GAME:
+      return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
+    case GOT_CURRENT_GAME:
+      return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
     case GETTING_CURRENT_GAME:
       return Object.assign({}, game, {data: null}, {gettingCurrentGame: true}, {currentGameNotFound: false});
     case CURRENT_GAME_NOT_FOUND:
       return Object.assign({}, game, {data: null}, {gettingCurrentGame: false}, {currentGameNotFound: true});
-    case ADDED_NEW_GAME:
-      return Object.assign({}, game, {data: action.game}, {gettingCurrentGame: false}, {currentGameNotFound: false});
     default:
       return game;
   }

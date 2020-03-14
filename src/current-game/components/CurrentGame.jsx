@@ -28,12 +28,10 @@ class CurrentGame extends React.Component {
   }
 
   componentDidMount() {
-    console.log('current game did mount')
     this.shouldInitialize(this.props.league);
   }
 
   componentDidUpdate() {
-    console.log('current game did update')
     this.shouldInitialize(this.props.league);
   }
 
@@ -71,7 +69,7 @@ class CurrentGame extends React.Component {
       );
     }
 
-    const game = this.props.league.game.data;
+    const game = this.props.league.game;
     return (
       <div>
         <Accordion>
@@ -82,13 +80,13 @@ class CurrentGame extends React.Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body><Details value={game}/></Card.Body>
+              <Card.Body><Details game={game}/></Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
 
-        <GamePlayersRemaining value={game}/>
-        <GamePlayers value={game}/>
+        <GamePlayersRemaining game={game}/>
+        <GamePlayers game={game} players={this.props.league.players}/>
 
         <Accordion>
           <Card>
@@ -98,7 +96,7 @@ class CurrentGame extends React.Component {
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
-              <Card.Body><Seating value={game}/></Card.Body>
+              <Card.Body><Seating game={game}/></Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>

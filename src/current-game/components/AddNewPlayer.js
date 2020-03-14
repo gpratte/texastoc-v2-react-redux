@@ -25,9 +25,11 @@ class AddNewPlayer extends React.Component {
 
 
   render() {
+    const game = this.props.game;
+
     return (
       <div>
-        <Modal show={this.props.value.showAddNewPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
+        <Modal show={game.showAddNewPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.addNewPlayer}>
               <Form.Group>

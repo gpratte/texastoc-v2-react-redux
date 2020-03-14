@@ -23,7 +23,7 @@ class Details extends React.Component {
     const {
       date, hostName, transportRequired, totalCollected, totalCombinedTocCalculated,
       kittyCalculated, prizePotCalculated, payouts
-    } = this.props.value;
+    } = this.props.game.data;
 
     const gameDate = moment(date).tz('America/Chicago').format('MM/DD')
     const tocPlusKitty = totalCombinedTocCalculated + kittyCalculated;
