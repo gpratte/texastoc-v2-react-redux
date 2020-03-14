@@ -2,12 +2,16 @@ import {createStore} from 'redux'
 import leagueReducer from './leagueReducer'
 
 const league = {
+  players: [],
   game: {
+    data: null,
     showAddExistingPlayer: false,
     showAddNewPlayer: false,
     showConfigureSeating: false,
     showConfigureSeatingKey: 1,
-    editGamePlayerId: null
+    editGamePlayerId: null,
+    gettingCurrentGame: false,
+    currentGameNotFound: false
   },
   season: {
     data: null,

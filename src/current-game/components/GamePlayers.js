@@ -15,6 +15,9 @@ import EditGamePlayer from "./EditGamePlayer";
 class GamePlayers extends React.Component {
 
   renderGamePlayers(gamePlayers) {
+    if (!gamePlayers) {
+      return;
+    }
     return gamePlayers.map((gamePlayer, index) => {
       const {
         id, firstName, lastName, buyInCollected, rebuyAddOnCollected, annualTocCollected,

@@ -8,14 +8,13 @@ import {
 function seasonReducer(season, action) {
   switch (action.type) {
     case ADDED_NEW_SEASON:
-      return Object.assign({}, {data: action.season}, {gettingSeason: false}, {seasonNotFound: false});
+      return Object.assign({}, season, {data: action.season}, {gettingSeason: false}, {seasonNotFound: false});
     case GOT_SEASON:
-      const newSeason = Object.assign({}, season, {data: action.season}, {gettingSeason: false}, {seasonNotFound: false});
-      return newSeason;
+      return Object.assign({}, season, {data: action.season}, {gettingSeason: false}, {seasonNotFound: false});
     case GETTING_SEASON:
-      return Object.assign({}, {data: null}, {gettingSeason: true}, {seasonNotFound: false});
+      return Object.assign({}, season, {data: null}, {gettingSeason: true}, {seasonNotFound: false});
     case SEASON_NOT_FOUND:
-      return Object.assign({}, {data: null}, {gettingSeason: false}, {seasonNotFound: true});
+      return Object.assign({}, season, {data: null}, {gettingSeason: false}, {seasonNotFound: true});
     default:
       return season;
   }

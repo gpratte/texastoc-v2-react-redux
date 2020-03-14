@@ -5,6 +5,9 @@ import Table from 'react-bootstrap/Table';
 class Details extends React.Component {
 
   renderPayouts(payouts) {
+    if (!payouts) {
+      return;
+    }
     return payouts.map((payout, index) => {
       const {id, place, amount} = payout
       return (

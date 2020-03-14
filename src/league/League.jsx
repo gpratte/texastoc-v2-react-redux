@@ -14,6 +14,7 @@ import Login from '../login/components/Login'
 import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'
+import NewGame from '../current-game/components/NewGame'
 import { LinkContainer } from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
 
@@ -80,6 +81,9 @@ class League extends React.Component {
                 </Route>
                 <Route path='/season/new'>
                   <NewSeason league={this.props.league}/>
+                </Route>
+                <Route path='/game/new'>
+                  <NewGame league={this.props.league}/>
                 </Route>
                 <Route path='/current-game'>
                   <CurrentGame league={this.props.league}/>
