@@ -5,9 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
-  ADD_EXISTING_PLAYER_TO_GAME,
   TOGGLE_ADD_EXISTING_PLAYER_TO_GAME
 } from '../actions/gameActions'
+import {addExistingPlayer} from "../apis/gameClient";
 import _ from 'lodash';
 
 class AddExistingPlayer extends React.Component {
@@ -33,12 +33,10 @@ class AddExistingPlayer extends React.Component {
 
   addExistingPlayer = (e) => {
     e.preventDefault();
-    leagueStore.dispatch({type: ADD_EXISTING_PLAYER_TO_GAME, player: {
-        id: e.target.elements.playerId.value,
-        buyInCollected: e.target.elements.buyInId.checked,
-        annualTocCollected: e.target.elements.tocId.checked,
-        quarterlyTocCollected: e.target.elements.qtocId.checked,
-      }})
+    addExistingPlayer(e.target.elements.playerId.value,
+      e.target.elements.buyInId.checked,
+      e.target.elements.tocId.checked,
+      e.target.elements.qtocId.checked);
   }
 
   render() {
