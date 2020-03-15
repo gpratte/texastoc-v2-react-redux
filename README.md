@@ -9,6 +9,7 @@ The following shows what I did step by step.
 Each step can be found on the cooresponding branch.
 
 ## Branches
+* [step-13-add-existing-player](#step-13-add-existing-player)
 * [step-12-create-new-game](#step-12-create-new-game)
 * [step-11-create-new-season](#step-11-create-new-season)
 * [step 10 api error handler](#step-10-api-error-handler)
@@ -21,6 +22,12 @@ Each step can be found on the cooresponding branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-13-add-existing-player
+The add existing player to a game modal dialog, when submitted, now calls the server 
+to add the player. The call to add the player returns the updated game. The updated 
+game is dispatched to the reducers which updates the UI.
+
 
 ## step-12-create-new-game
 Check for a current game (a game that is not finalized). If there is one show it. If not, allow the user to create one.
