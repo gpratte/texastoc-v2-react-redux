@@ -3,8 +3,7 @@ import leagueStore from "../../league/leagueStore";
 import {API_ERROR} from "../../league/leagueActions";
 import {ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
-  CURRENT_GAME_NOT_FOUND,
-  UPDATED_GAME} from '../actions/gameActions'
+  CURRENT_GAME_NOT_FOUND} from '../actions/gameActions'
 
 export function addNewGame(month, day, year, hostId, transport) {
   let createGameRequest = {};
@@ -70,7 +69,7 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
     }
   })
     .then(result => {
-      leagueStore.dispatch({type: UPDATED_GAME, game: result.data})
+      getCurrentGame(token);
     })
     .catch(function (error) {
       const message = error.message ? error.message : error.toString();

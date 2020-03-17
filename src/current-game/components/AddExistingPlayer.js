@@ -33,6 +33,7 @@ class AddExistingPlayer extends React.Component {
 
   addExistingPlayer = (e) => {
     e.preventDefault();
+    leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})
     addExistingPlayer(e.target.elements.playerId.value,
       e.target.elements.buyInId.checked,
       e.target.elements.tocId.checked,

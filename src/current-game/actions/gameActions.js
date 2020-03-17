@@ -18,10 +18,6 @@ export const ADDED_NEW_GAME = 'ADDED_NEW_GAME'
 export const UPDATED_GAME = 'UPDATED_GAME'
 
 /*
- * other constants
- */
-
-/*
  * action creators
  */
 

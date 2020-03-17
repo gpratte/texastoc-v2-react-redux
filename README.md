@@ -25,8 +25,9 @@ Each step can be found on the cooresponding branch.
 
 ## step-13-add-existing-player
 The add existing player to a game modal dialog, when submitted, now calls the server 
-to add the player. The call to add the player returns the updated game. The updated 
-game is dispatched to the reducers which updates the UI.
+to add the player. If the call to add the player is successful then a call 
+is made to get the current game and the updated game is dispatched to 
+the reducers which updates the UI.
 
 
 ## step-12-create-new-game
