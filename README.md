@@ -9,6 +9,7 @@ The following shows what I did step by step.
 Each step can be found on the cooresponding branch.
 
 ## Branches
+* [step-14-update-game-player](#step-14-update-game-player)
 * [step-13-add-existing-player](#step-13-add-existing-player)
 * [step-12-create-new-game](#step-12-create-new-game)
 * [step-11-create-new-season](#step-11-create-new-season)
@@ -23,19 +24,23 @@ Each step can be found on the cooresponding branch.
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
 
+## step-14-update-game-player
+The update game player modal dialog, when submitted, now calls the server 
+to update the player. If the call to update the player is successful then a call 
+is made to get the current game and the updated game is dispatched to 
+the reducers which updates the UI.
+
 ## step-13-add-existing-player
 The add existing player to a game modal dialog, when submitted, now calls the server 
 to add the player. If the call to add the player is successful then a call 
 is made to get the current game and the updated game is dispatched to 
 the reducers which updates the UI.
 
-
 ## step-12-create-new-game
 Check for a current game (a game that is not finalized). If there is one show it. If not, allow the user to create one.
 
 If the user trying to create the game does not have an administrative role
 then the api will return a 401. In this case show an unauthorized error message;
-
 
 ## step-11-create-new-season
 Check for a current season. If there is one show it. If not, allow the user to create one.

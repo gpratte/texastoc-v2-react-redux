@@ -1,9 +1,11 @@
 import API from '../../utils/api'
 import leagueStore from "../../league/leagueStore";
 import {API_ERROR} from "../../league/leagueActions";
-import {ADDED_NEW_GAME,
+import {
+  ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
-  CURRENT_GAME_NOT_FOUND} from '../actions/gameActions'
+  CURRENT_GAME_NOT_FOUND
+} from '../actions/gameActions'
 
 export function addNewGame(month, day, year, hostId, transport) {
   let createGameRequest = {};
@@ -53,7 +55,6 @@ export function getCurrentGame(token) {
 
 export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
   const gameId = leagueStore.getState().game.data.id;
-
   let createGamePlayerRequest = {};
   createGamePlayerRequest.gameId = parseInt('' + gameId);
   createGamePlayerRequest.playerId = parseInt('' + playerId);
@@ -66,6 +67,37 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
   API.post('/api/v2/games/players', createGamePlayerRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
+export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knockedOut, chop) {
+  const gameId = leagueStore.getState().game.data.id;
+  const updateGamePlayerRequest = {
+    gamePlayerId: parseInt('' + gamePlayerId),
+    gameId: gameId,
+    buyInCollected: buyIn,
+    annualTocCollected: toc,
+    quarterlyTocCollected: qtoc,
+    rebuyAddOnCollected: rebuy,
+    place: place,
+    knockedOut: knockedOut,
+    chop: chop
+  };
+
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/players/' + gamePlayerId, updateGamePlayerRequest, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Access-Control-Allow-Origin': "*"
     }
   })
     .then(result => {

@@ -21,12 +21,12 @@ class GamePlayers extends React.Component {
     return gamePlayers.map((gamePlayer, index) => {
       const {
         id, name, buyInCollected, rebuyAddOnCollected, annualTocCollected,
-        quarterlyTocCollected, chop, points, finish, knockedOut
+        quarterlyTocCollected, chop, points, place, knockedOut
       } = gamePlayer;
       return (
         <tr key={id}>
           <td className="knocked-out">{knockedOut ? 'x' : ''}</td>
-          <td>{finish}</td>
+          <td>{place ? (place < 11 ? place : '') : ''}</td>
           <td>
             <Button variant="link" onClick={() => {
               leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: id});

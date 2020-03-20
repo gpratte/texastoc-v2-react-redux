@@ -8,16 +8,16 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
   EDIT_GAME_PLAYER,
-  UPDATE_GAME_PLAYER,
   DELETE_GAME_PLAYER
 } from '../actions/gameActions'
+import {updatePlayer} from "../apis/gameClient";
 import _ from "lodash";
 
 const tenPlaces = [10,9,8,7,6,5,4,3,2,1]
 
 class EditGamePlayer extends React.Component {
 
-  renderPlaces(gamePlayers, gamePlayerFinish) {
+  renderPlaces() {
     return tenPlaces.map((place) => {
       return (
         <option key={place} value={place}>{place}</option>
@@ -27,22 +27,20 @@ class EditGamePlayer extends React.Component {
 
   updatePlayer = (e) => {
     e.preventDefault();
-    leagueStore.dispatch({type: UPDATE_GAME_PLAYER, gamePlayer: {
-        id: e.target.elements.gamePlayerId.value,
-        buyInCollected: e.target.elements.buyInId.checked,
-        annualTocCollected: e.target.elements.tocId.checked,
-        quarterlyTocCollected: e.target.elements.qtocId.checked,
-        rebuyAddOnCollected: e.target.elements.rebuyId.checked,
-        knockedOut: e.target.elements.knockedOutId.checked,
-        finish: e.target.elements.finishId.value,
-        chop: e.target.elements.chopId.value,
-      }})
+    leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null});
+    updatePlayer(e.target.elements.gamePlayerId.value,
+      e.target.elements.buyInId.checked,
+      e.target.elements.tocId.checked,
+      e.target.elements.qtocId.checked,
+      e.target.elements.rebuyId.checked,
+      e.target.elements.placeId.value,
+      e.target.elements.knockedOutId.checked,
+      e.target.elements.chopId.value);
   }
 
   render() {
     const game = this.props.game;
-    let gamePlayer = _.find(game.data.gamePlayers, {'id': game.editGamePlayerId});
-    const finished = gamePlayer ? gamePlayer.finish : 11
+    let gamePlayer = _.find(game.data.players, {'id': game.editGamePlayerId});
 
     return (
       <div>
@@ -92,9 +90,9 @@ class EditGamePlayer extends React.Component {
               <Form.Group as={Row}>
                 <Form.Label>&nbsp;&nbsp;Place</Form.Label>
                 <Col>
-                  <Form.Control as="select" defaultValue={finished} id="finishId">
+                  <Form.Control as="select" defaultValue={gamePlayer ? (gamePlayer.place ? gamePlayer.place : 11) : 11} id="placeId">
                     <option key={11} value={11}> </option>
-                    {this.renderPlaces(game.data.gamePlayers)}
+                    {this.renderPlaces()}
                   </Form.Control>
                 </Col>
               </Form.Group>
