@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-17-add-first-time-player](#step-17-add-first-time-player)
 * [step-16-delete-game-player](#step-16-delete-game-player)
 * [step-15-knockout-game-player](#step-15-knockout-game-player)
 * [step-14-update-game-player](#step-14-update-game-player)
@@ -27,6 +28,12 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-17-add-first-time-player
+The add first time player to a game modal dialog, when submitted, now calls the server
+to add the player. If the call to add the first time player is successful then a call
+is made to get the current game and the updated game is dispatched to
+the reducers which updates the UI.
 
 ## step-16-delete-game-player
 Very simple to pass the game player id to a call to the server to delet the game player 

@@ -5,37 +5,36 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
-  ADD_NEW_PLAYER_TO_GAME,
   TOGGLE_ADD_NEW_PLAYER_TO_GAME
 } from '../actions/gameActions'
+import {addNewPlayer} from "../apis/gameClient";
 
 class AddNewPlayer extends React.Component {
 
-  addNewPlayer = (e) => {
+  addNewGamePlayer = (e) => {
     e.preventDefault();
-    leagueStore.dispatch({type: ADD_NEW_PLAYER_TO_GAME, player: {
-        firstName: e.target.elements.firstNameId.value,
-        lastName: e.target.elements.lastNameId.value,
-        email: e.target.elements.emailId.value,
-        buyInCollected: e.target.elements.buyInId.checked,
-        annualTocCollected: e.target.elements.tocId.checked,
-        quarterlyTocCollected: e.target.elements.qtocId.checked,
-      }})
+    leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})
+    addNewPlayer(e.target.elements.firstNameId.value,
+      e.target.elements.lastNameId.value,
+      e.target.elements.emailId.value,
+      e.target.elements.buyInId.checked,
+      e.target.elements.tocId.checked,
+      e.target.elements.qtocId.checked);
   }
-
 
   render() {
     const game = this.props.game;
 
     return (
       <div>
-        <Modal show={game.showAddNewPlayer} onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
+        <Modal show={game.showAddNewPlayer}
+               onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
-            <Form onSubmit={this.addNewPlayer}>
+            <Form onSubmit={this.addNewGamePlayer}>
               <Form.Group>
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="First"  id={'firstNameId'}/>
-                <Form.Control type="text" placeholder="Last"  id={'lastNameId'}/>
+                <Form.Control type="text" placeholder="First" id={'firstNameId'}/>
+                <Form.Control type="text" placeholder="Last" id={'lastNameId'}/>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Email address</Form.Label>

@@ -79,6 +79,33 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
     });
 }
 
+export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
+  const gameId = leagueStore.getState().game.data.id;
+  let firstTimeGamePlayer = {};
+  firstTimeGamePlayer.gameId = gameId;
+  firstTimeGamePlayer.firstName = firstName ? firstName : null;
+  firstTimeGamePlayer.lastName = lastName ? lastName : null;
+  firstTimeGamePlayer.email = email ? email : null;
+  firstTimeGamePlayer.buyInCollected = buyIn;
+  firstTimeGamePlayer.annualTocCollected = toc;
+  firstTimeGamePlayer.quarterlyTocCollected = qtoc;
+
+  const token = leagueStore.getState().token.token;
+
+  API.post('/api/v2/games/players/first', firstTimeGamePlayer, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
 export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knockedOut, chop) {
   const gameId = leagueStore.getState().game.data.id;
   const updateGamePlayerRequest = {

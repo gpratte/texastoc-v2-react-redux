@@ -2,7 +2,6 @@ import {
   TOGGLE_ADD_EXISTING_PLAYER_TO_GAME,
   TOGGLE_ADD_NEW_PLAYER_TO_GAME,
   TOGGLE_CONFIGURE_SEATING,
-  ADD_NEW_PLAYER_TO_GAME,
   EDIT_GAME_PLAYER,
   SUBMIT_SEATING,
   GETTING_CURRENT_GAME,
@@ -40,16 +39,6 @@ function currentGameReducer(game, action) {
       return Object.assign({}, game,
         {showConfigureSeating: action.show},
         {showConfigureSeatingKey: new Date().getTime()});
-    case ADD_NEW_PLAYER_TO_GAME:
-      let newPlayer = action.player;
-      newPlayer['id'] = new Date().getTime();
-      newPlayer['buyInCollected'] = action.player.buyInCollected ? game.data.buyInCost : null;
-      newPlayer['annualTocCollected'] = action.player.annualTocCollected ? game.data.annualTocCost : null;
-      newPlayer['quarterlyTocCollected'] = action.player.quarterlyTocCollected ? game.data.quarterlyTocCost : null;
-
-      let gameWithNewPlayer = Object.assign({}, game, {showAddNewPlayer: false});
-      gameWithNewPlayer.data.gamePlayers.push(newPlayer);
-      return gameWithNewPlayer;
     case EDIT_GAME_PLAYER:
       return Object.assign({}, game, {editGamePlayerId: action.id});
     case SUBMIT_SEATING:
