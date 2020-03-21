@@ -4,8 +4,6 @@ import {
   TOGGLE_CONFIGURE_SEATING,
   ADD_NEW_PLAYER_TO_GAME,
   EDIT_GAME_PLAYER,
-  UPDATE_GAME_PLAYER,
-  DELETE_GAME_PLAYER,
   SUBMIT_SEATING,
   GETTING_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND,
@@ -54,29 +52,6 @@ function currentGameReducer(game, action) {
       return gameWithNewPlayer;
     case EDIT_GAME_PLAYER:
       return Object.assign({}, game, {editGamePlayerId: action.id});
-    case UPDATE_GAME_PLAYER:
-      let gameWithUpdatedPlayer = Object.assign({}, game, {editGamePlayerId: null});
-
-      // Make sure its a primitive
-      const gamePlayerId = parseInt('' + action.gamePlayer.id);
-      const finish = parseInt('' + action.gamePlayer.finish);
-
-      const indexOfGamePlayer = _.findIndex(gameWithUpdatedPlayer.data.gamePlayers, {'id': gamePlayerId});
-      const gamePlayerToUpdate = gameWithUpdatedPlayer.data.gamePlayers[indexOfGamePlayer];
-      gamePlayerToUpdate['buyInCollected'] = action.gamePlayer.buyInCollected ? game.buyInCost : null;
-      gamePlayerToUpdate['annualTocCollected'] = action.gamePlayer.annualTocCollected ? game.annualTocCost : null;
-      gamePlayerToUpdate['quarterlyTocCollected'] = action.gamePlayer.quarterlyTocCollected ? game.quarterlyTocCost : null;
-      gamePlayerToUpdate['rebuyAddOnCollected'] = action.gamePlayer.rebuyAddOnCollected ? game.quarterlyTocCost : null;
-      gamePlayerToUpdate['knockedOut'] = action.gamePlayer.knockedOut;
-      gamePlayerToUpdate['finish'] = finish === 11 ? null : finish;
-      gamePlayerToUpdate['chop'] = action.gamePlayer.chop ? parseInt('' + action.gamePlayer.chop) : null;
-      return gameWithUpdatedPlayer;
-    case DELETE_GAME_PLAYER:
-      let gameWithDeletedPlayer = Object.assign({}, game, {editGamePlayerId: null});
-      _.remove(gameWithDeletedPlayer.data.gamePlayers, function (gp) {
-        return gp.id === action.id;
-      });
-      return gameWithDeletedPlayer;
     case SUBMIT_SEATING:
       // initialize the tables
       const tables = [];

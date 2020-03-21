@@ -97,8 +97,7 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
 
   API.put('/api/v2/games/players/' + gamePlayerId, updateGamePlayerRequest, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Access-Control-Allow-Origin': "*"
+      'Authorization': `Bearer ${token}`
     }
   })
     .then(result => {
@@ -122,5 +121,21 @@ export function toggleKnockedOut(gamePlayerId) {
     gamePlayer.place ? gamePlayer.place : null,
     gamePlayer.knockedOut ? false : true,
     gamePlayer.chop ? gamePlayer.chop : null);
-  }
+}
 
+export function deletePlayer(gamePlayerId) {
+  const token = leagueStore.getState().token.token;
+
+  API.delete('/api/v2/games/players/' + gamePlayerId, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}

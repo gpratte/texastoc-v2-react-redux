@@ -7,10 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
-  EDIT_GAME_PLAYER,
-  DELETE_GAME_PLAYER
+  EDIT_GAME_PLAYER
 } from '../actions/gameActions'
-import {updatePlayer} from "../apis/gameClient";
+import {updatePlayer, deletePlayer} from "../apis/gameClient";
 import _ from "lodash";
 
 const tenPlaces = [10,9,8,7,6,5,4,3,2,1]
@@ -25,7 +24,7 @@ class EditGamePlayer extends React.Component {
     })
   }
 
-  updatePlayer = (e) => {
+  updateGamePlayer = (e) => {
     e.preventDefault();
     leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null});
     updatePlayer(e.target.elements.gamePlayerId.value,
@@ -51,7 +50,7 @@ class EditGamePlayer extends React.Component {
               {gamePlayer ? ((gamePlayer.firstName && gamePlayer.lastName) ? ' ' : '') : ''}
               {gamePlayer ? gamePlayer.lastName : ''}
             </p>
-            <Form onSubmit={this.updatePlayer}>
+            <Form onSubmit={this.updateGamePlayer}>
               <Form.Control type={'hidden'} id={'gamePlayerId'} value={gamePlayer ? gamePlayer.id : 0}/>
               <Form.Group>
                 <Form.Check inline
@@ -107,7 +106,8 @@ class EditGamePlayer extends React.Component {
                   // eslint-disable-next-line no-restricted-globals
                   const doit = confirm('are you sure?');
                   if (doit) {
-                    leagueStore.dispatch({type: DELETE_GAME_PLAYER, id: gamePlayer ? gamePlayer.id : 0})
+                    leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null});
+                    deletePlayer(gamePlayer ? gamePlayer.id : 0);
                   }
                 }}>
                   Delete
