@@ -6,6 +6,7 @@ import {
   GOT_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND
 } from '../actions/gameActions'
+import _ from 'lodash';
 
 export function addNewGame(month, day, year, hostId, transport) {
   let createGameRequest = {};
@@ -108,4 +109,18 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function toggleKnockedOut(gamePlayerId) {
+  // find the player
+  const gamePlayers = leagueStore.getState().game.data.players;
+  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
+  updatePlayer(gamePlayer.id,
+    gamePlayer.buyInCollected ? true : false,
+    gamePlayer.annualTocCollected ? true : false,
+    gamePlayer.quarterlyTocCollected ? true : false,
+    gamePlayer.rebuyAddOnCollected ? true : false,
+    gamePlayer.place ? gamePlayer.place : null,
+    gamePlayer.knockedOut ? false : true,
+    gamePlayer.chop ? gamePlayer.chop : null);
+  }
 

@@ -11,8 +11,13 @@ import {
 import AddExistingPlayer from "./AddExistingPlayer";
 import AddNewPlayer from "./AddNewPlayer";
 import EditGamePlayer from "./EditGamePlayer";
+import {toggleKnockedOut} from "../apis/gameClient";
 
 class GamePlayers extends React.Component {
+
+  toggleKnockedOut(id) {
+    toggleKnockedOut(id);
+  }
 
   renderGamePlayers(gamePlayers) {
     if (!gamePlayers) {
@@ -25,7 +30,14 @@ class GamePlayers extends React.Component {
       } = gamePlayer;
       return (
         <tr key={id}>
-          <td className="knocked-out">{knockedOut ? 'x' : ''}</td>
+          <td>
+            <Button variant="link" onClick={() => {
+              this.toggleKnockedOut(id);
+            }}>
+               {knockedOut ? <i className="fas fa-user-slash knocked-out"></i> : <i className="fas fa-user"></i>}
+            </Button>
+          </td>
+
           <td>{place ? (place < 11 ? place : '') : ''}</td>
           <td>
             <Button variant="link" onClick={() => {

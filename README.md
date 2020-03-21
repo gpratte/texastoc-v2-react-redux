@@ -6,9 +6,12 @@ This is the beginning of writing a new front end using React and Redux.
 
 The following shows what I did step by step.
 
-Each step can be found on the cooresponding branch.
+Each step can be found on the corresponding branch.
+
+To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-15-knockout-game-player](#step-15-knockout-game-player)
 * [step-14-update-game-player](#step-14-update-game-player)
 * [step-13-add-existing-player](#step-13-add-existing-player)
 * [step-12-create-new-game](#step-12-create-new-game)
@@ -24,16 +27,22 @@ Each step can be found on the cooresponding branch.
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
 
+## step-15-knockout-game-player
+Added the ability to toggle if a game player is knocked out with a single press of a
+user icon in the user list.
+
+Using Font Awesome for React for the icons. See https://fontawesome.com/how-to-use/on-the-web/using-with/react
+
 ## step-14-update-game-player
-The update game player modal dialog, when submitted, now calls the server 
-to update the player. If the call to update the player is successful then a call 
-is made to get the current game and the updated game is dispatched to 
+The update game player modal dialog, when submitted, now calls the server
+to update the player. If the call to update the player is successful then a call
+is made to get the current game and the updated game is dispatched to
 the reducers which updates the UI.
 
 ## step-13-add-existing-player
-The add existing player to a game modal dialog, when submitted, now calls the server 
-to add the player. If the call to add the player is successful then a call 
-is made to get the current game and the updated game is dispatched to 
+The add existing player to a game modal dialog, when submitted, now calls the server
+to add the player. If the call to add the player is successful then a call
+is made to get the current game and the updated game is dispatched to
 the reducers which updates the UI.
 
 ## step-12-create-new-game
