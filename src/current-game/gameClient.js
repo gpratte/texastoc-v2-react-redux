@@ -136,20 +136,6 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
     });
 }
 
-export function toggleKnockedOut(gamePlayerId) {
-  // find the player
-  const gamePlayers = leagueStore.getState().game.data.players;
-  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
-  updatePlayer(gamePlayer.id,
-    gamePlayer.buyInCollected ? true : false,
-    gamePlayer.annualTocCollected ? true : false,
-    gamePlayer.quarterlyTocCollected ? true : false,
-    gamePlayer.rebuyAddOnCollected ? true : false,
-    gamePlayer.place ? gamePlayer.place : null,
-    gamePlayer.knockedOut ? false : true,
-    gamePlayer.chop ? gamePlayer.chop : null);
-}
-
 export function deletePlayer(gamePlayerId) {
   const token = leagueStore.getState().token.token;
 
@@ -166,3 +152,35 @@ export function deletePlayer(gamePlayerId) {
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function toggleKnockedOut(gamePlayerId) {
+  // find the player
+  const gamePlayers = leagueStore.getState().game.data.players;
+  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
+  updatePlayer(gamePlayer.id,
+    gamePlayer.buyInCollected ? true : false,
+    gamePlayer.annualTocCollected ? true : false,
+    gamePlayer.quarterlyTocCollected ? true : false,
+    gamePlayer.rebuyAddOnCollected ? true : false,
+    gamePlayer.place ? gamePlayer.place : null,
+    gamePlayer.knockedOut ? false : true,
+    gamePlayer.chop ? gamePlayer.chop : null);
+}
+
+export function finalize(gameId) {
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/' + gameId + '/finalize', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+

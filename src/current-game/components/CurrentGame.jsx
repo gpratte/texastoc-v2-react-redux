@@ -12,7 +12,6 @@ import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getPlayers} from "../../league/leagueClient";
 import {getCurrentGame} from "../gameClient";
-import {gameOver} from "../gameUtils";
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
@@ -89,7 +88,7 @@ class CurrentGame extends React.Component {
 
         <GamePlayersRemaining game={game}/>
         <GamePlayers game={game} players={this.props.league.players}/>
-        <Finalize gamePlayers={game.data.players}/>
+        <Finalize gamePlayers={game.data.players} gameId={game.data.id} finialized={game.data.finalized}/>
 
         <Accordion>
           <Card>
