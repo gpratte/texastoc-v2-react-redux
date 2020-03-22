@@ -37,6 +37,9 @@ export function addNewGame(month, day, year, hostId, transport) {
 }
 
 export function getCurrentGame(token) {
+  if (!token) {
+    token = leagueStore.getState().token.token;
+  }
   API.get('/api/v2/games/current', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -131,23 +134,14 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
       getCurrentGame(token);
     })
     .catch(function (error) {
-      const message = error.message ? error.message : error.toString();
+      let message;
+      if (error.response && error.response.status && error.response.status === 409) {
+        message = "Cannot change the game in any way after it has ended";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
-}
-
-export function toggleKnockedOut(gamePlayerId) {
-  // find the player
-  const gamePlayers = leagueStore.getState().game.data.players;
-  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
-  updatePlayer(gamePlayer.id,
-    gamePlayer.buyInCollected ? true : false,
-    gamePlayer.annualTocCollected ? true : false,
-    gamePlayer.quarterlyTocCollected ? true : false,
-    gamePlayer.rebuyAddOnCollected ? true : false,
-    gamePlayer.place ? gamePlayer.place : null,
-    gamePlayer.knockedOut ? false : true,
-    gamePlayer.chop ? gamePlayer.chop : null);
 }
 
 export function deletePlayer(gamePlayerId) {
@@ -162,7 +156,65 @@ export function deletePlayer(gamePlayerId) {
       getCurrentGame(token);
     })
     .catch(function (error) {
+      let message;
+      if (error.response && error.response.status && error.response.status === 409) {
+        message = "Cannot change the game in any way after it has ended";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
+export function toggleKnockedOut(gamePlayerId) {
+  // find the player
+  const gamePlayers = leagueStore.getState().game.data.players;
+  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
+  updatePlayer(gamePlayer.id,
+    !!gamePlayer.buyInCollected,
+    !!gamePlayer.annualTocCollected,
+    !!gamePlayer.quarterlyTocCollected,
+    !!gamePlayer.rebuyAddOnCollected,
+    gamePlayer.place ? gamePlayer.place : null,
+    !!gamePlayer.knockedOut,
+    gamePlayer.chop ? gamePlayer.chop : null);
+}
+
+export function finalize(gameId) {
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/' + gameId + '/finalize', {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
       const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
+export function unfinalize(gameId) {
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/' + gameId + '/unfinalize', {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      let message;
+      if (error.response && error.response.status && error.response.status === 403) {
+        message = "You are not authorized to edit the game";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }

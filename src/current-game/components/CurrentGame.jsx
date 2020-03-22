@@ -7,10 +7,12 @@ import Details from './Details'
 import GamePlayers from './GamePlayers'
 import GamePlayersRemaining from './GamePlayersRemaining'
 import Seating from './Seating'
+import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getPlayers} from "../../league/leagueClient";
 import {getCurrentGame} from "../gameClient";
+import {gameOver} from "../gameUtils";
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
@@ -33,6 +35,32 @@ class CurrentGame extends React.Component {
 
   componentDidUpdate() {
     this.shouldInitialize(this.props.league);
+  }
+
+  // TODO move to utils
+  refresh = () => {
+    getCurrentGame();
+  }
+
+  renderSeating(isGameOver, game) {
+    if (isGameOver) {
+      return null;
+    }
+
+    return (
+      <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+              Seating
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="1">
+            <Card.Body><Seating game={game}/></Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+    )
   }
 
   render() {
@@ -70,6 +98,8 @@ class CurrentGame extends React.Component {
     }
 
     const game = this.props.league.game;
+    const isGameOver = gameOver(game.data.players);
+
     return (
       <div>
         <Accordion>
@@ -78,6 +108,7 @@ class CurrentGame extends React.Component {
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Details
               </Accordion.Toggle>
+              <Button variant="outline-secondary" onClick={() => this.refresh()}>Refresh</Button>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body><Details game={game}/></Card.Body>
@@ -87,20 +118,9 @@ class CurrentGame extends React.Component {
 
         <GamePlayersRemaining game={game}/>
         <GamePlayers game={game} players={this.props.league.players}/>
+        <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
 
-        <Accordion>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                Seating
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="1">
-              <Card.Body><Seating game={game}/></Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
-
+        {this.renderSeating(isGameOver, game)}
       </div>
     );
   }

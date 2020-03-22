@@ -12,11 +12,31 @@ import AddExistingPlayer from "./AddExistingPlayer";
 import AddNewPlayer from "./AddNewPlayer";
 import EditGamePlayer from "./EditGamePlayer";
 import {toggleKnockedOut} from "../gameClient";
+import {gameOver} from "../gameUtils";
 
 class GamePlayers extends React.Component {
 
   toggleKnockedOut(id) {
     toggleKnockedOut(id);
+  }
+
+  renderAddPlayerButtons(isGameOver) {
+    if (isGameOver) {
+      return null;
+    }
+    return (
+      <div>
+        <Button variant="primary"
+                onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
+          Add Player
+        </Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant="primary"
+                onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: true})}>
+          Add New Player
+        </Button>
+      </div>
+    )
   }
 
   renderGamePlayers(gamePlayers) {
@@ -34,7 +54,7 @@ class GamePlayers extends React.Component {
             <Button variant="link" onClick={() => {
               this.toggleKnockedOut(id);
             }}>
-               {knockedOut ? <i className="fas fa-user-slash knocked-out"></i> : <i className="fas fa-user"></i>}
+              {knockedOut ? <i className="fas fa-user-slash knocked-out"></i> : <i className="fas fa-user"></i>}
             </Button>
           </td>
 
@@ -61,6 +81,7 @@ class GamePlayers extends React.Component {
     const game = this.props.game;
     const gamePlayers = game.data.players;
     const players = this.props.players;
+    const isGameOver = gameOver(gamePlayers);
 
     return (
       <div>
@@ -88,13 +109,7 @@ class GamePlayers extends React.Component {
         <AddNewPlayer game={game}/>
         <EditGamePlayer game={game}/>
 
-        <Button variant="primary" onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
-          Add Player
-        </Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="primary" onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: true})}>
-          Add New Player
-        </Button>
+        {this.renderAddPlayerButtons(isGameOver)}
       </div>
     );
   }
