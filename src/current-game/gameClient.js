@@ -37,6 +37,9 @@ export function addNewGame(month, day, year, hostId, transport) {
 }
 
 export function getCurrentGame(token) {
+  if (!token) {
+    token = leagueStore.getState().token.token;
+  }
   API.get('/api/v2/games/current', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -184,3 +187,19 @@ export function finalize(gameId) {
     });
 }
 
+export function unfinalize(gameId) {
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/' + gameId + '/unfinalize', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
