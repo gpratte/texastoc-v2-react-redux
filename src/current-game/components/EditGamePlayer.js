@@ -8,8 +8,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
   EDIT_GAME_PLAYER
-} from '../actions/gameActions'
-import {updatePlayer, deletePlayer} from "../apis/gameClient";
+} from '../gameActions'
+import {updatePlayer, deletePlayer} from "../gameClient";
 import _ from "lodash";
 
 const tenPlaces = [10,9,8,7,6,5,4,3,2,1]

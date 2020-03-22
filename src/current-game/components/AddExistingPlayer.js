@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {
   TOGGLE_ADD_EXISTING_PLAYER_TO_GAME
-} from '../actions/gameActions'
-import {addExistingPlayer} from "../apis/gameClient";
+} from '../gameActions'
+import {addExistingPlayer} from "../gameClient";
 import _ from 'lodash';
 
 class AddExistingPlayer extends React.Component {

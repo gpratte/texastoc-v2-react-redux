@@ -2,7 +2,7 @@ import {
   ADDED_NEW_SEASON,
   GOT_SEASON,
   GETTING_SEASON,
-  SEASON_NOT_FOUND} from '../actions/seasonActions'
+  SEASON_NOT_FOUND} from './seasonActions'
 
 // Take the season as the parameter
 function seasonReducer(season, action) {

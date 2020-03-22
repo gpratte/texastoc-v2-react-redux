@@ -9,7 +9,7 @@ import {
   ADDED_NEW_GAME,
   UPDATED_GAME,
   GOT_CURRENT_GAME
-} from '../actions/gameActions'
+} from './gameActions'
 import _ from 'lodash';
 
 // TODO need a place for utility functions

@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link, Redirect} from "react-router-dom";
-import {addNewSeason} from '../apis/seasonClient'
+import {addNewSeason} from '../seasonClient'
 
 class NewSeason extends React.Component {
 

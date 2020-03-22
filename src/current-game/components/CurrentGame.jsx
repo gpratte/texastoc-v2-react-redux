@@ -8,9 +8,9 @@ import GamePlayers from './GamePlayers'
 import GamePlayersRemaining from './GamePlayersRemaining'
 import Seating from './Seating'
 import leagueStore from "../../league/leagueStore";
-import {GETTING_CURRENT_GAME} from "../actions/gameActions";
+import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getPlayers} from "../../league/leagueClient";
-import {getCurrentGame} from "../apis/gameClient";
+import {getCurrentGame} from "../gameClient";
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {

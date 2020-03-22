@@ -1,11 +1,11 @@
-import API from '../../utils/api'
-import leagueStore from "../../league/leagueStore";
-import {API_ERROR} from "../../league/leagueActions";
+import API from '../utils/api'
+import leagueStore from "../league/leagueStore";
+import {API_ERROR} from "../league/leagueActions";
 import {
   ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND
-} from '../actions/gameActions'
+} from './gameActions'
 import _ from 'lodash';
 
 export function addNewGame(month, day, year, hostId, transport) {

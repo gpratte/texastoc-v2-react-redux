@@ -1,6 +1,6 @@
 import {
   LOGGED_IN, LOGGED_OUT
-} from '../actions/loginActions'
+} from './loginActions'
 
 // Take the league as the parameter
 function loginReducer(league, action) {

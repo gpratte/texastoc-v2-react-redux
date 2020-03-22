@@ -12,8 +12,8 @@ import Quarters from './Quarters'
 import Games from './Games'
 import {Link, Redirect} from "react-router-dom";
 import leagueStore from "../../league/leagueStore";
-import {GETTING_SEASON} from "../actions/seasonActions";
-import {getCurrentSeason} from "../apis/seasonClient";
+import {GETTING_SEASON} from "../seasonActions";
+import {getCurrentSeason} from "../seasonClient";
 
 class Season extends React.Component {
 

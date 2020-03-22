@@ -1,7 +1,7 @@
-import API from '../../utils/api'
-import leagueStore from "../../league/leagueStore";
-import {API_ERROR} from "../../league/leagueActions";
-import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from '../actions/seasonActions'
+import API from '../utils/api'
+import leagueStore from "../league/leagueStore";
+import {API_ERROR} from "../league/leagueActions";
+import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
 
 export function addNewSeason(month, day, year) {
   const dates = [];

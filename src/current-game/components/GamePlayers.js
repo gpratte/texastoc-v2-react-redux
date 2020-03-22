@@ -7,11 +7,11 @@ import {
   TOGGLE_ADD_EXISTING_PLAYER_TO_GAME,
   TOGGLE_ADD_NEW_PLAYER_TO_GAME,
   EDIT_GAME_PLAYER
-} from '../actions/gameActions'
+} from '../gameActions'
 import AddExistingPlayer from "./AddExistingPlayer";
 import AddNewPlayer from "./AddNewPlayer";
 import EditGamePlayer from "./EditGamePlayer";
-import {toggleKnockedOut} from "../apis/gameClient";
+import {toggleKnockedOut} from "../gameClient";
 
 class GamePlayers extends React.Component {
 

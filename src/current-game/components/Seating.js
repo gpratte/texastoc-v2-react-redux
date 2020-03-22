@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import SeatingConfig from "./SeatingConfig";
 import Button from "react-bootstrap/Button";
 import leagueStore from '../../league/leagueStore'
-import {TOGGLE_CONFIGURE_SEATING} from "../actions/gameActions";
+import {TOGGLE_CONFIGURE_SEATING} from "../gameActions";
 
 class Seating extends React.Component {
 

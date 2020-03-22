@@ -10,7 +10,7 @@ import NavLink from 'react-bootstrap/NavLink';
 import {Route, Switch} from 'react-router-dom';
 import Error from './Error'
 import Home from '../home/Home'
-import Login from '../login/components/Login'
+import Login from '../login/Login'
 import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'

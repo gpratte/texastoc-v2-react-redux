@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Link, Redirect} from "react-router-dom";
-import {addNewGame} from '../apis/gameClient'
+import {addNewGame} from '../gameClient'
 
 class NewGame extends React.Component {
 

@@ -1,6 +1,6 @@
-import currentGameReducer from '../current-game/reducers/currentGameReducer'
-import seasonReducer from '../season/reducers/seasonReducer'
-import loginReducer from '../login/reducers/loginReducer'
+import currentGameReducer from '../current-game/currentGameReducer'
+import seasonReducer from '../season/seasonReducer'
+import loginReducer from '../login/loginReducer'
 import {API_ERROR, GOT_LEAGUE_PLAYERS} from "./leagueActions";
 
 function leagueReducer(league, action) {

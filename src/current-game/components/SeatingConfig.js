@@ -9,7 +9,7 @@ import SeatingSeatsPerTable from './SeatingSeatsPerTable'
 import {
   TOGGLE_CONFIGURE_SEATING,
   SUBMIT_SEATING
-} from '../actions/gameActions'
+} from '../gameActions'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import _ from 'lodash';

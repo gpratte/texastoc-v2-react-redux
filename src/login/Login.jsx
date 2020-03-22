@@ -2,9 +2,9 @@ import React from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
-import {login} from '../apis/loginClient'
-import leagueStore from "../../league/leagueStore";
-import {LOGGED_OUT} from "../actions/loginActions";
+import {login} from './loginClient'
+import leagueStore from "../league/leagueStore";
+import {LOGGED_OUT} from "./loginActions";
 
 class Login extends React.Component {
 

@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-18-move-files](#step-18-move-files)
 * [step-17-add-first-time-player](#step-17-add-first-time-player)
 * [step-16-delete-game-player](#step-16-delete-game-player)
 * [step-15-knockout-game-player](#step-15-knockout-game-player)
@@ -28,6 +29,10 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-18-move-files
+For any subdirectories that have only one file (e.g. season had an actions subdirectory)
+move that file up to its parent directory and remove the subdirectory.
 
 ## step-17-add-first-time-player
 The add first time player to a game modal dialog, when submitted, now calls the server

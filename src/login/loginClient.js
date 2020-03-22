@@ -1,7 +1,7 @@
-import API from '../../utils/api'
-import {LOGGED_IN} from '../actions/loginActions'
-import leagueStore from "../../league/leagueStore";
-import {API_ERROR} from "../../league/leagueActions";
+import API from '../utils/api'
+import {LOGGED_IN} from './loginActions'
+import leagueStore from "../league/leagueStore";
+import {API_ERROR} from "../league/leagueActions";
 
 function login(email, password) {
   API.post('/login',
