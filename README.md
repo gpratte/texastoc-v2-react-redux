@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-19-finalize-game](#step-19-finalize-game)
 * [step-18-move-files](#step-18-move-files)
 * [step-17-add-first-time-player](#step-17-add-first-time-player)
 * [step-16-delete-game-player](#step-16-delete-game-player)
@@ -29,6 +30,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-19-finalize-game
+Added the ability to end a game (finalize) and put the game back into edit mode (unfinalize).
+
+The linter called out using double bang (!!). See https://medium.com/better-programming/javascript-bang-bang-i-shot-you-down-use-of-double-bangs-in-javascript-7c9d94446054
 
 ## step-18-move-files
 For any subdirectories that have only one file (e.g. season had an actions subdirectory)
