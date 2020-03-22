@@ -7,10 +7,12 @@ import Details from './Details'
 import GamePlayers from './GamePlayers'
 import GamePlayersRemaining from './GamePlayersRemaining'
 import Seating from './Seating'
+import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getPlayers} from "../../league/leagueClient";
 import {getCurrentGame} from "../gameClient";
+import {gameOver} from "../gameUtils";
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
@@ -87,6 +89,7 @@ class CurrentGame extends React.Component {
 
         <GamePlayersRemaining game={game}/>
         <GamePlayers game={game} players={this.props.league.players}/>
+        <Finalize gamePlayers={game.data.players}/>
 
         <Accordion>
           <Card>
