@@ -20,9 +20,12 @@ class Finalize extends React.Component {
     }
 
     return (
-      <Button variant="primary" onClick={() => finalize(gameId)}>
-        Game Over
-      </Button>
+      <div>
+        <h3>If the game is over then click the Finalize button</h3>
+        <Button variant="primary" onClick={() => finalize(gameId)}>
+          Finalize
+        </Button>
+      </div>
     );
   }
 }

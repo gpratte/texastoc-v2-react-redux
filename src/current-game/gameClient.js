@@ -7,6 +7,7 @@ import {
   CURRENT_GAME_NOT_FOUND
 } from './gameActions'
 import _ from 'lodash';
+import {getCurrentSeason} from "../season/seasonClient";
 
 export function addNewGame(month, day, year, hostId, transport) {
   let createGameRequest = {};
@@ -190,6 +191,7 @@ export function finalize(gameId) {
   })
     .then(result => {
       getCurrentGame(token);
+      getCurrentSeason(token);
     })
     .catch(function (error) {
       const message = error.message ? error.message : error.toString();

@@ -16,7 +16,11 @@ class AddExistingPlayer extends React.Component {
     // Remove players already in game
     const filtered = _.filter(players,
       (p) => {
-        let index = _.findIndex(gamePlayers, {"playerId": p.id});
+        let index = _.findIndex(gamePlayers, function(gp) {
+          return gp.playerId === p.id;
+        });
+        // return true if not found (i.e. the player is not
+        // filtered out of the players to choose from
         return index === -1;
       }
     )
@@ -43,7 +47,7 @@ class AddExistingPlayer extends React.Component {
   render() {
     const game = this.props.game;
     const players = this.props.players;
-    const {gamePlayers} = game.data;
+    const gamePlayers = game.data.players;
 
     return (
       <div>

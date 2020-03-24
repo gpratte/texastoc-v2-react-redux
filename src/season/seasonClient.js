@@ -31,6 +31,9 @@ export function addNewSeason(month, day, year) {
 }
 
 export function getCurrentSeason(token) {
+  if (!token) {
+    token = leagueStore.getState().token.token;
+  }
   API.get('/api/v2/seasons/current', {
     headers: {
       'Authorization': `Bearer ${token}`
