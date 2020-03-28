@@ -1,6 +1,6 @@
 import API from '../utils/api'
 import leagueStore from "../league/leagueStore";
-import {API_ERROR, REDIRECT} from "../league/leagueActions";
+import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {
   ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
@@ -51,8 +51,10 @@ export function getCurrentGame(token) {
   })
     .then(result => {
       leagueStore.dispatch({type: GOT_CURRENT_GAME, game: result.data})
+      leagueStore.dispatch({type: REFRESH, refresh: false})
     })
     .catch(function (error) {
+      leagueStore.dispatch({type: REFRESH, refresh: false})
       if (error.response && error.response.status && error.response.status === 404) {
         leagueStore.dispatch({type: CURRENT_GAME_NOT_FOUND, flag: true})
       } else {

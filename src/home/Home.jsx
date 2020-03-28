@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import {isLoggedIn} from "../utils/util";
-import {refresh, isRefreshing} from '../league/leagueClient'
+import {refreshLeague, isRefreshing} from '../league/leagueClient'
 const Home = (props) => {
 
   const league = props.league;
@@ -36,7 +36,7 @@ const Home = (props) => {
       {
         isLoggedIn(league) && !isRefreshing(league) &&
         <p className={'main-p'}>
-          <Button variant="outline-secondary" onClick={() => refresh()}>
+          <Button variant="outline-secondary" onClick={() => refreshLeague()}>
           Refresh
           </Button>
         </p>

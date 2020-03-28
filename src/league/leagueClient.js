@@ -2,16 +2,26 @@ import API from '../utils/api'
 import leagueStore from "./leagueStore";
 import {API_ERROR, GOT_LEAGUE_PLAYERS, RESET, REFRESH} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
+import {GETTING_SEASON} from "../season/seasonActions";
 
-export function refresh() {
-  leagueStore.dispatch({type: RESET})
+export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
-  getCurrentSeason();
-  setTimeout(function(){ leagueStore.dispatch({type: REFRESH, refresh: false}) }, 3000);
+  if (delayMillis) {
+    setTimeout(function(){ leagueStore.dispatch({type: REFRESH, refresh: false}) }, delayMillis);
+  }
 }
 
 export function isRefreshing(league) {
   return !!league.refresh;
+}
+
+export function refreshLeague() {
+  const league = leagueStore.getState();
+  leagueStore.dispatch({type: RESET})
+  leagueStore.dispatch({type: REFRESH, refresh: true})
+  leagueStore.dispatch({type: GETTING_SEASON, flag: true})
+  getPlayers(league.token.token);
+  getCurrentSeason(league.token.token);
 }
 
 export function getPlayers(token) {

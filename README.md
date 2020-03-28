@@ -11,7 +11,8 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-20-get-season-when-game-finalized
+* [step-21-refresh-game-spinner](#step-21-refresh-game-spinner)
+* [step-20-get-season-when-game-finalized](#step-20-get-season-when-game-finalized)
 * [step-19-finalize-game](#step-19-finalize-game)
 * [step-18-move-files](#step-18-move-files)
 * [step-17-add-first-time-player](#step-17-add-first-time-player)
@@ -31,6 +32,9 @@ step-20-get-season-when-game-finalized
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-21-refresh-game-spinner
+Show a spinner when the game is being refreshed.
 
 ## step-20-get-season-when-game-finalized
 Update the season to pick up the game when a game is finalized.
