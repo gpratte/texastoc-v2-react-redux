@@ -1,6 +1,6 @@
 import API from '../utils/api'
 import leagueStore from "../league/leagueStore";
-import {API_ERROR} from "../league/leagueActions";
+import {API_ERROR, REDIRECT} from "../league/leagueActions";
 import {
   ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
@@ -25,11 +25,14 @@ export function addNewGame(month, day, year, hostId, transport) {
   })
     .then(result => {
       leagueStore.dispatch({type: ADDED_NEW_GAME, game: result.data})
+      leagueStore.dispatch({type: REDIRECT, to: '/current-game'})
     })
     .catch(function (error) {
       let message;
       if (error.response && error.response.status && error.response.status === 403) {
         message = "You are not authorized to start a new game";
+      } if (error.response && error.response.status && error.response.status === 409) {
+        message = "Cannot start a new game while there is a game in progress";
       } else {
         message = error.message ? error.message : error.toString();
       }

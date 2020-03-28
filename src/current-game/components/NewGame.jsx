@@ -1,8 +1,9 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {addNewGame} from '../gameClient'
+import {shouldRedirect, redirect} from '../../utils/util';
 
 class NewGame extends React.Component {
 
@@ -30,17 +31,9 @@ class NewGame extends React.Component {
 
 
   render() {
-    if (this.props.league.token === null || this.props.league.token.token === null ) {
-      // Must be logged in to view this component
-      return (
-        <Redirect to='/login'/>
-      )
-    }
-
-    if (this.props.league.game.data !== null) {
-      return (
-        <Redirect to='/current-game'/>
-      )
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
     }
 
     const {players} = this.props.league;
