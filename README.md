@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+step-20-get-season-when-game-finalized
 * [step-19-finalize-game](#step-19-finalize-game)
 * [step-18-move-files](#step-18-move-files)
 * [step-17-add-first-time-player](#step-17-add-first-time-player)
@@ -30,6 +31,17 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-20-get-season-when-game-finalized
+Update the season to pick up the game when a game is finalized.
+
+But after the game is finalized needed the ability to start a new game so added that functionality.
+
+A lot of other little things got done
+* Set up the ability to redirect. Using this to redirect to the current game after starting a game.
+* Can now reset the client to the "real" state of the server from Home. Puts up a spinner for a few seconds while resetting.
+* The league will initialize by getting the league players and current season.
+* Adding functions to util.js (e.g. isLoggedIn, redirect, ...).
 
 ## step-19-finalize-game
 Added the ability to end a game (finalize) and put the game back into edit mode (unfinalize).

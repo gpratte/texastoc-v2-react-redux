@@ -10,10 +10,11 @@ import SeasonDetails from './SeasonDetails'
 import Standings from './Standings'
 import Quarters from './Quarters'
 import Games from './Games'
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import leagueStore from "../../league/leagueStore";
 import {GETTING_SEASON} from "../seasonActions";
 import {getCurrentSeason} from "../seasonClient";
+import {redirect, shouldRedirect} from "../../utils/util";
 
 class Season extends React.Component {
 
@@ -39,11 +40,9 @@ class Season extends React.Component {
 
 
   render() {
-    if (this.props.league.token === null || this.props.league.token.token === null ) {
-      // Must be logged in to view this component
-      return (
-        <Redirect to='/login'/>
-      )
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
     }
 
     if (this.props.league.season.seasonNotFound === true) {

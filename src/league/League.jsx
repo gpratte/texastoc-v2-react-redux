@@ -15,16 +15,47 @@ import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'
 import NewGame from '../current-game/components/NewGame'
-import { LinkContainer } from "react-router-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
+import leagueStore from "./leagueStore";
+import {GETTING_SEASON} from "../season/seasonActions";
+import {getCurrentSeason} from "../season/seasonClient";
+import {isLoggedIn, shouldShowGame} from "../utils/util";
+import {getPlayers} from "./leagueClient";
 
 class League extends React.Component {
+
+  shouldInitialize = (league) => {
+    const shouldInitialize = isLoggedIn(league) &&
+      league.season.data === null &&
+      league.season.gettingSeason === false &&
+      league.season.seasonNotFound === false;
+    if (shouldInitialize) {
+      getPlayers(league.token.token);
+      leagueStore.dispatch({type: GETTING_SEASON, flag: true})
+      getCurrentSeason(league.token.token);
+    }
+  }
+
+  componentDidMount() {
+    this.shouldInitialize(this.props.league);
+  }
+
+  componentDidUpdate() {
+    this.shouldInitialize(this.props.league);
+  }
+
   render() {
+    const league = this.props.league;
+
+    // Do not show anything about a game if there is not season.
+    const showGame = shouldShowGame(league);
+
     return (
       <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Navbar.Brand href="/home">Texas TOC</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
             </Nav>
@@ -44,16 +75,30 @@ class League extends React.Component {
                     <Button variant="link">Home</Button>
                   </NavLink>
                 </LinkContainer>
-                <LinkContainer exact to={"/season"}>
-                  <NavLink>
-                    <Button variant="link">Season</Button>
-                  </NavLink>
-                </LinkContainer>
-                <LinkContainer exact to={"/current-game"}>
-                  <NavLink>
-                    <Button variant="link">Game</Button>
-                  </NavLink>
-                </LinkContainer>
+                {
+                  isLoggedIn(league) &&
+                  <LinkContainer exact to={"/season"}>
+                    <NavLink>
+                      <Button variant="link">Season</Button>
+                    </NavLink>
+                  </LinkContainer>
+                }
+                {
+                  isLoggedIn(league) && showGame &&
+                  <LinkContainer exact to={"/current-game"}>
+                    <NavLink>
+                      <Button variant="link">Game</Button>
+                    </NavLink>
+                  </LinkContainer>
+                }
+                {
+                  isLoggedIn(league) && showGame &&
+                  <LinkContainer exact to={"/game/new"}>
+                    <NavLink>
+                      <Button variant="link">New game</Button>
+                    </NavLink>
+                  </LinkContainer>
+                }
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -61,32 +106,32 @@ class League extends React.Component {
         <Container className="main-view">
           <Row className="justify-content-center text-center gp">
             <Col>
-              <Error league={this.props.league}/>
+              <Error league={league}/>
             </Col>
           </Row>
           <Row className="justify-content-center text-center gp">
             <Col>
               <Switch>
                 <Route exact path='/'>
-                  <Home league={this.props.league}/>
+                  <Home league={league}/>
                 </Route>
                 <Route path='/home'>
-                  <Home league={this.props.league}/>
+                  <Home league={league}/>
                 </Route>
                 <Route path='/login'>
-                  <Login league={this.props.league}/>
+                  <Login league={league}/>
                 </Route>
                 <Route exact path='/season'>
-                  <Season league={this.props.league}/>
+                  <Season league={league}/>
                 </Route>
                 <Route path='/season/new'>
-                  <NewSeason league={this.props.league}/>
+                  <NewSeason league={league}/>
                 </Route>
                 <Route path='/game/new'>
-                  <NewGame league={this.props.league}/>
+                  <NewGame league={league}/>
                 </Route>
                 <Route path='/current-game'>
-                  <CurrentGame league={this.props.league}/>
+                  <CurrentGame league={league}/>
                 </Route>
               </Switch>
             </Col>

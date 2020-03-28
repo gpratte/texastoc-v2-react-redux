@@ -1,7 +1,7 @@
 import {createStore} from 'redux'
 import leagueReducer from './leagueReducer'
 
-const league = {
+export const seed = {
   players: [],
   game: {
     data: null,
@@ -22,6 +22,6 @@ const league = {
   apiError: null
 }
 
-const store = createStore(leagueReducer, league);
+const store = createStore(leagueReducer, seed);
 
 export default store;

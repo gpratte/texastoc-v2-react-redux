@@ -2,7 +2,7 @@ import React from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
 import GamePlayersRemaining from './GamePlayersRemaining'
@@ -10,9 +10,9 @@ import Seating from './Seating'
 import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
-import {getPlayers} from "../../league/leagueClient";
 import {getCurrentGame} from "../gameClient";
 import {gameOver} from "../gameUtils";
+import {shouldRedirect, redirect} from '../../utils/util';
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
@@ -23,8 +23,6 @@ class CurrentGame extends React.Component {
       league.game.currentGameNotFound === false;
     if (shouldInitialize) {
       leagueStore.dispatch({type: GETTING_CURRENT_GAME, flag: true})
-      // Need the season for the season players
-      getPlayers(league.token.token);
       getCurrentGame(league.token.token);
     }
   }
@@ -64,11 +62,9 @@ class CurrentGame extends React.Component {
   }
 
   render() {
-    if (this.props.league.token === null || this.props.league.token.token === null ) {
-      // Must be logged in to view this component
-      return (
-        <Redirect to='/login'/>
-      )
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
     }
 
     if (this.props.league.game.currentGameNotFound === true) {
