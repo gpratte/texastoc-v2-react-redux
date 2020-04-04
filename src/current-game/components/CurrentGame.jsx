@@ -44,27 +44,6 @@ class CurrentGame extends React.Component {
     getCurrentGame();
   }
 
-  renderSeating(isGameOver, game) {
-    if (isGameOver) {
-      return null;
-    }
-
-    return (
-      <Accordion>
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Seating
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body><Seating game={game}/></Card.Body>
-          </Accordion.Collapse>
-        </Card>
-      </Accordion>
-    )
-  }
-
   render() {
     let redirectTo;
     if ((redirectTo = shouldRedirect(this.props.league))) {
@@ -139,7 +118,21 @@ class CurrentGame extends React.Component {
         <GamePlayers game={game} players={this.props.league.players}/>
         <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
 
-        {this.renderSeating(isGameOver, game)}
+        {
+          !isGameOver &&
+          <Accordion>
+            <Card>
+              <Card.Header>
+                <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                  Seating
+                </Accordion.Toggle>
+              </Card.Header>
+              <Accordion.Collapse eventKey="1">
+                <Card.Body><Seating game={game}/></Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        }
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {flatMap, map} from 'lodash';
+import {flatMap, filter, map} from 'lodash';
 import Table from 'react-bootstrap/Table';
 import SeatingConfig from "./SeatingConfig";
 import Button from "react-bootstrap/Button";
@@ -12,7 +12,8 @@ class Seating extends React.Component {
     const seats = flatMap(tables, ({seats}) =>
       map(seats, seat => ({...seat}))
     );
-    return seats.map((seat, index) => {
+    const seatsWithPlayer = filter(seats, (seat) => seat.gamePlayerId)
+    return map(seatsWithPlayer, (seat, index) => {
       const {seatNumber, tableNumber, gamePlayerName} = seat;
       return (
         <tr key={index}>
