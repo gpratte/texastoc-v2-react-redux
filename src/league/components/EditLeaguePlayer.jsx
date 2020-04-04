@@ -1,0 +1,102 @@
+import React from 'react'
+import leagueStore from '../../league/leagueStore'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import {EDIT_LEAGUE_PLAYER} from '../leagueActions'
+import _ from "lodash";
+import {obfuscateEmail, obfuscatePhone} from "../../utils/util";
+import {updatePlayer} from '../leagueClient'
+
+class EditLeaguePlayer extends React.Component {
+
+  updateThePlayer = (e) => {
+    e.preventDefault();
+
+    const playerId = parseInt('' + e.target.elements.playerId.value);
+    const leaguePlayer = _.find(leagueStore.getState().players, {'id': playerId});
+
+    // If there is an asterisk in the field use the original
+    let phoneValue = e.target.elements.phoneId.value;
+    phoneValue = phoneValue.includes('*') ? leaguePlayer.phone : phoneValue;
+
+    // If there is an asterisk in the field use the original
+    let emailValue = e.target.elements.emailId.value;
+    emailValue = emailValue.includes('*') ? leaguePlayer.email : emailValue;
+
+    leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: null});
+    updatePlayer(e.target.elements.playerId.value,
+      e.target.elements.firstNameId.value,
+      e.target.elements.lastNameId.value,
+      phoneValue,
+      emailValue);
+  }
+
+  render() {
+    const league = this.props.league;
+    const leaguePlayer = _.find(league.players, {'id': league.editLeaguePlayerId});
+
+    if (!leaguePlayer) {
+      return null;
+    }
+
+    let obfuscatedPhone = obfuscatePhone(leaguePlayer.phone);
+    let obfuscatedEmail = obfuscateEmail(leaguePlayer.email);
+
+    return (
+      <div>
+        <Modal show={league.editLeaguePlayerId !== null} onHide={() => leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: null})}>
+          <Modal.Body>
+            <p className="text-center">
+              {leaguePlayer ? leaguePlayer.firstName : ''}
+              {leaguePlayer ? ((leaguePlayer.firstName && leaguePlayer.lastName) ? ' ' : '') : ''}
+              {leaguePlayer ? leaguePlayer.lastName : ''}
+            </p>
+            <Form onSubmit={this.updateThePlayer}>
+              <Form.Control type={'hidden'} id={'playerId'} value={leaguePlayer ? leaguePlayer.id : 0}/>
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text"
+                              defaultValue={leaguePlayer.firstName}
+                              placeholder="First" id={'firstNameId'}/>
+                <Form.Control type="text"
+                              defaultValue={leaguePlayer.lastName}
+                              placeholder="Last" id={'lastNameId'}/>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email"
+                              defaultValue={obfuscatedEmail}
+                              placeholder="Enter email" id={'emailId'}/>
+                <Form.Text className="text-muted">
+                  Needed to login
+                </Form.Text>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Phone</Form.Label>
+                <Form.Control type="text"
+                              defaultValue={obfuscatedPhone}
+                              placeholder="Enter phone" id={'phoneId'}/>
+                <Form.Text className="text-muted">
+                  Needed for text messages
+                </Form.Text>
+              </Form.Group>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => {
+                  leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: null})
+                }}>
+                  Cancel
+                </Button>
+                <Button variant="primary" type="submit">
+                  Update Player
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+export default EditLeaguePlayer

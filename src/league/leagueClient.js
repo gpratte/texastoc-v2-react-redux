@@ -38,3 +38,27 @@ export function getPlayers(token) {
     });
 }
 
+export function updatePlayer(playerId, firstName, lastName, phone, email) {
+  const updatePlayerRequest = {
+    id: parseInt('' + playerId),
+    firstName: firstName,
+    lastName: lastName,
+    phone: phone,
+    email: email
+  };
+
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/players/' + playerId, updatePlayerRequest, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getPlayers(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
