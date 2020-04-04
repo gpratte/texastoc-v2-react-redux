@@ -186,6 +186,30 @@ export function toggleKnockedOut(gamePlayerId) {
     gamePlayer.chop ? gamePlayer.chop : null);
 }
 
+export function seating(numSeatsPerTable, tableRequests) {
+  const gameId = leagueStore.getState().game.data.id;
+  let seatingRequest = {};
+  seatingRequest.gameId = parseInt('' + gameId);
+  seatingRequest.numSeatsPerTable = numSeatsPerTable;
+  seatingRequest.tableRequests = tableRequests;
+
+  const token = leagueStore.getState().token.token;
+
+  API.post('/api/v2/games/seats', seatingRequest, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
+
 export function finalize(gameId) {
   const token = leagueStore.getState().token.token;
 

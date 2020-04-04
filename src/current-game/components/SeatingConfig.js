@@ -4,14 +4,12 @@ import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import SeatingPlayerAtTable from './SeatingPlayerAtTable'
-import SeatingSeatsPerTable from './SeatingSeatsPerTable'
-import {
-  TOGGLE_CONFIGURE_SEATING,
-  SUBMIT_SEATING
-} from '../gameActions'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import SeatingPlayerAtTable from './SeatingPlayerAtTable'
+import SeatingSeatsPerTable from './SeatingSeatsPerTable'
+import {TOGGLE_CONFIGURE_SEATING} from '../gameActions'
+import {seating} from "../gameClient";
 import _ from 'lodash';
 
 const fiveTables = [1, 2, 3, 4, 5]
@@ -20,6 +18,13 @@ class SeatingConfig extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      gamePlayers: props.game.data.gamePlayers,
+      seating: Object.assign({}, props.game.data.seating,
+        {numSeatsPerTable: props.game.data.seating.numSeatsPerTable ? [...props.game.data.seating.numSeatsPerTable] : [10]},
+        {tableRequests: props.game.data.seating.tableRequests ? [...props.game.data.seating.tableRequests] : []})
+    };
+
     this.handleChangeSeatsPerTables = this.handleChangeSeatsPerTables.bind(this);
     this.handleAddAnotherRequest = this.handleAddAnotherRequest.bind(this);
     this.handlePlayerRequesting = this.handlePlayerRequesting.bind(this);
@@ -37,9 +42,8 @@ class SeatingConfig extends React.Component {
 
   handleChangeNumTables(e) {
     const newNumSeatsPerTable = [...this.state.seating.numSeatsPerTable];
-
     const newNumTables = parseInt('' + e.target.value);
-    let delta = newNumTables - this.state.seating.numTables;
+    let delta = newNumTables - this.state.seating.numSeatsPerTable.length;
     let deltaPositive = true;
     if (delta < 0) {
       deltaPositive = false;
@@ -53,7 +57,6 @@ class SeatingConfig extends React.Component {
       }
     }
     const newSeating = (Object.assign({}, this.state.seating,
-      {numTables: newNumTables},
       {numSeatsPerTable: newNumSeatsPerTable}))
     this.setState({seating: newSeating})
   }
@@ -93,17 +96,15 @@ class SeatingConfig extends React.Component {
 
   requestSeating = (e) => {
     e.preventDefault();
-    const seatingConfig = {numTables: this.state.seating.numSeatsPerTable.length};
-    seatingConfig['numSeatsPerTable'] = [...this.state.seating.numSeatsPerTable];
-
-    seatingConfig['tableRequests'] = []
+    let tableRequests = []
     _.forEach(this.state.seating.tableRequests, function(tableRequest) {
       if (tableRequest.gamePlayerId) {
-        seatingConfig.tableRequests.push(tableRequest);
+        tableRequests.push(tableRequest);
       }
     })
 
-    leagueStore.dispatch({type: SUBMIT_SEATING, seatingConfig})
+    seating(this.state.seating.numSeatsPerTable, tableRequests);
+    leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})
   }
 
   render() {
@@ -118,7 +119,7 @@ class SeatingConfig extends React.Component {
                 <Form.Label>&nbsp;&nbsp;Number of Tables</Form.Label>
                 <Col>
                   <Form.Control as="select"
-                                defaultValue={game.data.seating.numTables}
+                                defaultValue={this.state.seating.numSeatsPerTable.length}
                                 id="tablesId"
                                 onChange={(e) => this.handleChangeNumTables(e)}>
                     {this.renderNumberOfTables()}
@@ -126,11 +127,11 @@ class SeatingConfig extends React.Component {
                 </Col>
               </Form.Group>
 
-              <SeatingSeatsPerTable seating={game.data.seating}
+              <SeatingSeatsPerTable seating={this.state.seating}
                                     handleChangeSeatsPerTables={this.handleChangeSeatsPerTables}/>
 
-              <SeatingPlayerAtTable gamePlayers={game.data.gamePlayers}
-                                    seating={game.data.seating}
+              <SeatingPlayerAtTable gamePlayers={game.data.players}
+                                    seating={this.state.seating}
                                     handleAddAnotherRequest={this.handleAddAnotherRequest}
                                     handlePlayerRequesting={this.handlePlayerRequesting}
                                     handleTableRequesting={this.handleTableRequesting}/>

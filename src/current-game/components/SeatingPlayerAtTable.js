@@ -38,11 +38,11 @@ class SeatingPlayerAtTable extends React.Component {
   renderGamePlayers(gamePlayers, index) {
     return gamePlayers.map((gamePlayer) => {
       const {
-        id, firstName, lastName
+        id, name
       } = gamePlayer;
       return (
         <option key={id} value={id}
-                tablerequestindex={index}>{firstName}{(firstName && lastName) ? ' ' : ''}{lastName}</option>
+                tablerequestindex={index}>{name}</option>
       )
     })
   }
@@ -80,7 +80,7 @@ class SeatingPlayerAtTable extends React.Component {
             this.renderNumberOfTables,
             this.props.handlePlayerRequesting,
             this.props.handleTableRequesting)}
-          <Button variant="outline-secondary" onClick={this.props.handleAddAnotherRequest}>
+          <Button variant="outline-secondary" onClick={() => this.props.handleAddAnotherRequest()}>
             Seat Another
           </Button>
         </div>
@@ -88,6 +88,7 @@ class SeatingPlayerAtTable extends React.Component {
     } else {
       return (
         <Button variant="outline-secondary" onClick={() => {
+          this.props.handleAddAnotherRequest();
           this.handleEnablingSeatingRequests();
         }}>
           Seat a Player at a Table
