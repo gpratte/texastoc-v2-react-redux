@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-22-seating](#step-22-seating)
 * [step-21-refresh-game-spinner](#step-21-refresh-game-spinner)
 * [step-20-get-season-when-game-finalized](#step-20-get-season-when-game-finalized)
 * [step-19-finalize-game](#step-19-finalize-game)
@@ -32,6 +33,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-22-seating
+Seating now working calling server API.
+
+The seating components still use local state while being configured.
 
 ## step-21-refresh-game-spinner
 Show a spinner when the game is being refreshed.
