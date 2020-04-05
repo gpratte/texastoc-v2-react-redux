@@ -57,6 +57,13 @@ const Home = (props) => {
           </Button>
         </p>
       }
+      {
+        isLoggedIn(league) &&
+        <p className={'main-p'}><Link to="/league/home">
+          <Button variant="outline-secondary">League</Button> </Link>
+        </p>
+      }
+
     </div>
   )
 }

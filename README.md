@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-23-league-players](#step-23-league-players)
 * [step-22-seating](#step-22-seating)
 * [step-21-refresh-game-spinner](#step-21-refresh-game-spinner)
 * [step-20-get-season-when-game-finalized](#step-20-get-season-when-game-finalized)
@@ -33,6 +34,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-23-league-players
+Added the ability to see the list of the players in the league and to edit a player.
+
+Need this to set the player's phone number to be able to receive text messages.
 
 ## step-22-seating
 Seating now working calling server API.

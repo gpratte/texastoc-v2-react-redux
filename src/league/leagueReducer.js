@@ -4,6 +4,7 @@ import loginReducer from '../login/loginReducer'
 import {seed} from "../league/leagueStore";
 import {API_ERROR,
   GOT_LEAGUE_PLAYERS,
+  EDIT_LEAGUE_PLAYER,
   REDIRECT,
   RESET,
   REFRESH} from "./leagueActions";
@@ -14,6 +15,8 @@ function leagueReducer(league, action) {
       return Object.assign({}, league, {apiError: action.message});
     case GOT_LEAGUE_PLAYERS:
       return Object.assign({}, league, {players: action.players});
+    case EDIT_LEAGUE_PLAYER:
+      return Object.assign({}, league, {editLeaguePlayerId: action.id});
     case REDIRECT:
       return Object.assign({}, league, {redirectTo: action.to});
     case RESET:

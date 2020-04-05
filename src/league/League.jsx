@@ -15,6 +15,8 @@ import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'
 import NewGame from '../current-game/components/NewGame'
+import LeagueHome from './components/LeagueHome'
+import LeaguePlayers from './components/LeaguePlayers'
 import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
 import leagueStore from "./leagueStore";
@@ -99,6 +101,14 @@ class League extends React.Component {
                     </NavLink>
                   </LinkContainer>
                 }
+                {
+                  isLoggedIn(league) &&
+                  <LinkContainer exact to={"/league/home"}>
+                    <NavLink>
+                      <Button variant="link">League</Button>
+                    </NavLink>
+                  </LinkContainer>
+                }
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -132,6 +142,12 @@ class League extends React.Component {
                 </Route>
                 <Route path='/current-game'>
                   <CurrentGame league={league}/>
+                </Route>
+                <Route path='/league/home'>
+                  <LeagueHome league={league}/>
+                </Route>
+                <Route path='/league/players'>
+                  <LeaguePlayers league={league}/>
                 </Route>
               </Switch>
             </Col>
