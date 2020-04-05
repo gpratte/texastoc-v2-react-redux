@@ -44,10 +44,12 @@ export function getCurrentGame(token) {
   if (!token) {
     token = leagueStore.getState().token.token;
   }
-  API.get('/api/v2/games/current', {
+  API.get('/api/v2/games', {
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.current+json'
+    },
+    data: {}
   })
     .then(result => {
       leagueStore.dispatch({type: GOT_CURRENT_GAME, game: result.data})
@@ -101,9 +103,10 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/players/first', firstTimeGamePlayer, {
+  API.post('/api/v2/games/' + gameId + '/players', firstTimeGamePlayer, {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.new-player+json'
     }
   })
     .then(result => {
@@ -196,10 +199,9 @@ export function seating(numSeatsPerTable, tableRequests) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId, seatingRequest, {
+  API.post('/api/v2/games/' + gameId + '/seats', seatingRequest, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/seating+json'
+      'Authorization': `Bearer ${token}`
     }
   })
     .then(result => {
@@ -215,9 +217,10 @@ export function seating(numSeatsPerTable, tableRequests) {
 export function finalize(gameId) {
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId + '/finalize', {}, {
+  API.put('/api/v2/games/' + gameId, {}, {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.finalize+json'
     }
   })
     .then(result => {
@@ -233,9 +236,10 @@ export function finalize(gameId) {
 export function unfinalize(gameId) {
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId + '/unfinalize', {}, {
+  API.put('/api/v2/games/' + gameId, {}, {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.unfinalize+json'
     }
   })
     .then(result => {

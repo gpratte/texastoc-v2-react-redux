@@ -58,7 +58,12 @@ export function updatePlayer(playerId, firstName, lastName, phone, email) {
       getPlayers(token);
     })
     .catch(function (error) {
-      const message = error.message ? error.message : error.toString();
+      let message;
+      if (error.response && error.response.status && error.response.status === 403) {
+        message = "You are not authorized to update the player";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }

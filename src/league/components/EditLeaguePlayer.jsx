@@ -69,7 +69,7 @@ class EditLeaguePlayer extends React.Component {
                               defaultValue={obfuscatedEmail}
                               placeholder="Enter email" id={'emailId'}/>
                 <Form.Text className="text-muted">
-                  Needed to login
+                  Needed to login (admin requires admin privilege to change)
                 </Form.Text>
               </Form.Group>
               <Form.Group>
