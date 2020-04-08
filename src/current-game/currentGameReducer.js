@@ -6,7 +6,8 @@ import {
   GETTING_CURRENT_GAME,
   CURRENT_GAME_NOT_FOUND,
   ADDED_NEW_GAME,
-  GOT_CURRENT_GAME
+  GOT_CURRENT_GAME,
+  SEATING_NOTIFIED
 } from './gameActions'
 
 // Take the game as the parameter
@@ -31,6 +32,8 @@ function currentGameReducer(game, action) {
       return Object.assign({}, game, {data: null}, {gettingCurrentGame: true}, {currentGameNotFound: false});
     case CURRENT_GAME_NOT_FOUND:
       return Object.assign({}, game, {data: null}, {gettingCurrentGame: false}, {currentGameNotFound: true});
+    case SEATING_NOTIFIED:
+      return Object.assign({}, game,  {seatingNotified: action.flag});
     default:
       return game;
   }

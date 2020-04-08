@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-24-seating-notify](#step-24-seating-notify)
 * [step-23-league-players](#step-23-league-players)
 * [step-22-seating](#step-22-seating)
 * [step-21-refresh-game-spinner](#step-21-refresh-game-spinner)
@@ -34,6 +35,10 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-24-seating-notify
+Show a button to notify players when they are seated at a game. When pressed call the server
+which sends text messages.
 
 ## step-23-league-players
 Added the ability to see the list of the players in the league and to edit a player.

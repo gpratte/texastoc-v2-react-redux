@@ -5,6 +5,7 @@ import SeatingConfig from "./SeatingConfig";
 import Button from "react-bootstrap/Button";
 import leagueStore from '../../league/leagueStore'
 import {TOGGLE_CONFIGURE_SEATING} from "../gameActions";
+import {notifySeating} from "../gameClient";
 
 class Seating extends React.Component {
 
@@ -28,6 +29,8 @@ class Seating extends React.Component {
   render() {
     const game = this.props.game;
     const {tables} = game.data.seating;
+    const isSeated = tables && tables.length > 0 && tables[0].seats && tables[0].seats.length > 0;
+    const isNotified = game.seatingNotified;
     return (
       <div>
         <Table striped bordered size="sm">
@@ -46,6 +49,20 @@ class Seating extends React.Component {
                 onClick={() => leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: true})}>
           Configure Seating
         </Button>
+        {
+          isSeated && !isNotified &&
+          <Button variant="outline-secondary"
+                  onClick={() => notifySeating()}>
+            Notify  <i className="fas fa-question"></i>
+          </Button>
+        }
+        {
+          isSeated && isNotified &&
+          <Button variant="outline-secondary"
+                  onClick={() => notifySeating()}>
+            Notified  <i className="fas fa-check"></i>
+          </Button>
+        }
         {/*TODO ask about key to remount the react component*/}
         <SeatingConfig key={game.showConfigureSeatingKey} game={game}/>
       </div>

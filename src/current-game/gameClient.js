@@ -4,7 +4,8 @@ import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {
   ADDED_NEW_GAME,
   GOT_CURRENT_GAME,
-  CURRENT_GAME_NOT_FOUND
+  CURRENT_GAME_NOT_FOUND,
+  SEATING_NOTIFIED
 } from './gameActions'
 import _ from 'lodash';
 import {getCurrentSeason} from "../season/seasonClient";
@@ -201,10 +202,12 @@ export function seating(numSeatsPerTable, tableRequests) {
 
   API.post('/api/v2/games/' + gameId + '/seats', seatingRequest, {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.assign-seats+json'
     }
   })
     .then(result => {
+      leagueStore.dispatch({type: SEATING_NOTIFIED, flag: false})
       getCurrentGame(token);
     })
     .catch(function (error) {
@@ -213,6 +216,24 @@ export function seating(numSeatsPerTable, tableRequests) {
     });
 }
 
+export function notifySeating() {
+  const gameId = leagueStore.getState().game.data.id;
+  const token = leagueStore.getState().token.token;
+
+  API.post('/api/v2/games/' + gameId + '/seats', {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.notify-seats+json'
+    }
+  })
+    .then(result => {
+      leagueStore.dispatch({type: SEATING_NOTIFIED, flag: true})
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
 
 export function finalize(gameId) {
   const token = leagueStore.getState().token.token;
