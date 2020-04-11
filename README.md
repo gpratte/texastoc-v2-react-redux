@@ -11,7 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-25-clock-websocket
+* [step-25-clock-websocket](#step-25-clock-websocket)
 * [step-24-seating-notify](#step-24-seating-notify)
 * [step-23-league-players](#step-23-league-players)
 * [step-22-seating](#step-22-seating)
