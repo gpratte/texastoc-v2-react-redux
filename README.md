@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-25-clock-websocket](#step-25-clock-websocket)
 * [step-24-seating-notify](#step-24-seating-notify)
 * [step-23-league-players](#step-23-league-players)
 * [step-22-seating](#step-22-seating)
@@ -35,6 +36,22 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-25-clock-websocket
+Attempted to use a websocket to get message from the server. Tried three ways
+* Stomp from 'stompjs';
+* Stomp from "@stomp/stompjs
+* browser supported WebSocket (that need no import)
+
+I was able to connect to the websocket and get messages using the first 
+but it is the oldest technology and will 
+require a bunch of code to reconnect.
+
+Was not able to create the websocket for the second.
+
+I was able to connect to the websocket for the third but never received a message. 
+
+Punting on this for now and will come back to it later.
 
 ## step-24-seating-notify
 Show a button to notify players when they are seated at a game. When pressed call the server

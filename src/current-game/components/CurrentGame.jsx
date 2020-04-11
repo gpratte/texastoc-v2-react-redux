@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
-import GamePlayersRemaining from './GamePlayersRemaining'
+import Clock from './Clock'
 import Seating from './Seating'
 import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
@@ -114,7 +114,12 @@ class CurrentGame extends React.Component {
           </Card>
         </Accordion>
 
-        <GamePlayersRemaining game={game}/>
+        {
+          !isGameOver &&
+          <Clock game={game}/>
+        }
+
+        {/* TODO <GamePlayersRemaining game={game}/>*/}
         <GamePlayers game={game} players={this.props.league.players}/>
         <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
 
@@ -123,11 +128,11 @@ class CurrentGame extends React.Component {
           <Accordion>
             <Card>
               <Card.Header>
-                <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                <Accordion.Toggle as={Button} variant="link" eventKey="2">
                   Seating
                 </Accordion.Toggle>
               </Card.Header>
-              <Accordion.Collapse eventKey="1">
+              <Accordion.Collapse eventKey="2">
                 <Card.Body><Seating game={game}/></Card.Body>
               </Accordion.Collapse>
             </Card>
