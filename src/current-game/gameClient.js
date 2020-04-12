@@ -119,7 +119,7 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
     });
 }
 
-export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knockedOut, chop) {
+export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knockedOut, clockAlert, chop) {
   const gameId = leagueStore.getState().game.data.id;
   const updateGamePlayerRequest = {
     gamePlayerId: parseInt('' + gamePlayerId),
@@ -130,6 +130,7 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
     rebuyAddOnCollected: rebuy,
     place: place,
     knockedOut: knockedOut,
+    roundUpdates: clockAlert,
     chop: chop
   };
 

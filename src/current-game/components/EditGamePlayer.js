@@ -34,6 +34,7 @@ class EditGamePlayer extends React.Component {
       e.target.elements.rebuyId.checked,
       e.target.elements.placeId.value,
       e.target.elements.knockedOutId.checked,
+      e.target.elements.clockAlertId.checked,
       e.target.elements.chopId.value);
   }
 
@@ -84,6 +85,12 @@ class EditGamePlayer extends React.Component {
                             id={'knockedOutId'}
                             label={'Knocked-Out'}
                             defaultChecked={gamePlayer ? (gamePlayer.knockedOut ? true : false) : false}
+                />
+                <Form.Check inline
+                            type={'checkbox'}
+                            id={'clockAlertId'}
+                            label={'Clock Alert'}
+                            defaultChecked={gamePlayer ? (gamePlayer.roundUpdates ? true : false) : false}
                 />
               </Form.Group>
               <Form.Group as={Row}>

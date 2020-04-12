@@ -60,21 +60,21 @@ class Clock extends React.Component {
               clock.playing &&
               <Button variant="link"
                       onClick={() => pause()}>
-                <i className="fas fa-pause"></i>
+                <i className="fas fa-pause"/>
               </Button>
             }
             {
               !clock.playing &&
               <Button variant="link"
                       onClick={() => resume()}>
-                <i className="fas fa-play"></i>
+                <i className="fas fa-play"/>
               </Button>
             }
             {
               !clock.playing &&
               <Button variant="link"
                       onClick={() => forward()}>
-                <i className="fas fa-step-forward"></i>
+                <i className="fas fa-step-forward"/>
               </Button>
             }
             <br/>
