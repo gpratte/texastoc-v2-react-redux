@@ -46,7 +46,7 @@ class GamePlayers extends React.Component {
     return gamePlayers.map((gamePlayer, index) => {
       const {
         id, name, buyInCollected, rebuyAddOnCollected, annualTocCollected,
-        quarterlyTocCollected, chop, points, place, knockedOut
+        quarterlyTocCollected, chop, points, place, knockedOut, roundUpdates
       } = gamePlayer;
       return (
         <tr key={id}>
@@ -63,6 +63,8 @@ class GamePlayers extends React.Component {
             <Button variant="link" onClick={() => {
               leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: id});
             }}>
+              {roundUpdates ? <i className="far fa-bell"/> : ''}
+              {roundUpdates ? ' ' : ''}
               {name}
             </Button>
           </td>

@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+step-26-clock-polling
 * [step-25-clock-websocket](#step-25-clock-websocket)
 * [step-24-seating-notify](#step-24-seating-notify)
 * [step-23-league-players](#step-23-league-players)
@@ -36,6 +37,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-26-clock-polling
+Poll the clock. Also use the clock controls to resume, pause, backup or move forward.
+
+Also allow a game player to opt in for clock alerts.
 
 ## step-25-clock-websocket
 Attempted to use a websocket to get message from the server. Tried three ways
