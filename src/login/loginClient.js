@@ -27,3 +27,22 @@ export function forgot(email) {
     });
 }
 
+export function resetPassword(code, password) {
+  API.post('/password/reset', {code, password}, {
+    headers: {
+      'Content-Type': 'application/vnd.texastoc.password-reset+json'
+    }
+  })
+    .then(result => {
+      leagueStore.dispatch({type: REDIRECT, to: '/login'})
+    })
+    .catch(function (error) {
+      let message;
+      if (error.response && error.response.status && error.response.status === 404) {
+        message = "Code not found";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
