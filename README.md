@@ -11,7 +11,8 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-26-clock-polling
+* [step-27-forgot-password](#step-27-forgot-password)
+* [step-26-clock-polling](#step-26-clock-polling)
 * [step-25-clock-websocket](#step-25-clock-websocket)
 * [step-24-seating-notify](#step-24-seating-notify)
 * [step-23-league-players](#step-23-league-players)
@@ -37,6 +38,13 @@ step-26-clock-polling
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-27-forgot-password
+A normal forgot password flow
+* at the login page click the forgot password link
+* enter the email used to login.
+* the server emails a code.
+* enter the code and new password.
 
 ## step-26-clock-polling
 Poll the clock. Also use the clock controls to resume, pause, backup or move forward.

@@ -38,13 +38,14 @@ export function getPlayers(token) {
     });
 }
 
-export function updatePlayer(playerId, firstName, lastName, phone, email) {
+export function updatePlayer(playerId, firstName, lastName, phone, email, password) {
   const updatePlayerRequest = {
     id: parseInt('' + playerId),
     firstName: firstName,
     lastName: lastName,
     phone: phone,
-    email: email
+    email: email,
+    password: password
   };
 
   const token = leagueStore.getState().token.token;
