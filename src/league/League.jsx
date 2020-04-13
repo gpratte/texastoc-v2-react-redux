@@ -10,7 +10,9 @@ import NavLink from 'react-bootstrap/NavLink';
 import {Route, Switch} from 'react-router-dom';
 import Error from './Error'
 import Home from '../home/Home'
-import Login from '../login/Login'
+import Login from '../login/components/Login'
+import ForgotPassword from '../login/components/ForgotPassword'
+import ForgotPasswordCode from '../login/components/ForgotPasswordCode'
 import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'
@@ -128,8 +130,14 @@ class League extends React.Component {
                 <Route path='/home'>
                   <Home league={league}/>
                 </Route>
-                <Route path='/login'>
+                <Route exact path='/login'>
                   <Login league={league}/>
+                </Route>
+                <Route exact path='/login/forgot'>
+                  <ForgotPassword league={league}/>
+                </Route>
+                <Route exact path='/login/code'>
+                  <ForgotPasswordCode league={league}/>
                 </Route>
                 <Route exact path='/season'>
                   <Season league={league}/>

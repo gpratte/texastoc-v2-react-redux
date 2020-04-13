@@ -4,8 +4,8 @@ import leagueStore from "../league/leagueStore";
 import {REDIRECT} from "../league/leagueActions";
 
 
-export function shouldRedirect(league) {
-  if (!isLoggedIn(league)) {
+export function shouldRedirect(league, skipLoginCheck) {
+  if (!skipLoginCheck && !isLoggedIn(league)) {
     return '/login';
   }
   if (leagueStore.getState().redirectTo) {
