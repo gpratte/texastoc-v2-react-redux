@@ -3,17 +3,23 @@ import './Home.css';
 import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import {isLoggedIn} from "../utils/util";
+import {redirect, shouldRedirect} from "../utils/util";
 import {refreshLeague, isRefreshing} from '../league/leagueClient'
-const Home = (props) => {
 
+const Home = (props) => {
   const league = props.league;
+
+  let redirectTo;
+  if ((redirectTo = shouldRedirect(league))) {
+    return redirect(redirectTo);
+  }
 
   // Do not show anything about a game if there is not season.
   const showGame = league.season.data !== null;
 
   return (
-    <div className={'main-h1'}>
+    <div>
+      <br/>
       <h1>Welcome to Texas TOC</h1>
       {league.token === null || league.token.token === null ?
         <p className={'main-p'}><Link to="/login">
@@ -21,20 +27,17 @@ const Home = (props) => {
         </p>
         : ''
       }
+      <p className={'main-p'}><Link to="/season">
+        <Button variant="outline-secondary"> View the latest season </Button> </Link>
+      </p>
       {
-        isLoggedIn(league) &&
-        <p className={'main-p'}><Link to="/season">
-          <Button variant="outline-secondary"> View the latest season </Button> </Link>
-        </p>
-      }
-      {
-        isLoggedIn(league) && showGame &&
+        showGame &&
         <p className={'main-p'}><Link to="/current-game">
           <Button variant="outline-secondary"> Go to the current game </Button> </Link>
         </p>
       }
       {
-        isLoggedIn(league) && !isRefreshing(league) &&
+        !isRefreshing(league) &&
         <p className={'main-p'}>
           <Button variant="outline-secondary" onClick={() => refreshLeague()}>
           Refresh
@@ -42,7 +45,7 @@ const Home = (props) => {
         </p>
       }
       {
-        isLoggedIn(league) && isRefreshing(league) &&
+        isRefreshing(league) &&
         <p className={'main-p'}>
           <Button variant="outline-secondary">
             <Spinner
@@ -57,12 +60,9 @@ const Home = (props) => {
           </Button>
         </p>
       }
-      {
-        isLoggedIn(league) &&
-        <p className={'main-p'}><Link to="/league/home">
-          <Button variant="outline-secondary">League</Button> </Link>
-        </p>
-      }
+      <p className={'main-p'}><Link to="/league/home">
+        <Button variant="outline-secondary">League</Button> </Link>
+      </p>
 
     </div>
   )

@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {login} from '../loginClient'
 import leagueStore from "../../league/leagueStore";
 import {LOGGED_OUT} from "../loginActions";
+import {redirect, shouldRedirect} from "../../utils/util";
 
 class Login extends React.Component {
 
@@ -18,6 +19,10 @@ class Login extends React.Component {
   }
 
   render() {
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league, true))) {
+      return redirect(redirectTo);
+    }
     if (this.props.league.token === null || this.props.league.token.token === null) {
       return (
         <div>

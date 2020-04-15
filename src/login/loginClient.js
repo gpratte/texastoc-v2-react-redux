@@ -7,6 +7,7 @@ export function login(email, password) {
   API.post('/login', {email: email, password: password})
     .then(result => {
       leagueStore.dispatch({type: LOGGED_IN, token: result.data.token})
+      leagueStore.dispatch({type: REDIRECT, to: '/home'})
     })
     .catch(function (error) {
       leagueStore.dispatch({type: API_ERROR, message: error.toString()})
