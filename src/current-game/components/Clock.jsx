@@ -38,16 +38,17 @@ class Clock extends React.Component {
     }
     return (
       <div>
+        <br/>
         {
           clock &&
           <div>
-            <span>{clock.thisRound.name}</span>
-            &nbsp;&nbsp;&nbsp;
-            <span>{clock.minutes}</span>:<span>{seconds}</span>
-            &nbsp;&nbsp;&nbsp;
-            <span>{clock.thisRound.bigBlind}</span>/
-            <span>{clock.thisRound.smallBlind}</span>/
-            <span>{clock.thisRound.ante}</span>
+            <span className={'bigger-round'}>{clock.thisRound.name}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span className={'bigger-round'}>{clock.minutes}</span>:<span className={'bigger-round'}>{seconds}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span className={'bigger-round'}>{clock.thisRound.bigBlind}</span>/
+            <span className={'bigger-round'}>{clock.thisRound.smallBlind}</span>/
+            <span className={'bigger-round'}>{clock.thisRound.ante}</span>
             <br/>
             {
               !clock.playing &&
@@ -79,12 +80,13 @@ class Clock extends React.Component {
             }
             <br/>
             <span>{clock.nextRound.name}</span>
-            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span>{clock.nextRound.bigBlind}</span>/
             <span>{clock.nextRound.smallBlind}</span>/
             <span>{clock.nextRound.ante}</span>
           </div>
         }
+        <br/>
       </div>
     );
   }

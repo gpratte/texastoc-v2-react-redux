@@ -56,9 +56,6 @@ class Login extends React.Component {
           <Button variant="outline-secondary" onClick={() => this.logout() }> Log Out </Button>
         </Link>
         </p>
-        <p className={'main-p'}><Link to="/home">
-          <Button variant="outline-secondary"> Home </Button> </Link>
-        </p>
       </div>
     )
   }

@@ -17,7 +17,6 @@ import Season from '../season/components/Season'
 import NewSeason from '../season/components/NewSeason'
 import CurrentGame from '../current-game/components/CurrentGame'
 import NewGame from '../current-game/components/NewGame'
-import LeagueHome from './components/LeagueHome'
 import LeaguePlayers from './components/LeaguePlayers'
 import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
@@ -28,6 +27,9 @@ import {isLoggedIn, shouldShowGame} from "../utils/util";
 import {getPlayers} from "./leagueClient";
 
 class League extends React.Component {
+
+  userIcon = <i className="fas fa-user-alt"/>
+  barsIcon = <i className="fas fa-bars"/>
 
   shouldInitialize = (league) => {
     const shouldInitialize = isLoggedIn(league) &&
@@ -63,10 +65,9 @@ class League extends React.Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-            </Nav>
+            <Nav className="mr-auto"/>
             <Nav>
-              <NavDropdown title="&nbsp;&nbsp;&nbsp;User&nbsp;&nbsp;" id="collasible-nav-dropdown">
+              <NavDropdown title={this.userIcon} id="collasible-nav-dropdown">
                 <LinkContainer exact to={"/login"}>
                   <NavLink>
                     <Button variant="link">Log In/Out</Button>
@@ -75,7 +76,7 @@ class League extends React.Component {
               </NavDropdown>
             </Nav>
             <Nav>
-              <NavDropdown title="&nbsp;&nbsp;&nbsp;Actions&nbsp;&nbsp;" id="collasible-nav-dropdown">
+              <NavDropdown title={this.barsIcon} id="collasible-nav-dropdown">
                 <LinkContainer exact to={"/home"}>
                   <NavLink>
                     <Button variant="link">Home</Button>
@@ -107,9 +108,9 @@ class League extends React.Component {
                 }
                 {
                   isLoggedIn(league) &&
-                  <LinkContainer exact to={"/league/home"}>
+                  <LinkContainer exact to={"/league/players"}>
                     <NavLink>
-                      <Button variant="link">League</Button>
+                      <Button variant="link">Players</Button>
                     </NavLink>
                   </LinkContainer>
                 }
@@ -152,9 +153,6 @@ class League extends React.Component {
                 </Route>
                 <Route path='/current-game'>
                   <CurrentGame league={league}/>
-                </Route>
-                <Route path='/league/home'>
-                  <LeagueHome league={league}/>
                 </Route>
                 <Route path='/league/players'>
                   <LeaguePlayers league={league}/>

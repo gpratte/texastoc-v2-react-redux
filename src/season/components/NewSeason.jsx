@@ -1,8 +1,9 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {addNewSeason} from '../seasonClient'
+import {redirect, shouldRedirect} from "../../utils/util";
 
 class NewSeason extends React.Component {
 
@@ -15,11 +16,9 @@ class NewSeason extends React.Component {
 
 
   render() {
-    if (this.props.league.token === null || this.props.league.token.token === null ) {
-      // Must be logged in to view this component
-      return (
-        <Redirect to='/login'/>
-      )
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
     }
 
     if (this.props.league.season.data !== null) {
@@ -30,16 +29,15 @@ class NewSeason extends React.Component {
 
     return (
       <div>
+        <br/>
         <h1>New Season</h1>
+        <br/>
         <p>The end of the season will be the day before the start date next year</p>
         <Form onSubmit={this.addNewSeason}>
           <Form.Group>
             <Form.Label>Start Date</Form.Label>
             <Form.Control type="text" placeholder="mm/dd/yyyy" id={'startDateId'}/>
           </Form.Group>
-          <Link to="/home">
-            <Button variant="outline-secondary"> Home </Button>
-          </Link>
           <Button variant="primary" type="submit">Add New Season</Button>
         </Form>
       </div>

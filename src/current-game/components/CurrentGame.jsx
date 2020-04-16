@@ -54,12 +54,10 @@ class CurrentGame extends React.Component {
       return (
         <div>
           <br/>
-          <p>Current game does not exist.</p>
+          <h1>Missing Current Game</h1>
+          <br/>
           <p><Link to="/game/new">
             <Button variant="outline-secondary"> Start a new game </Button> </Link>
-          </p>
-          <p className={'main-p'}><Link to="/home">
-            <Button variant="outline-secondary"> Home </Button> </Link>
           </p>
           <br/>
         </div>
@@ -91,7 +89,7 @@ class CurrentGame extends React.Component {
               {
                 !isRefreshing(league) &&
                 <Button variant="link" className={'refresh'} onClick={() => this.refreshGame()}>
-                  <i className="fas fa-sync-alt"></i>
+                  <i className="fas fa-sync-alt"/>
                 </Button>
               }
               {

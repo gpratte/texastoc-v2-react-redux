@@ -10,11 +10,11 @@ import {
 import _ from 'lodash';
 import {getCurrentSeason} from "../season/seasonClient";
 
-export function addNewGame(month, day, year, hostId, transport) {
+export function addNewGame(month, day, year, hostId) {
   let createGameRequest = {};
   createGameRequest.hostId = parseInt('' + hostId);
   createGameRequest.date = year + '-' + month + '-' + day;
-  createGameRequest.transportRequired = transport;
+  createGameRequest.transportRequired = false;
   createGameRequest.doubleBuyIn = false;
 
   const token = leagueStore.getState().token.token;

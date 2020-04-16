@@ -52,15 +52,17 @@ class Seating extends React.Component {
         {
           isSeated && !isNotified &&
           <Button variant="outline-secondary"
+                  className={'notify-seating'}
                   onClick={() => notifySeating()}>
-            Notify  <i className="fas fa-question"></i>
+            Notify <i className="fas fa-question"></i>
           </Button>
         }
         {
           isSeated && isNotified &&
           <Button variant="outline-secondary"
+                  className={'notify-seating'}
                   onClick={() => notifySeating()}>
-            Notified  <i className="fas fa-check"></i>
+            Notified <i className="fas fa-check"></i>
           </Button>
         }
         {/*TODO ask about key to remount the react component*/}

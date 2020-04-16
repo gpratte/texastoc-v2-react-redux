@@ -49,14 +49,11 @@ class Season extends React.Component {
       return (
         <div>
           <br/>
-          <p>Current season does not exist.</p>
+          <h1>Missing Current Season</h1>
+          <br/>
           <p><Link to="/season/new">
             <Button variant="outline-secondary"> Create a new season </Button> </Link>
           </p>
-          <p className={'main-p'}><Link to="/home">
-            <Button variant="outline-secondary"> Home </Button> </Link>
-          </p>
-          <br/>
         </div>
       );
     }

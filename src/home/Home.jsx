@@ -28,14 +28,17 @@ const Home = (props) => {
         : ''
       }
       <p className={'main-p'}><Link to="/season">
-        <Button variant="outline-secondary"> View the latest season </Button> </Link>
+        <Button variant="outline-secondary"> Season </Button> </Link>
       </p>
       {
         showGame &&
         <p className={'main-p'}><Link to="/current-game">
-          <Button variant="outline-secondary"> Go to the current game </Button> </Link>
+          <Button variant="outline-secondary"> Game </Button> </Link>
         </p>
       }
+      <p className={'main-p'}><Link to="/league/players">
+        <Button variant="outline-secondary">Players</Button> </Link>
+      </p>
       {
         !isRefreshing(league) &&
         <p className={'main-p'}>
@@ -60,9 +63,6 @@ const Home = (props) => {
           </Button>
         </p>
       }
-      <p className={'main-p'}><Link to="/league/home">
-        <Button variant="outline-secondary">League</Button> </Link>
-      </p>
 
     </div>
   )

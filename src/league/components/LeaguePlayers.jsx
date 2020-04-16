@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
 import leagueStore from "../leagueStore";
 import {EDIT_LEAGUE_PLAYER} from "../leagueActions";
-import {obfuscatePhone, obfuscateEmail} from '../../utils/util'
+import {obfuscatePhone, obfuscateEmail, shouldRedirect, redirect} from '../../utils/util'
 import EditLeaguePlayer from "./EditLeaguePlayer";
 
 class LeaguePlayers extends React.Component {
@@ -38,6 +38,11 @@ class LeaguePlayers extends React.Component {
   }
 
   render() {
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
+    }
+
     const league = this.props.league;
     const leaguePlayers = league.players;
 
