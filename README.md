@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-29-production-build](#step-29-production-build)
 * [step-28-clean-up-ui](#step-28-clean-up-ui)
 * [step-27-forgot-password](#step-27-forgot-password)
 * [step-26-clock-polling](#step-26-clock-polling)
@@ -39,6 +40,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-29-production-build
+Created a pom.xml to build a war that can be deployed to tomcat.
+
+A war file needs a web.xml so created on of those as well.
 
 ## step-28-clean-up-ui
 Cleaned up the UI
