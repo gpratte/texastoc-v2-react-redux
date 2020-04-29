@@ -3,15 +3,12 @@ import leagueStore from "../league/leagueStore";
 import {API_ERROR, REFRESH} from "../league/leagueActions";
 import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
 
-export function addNewSeason(month, day, year) {
-  const dates = [];
-  dates.push(parseInt('' + year, 10));
-  dates.push(parseInt('' + month, 10));
-  dates.push(parseInt('' + day, 10));
-
+export function addNewSeason(year) {
   const token = leagueStore.getState().token.token;
+  const seasonStart = {};
+  seasonStart['startYear'] = year;
 
-  API.post('/api/v2/seasons', dates, {
+  API.post('/api/v2/seasons', seasonStart, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

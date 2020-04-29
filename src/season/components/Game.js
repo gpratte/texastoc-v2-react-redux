@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment-timezone'
 import Table from 'react-bootstrap/Table';
 import Payouts from './Payouts'
-import Standings from "./Standings";
+import GameStandings from "./GameStandings";
 
 class Game extends React.Component {
 
@@ -46,7 +46,7 @@ class Game extends React.Component {
           </tbody>
         </Table>
 
-        <Standings value={ {players:players, hideEntries: true} }/>
+        <GameStandings value={ {players:players} }/>
 
         <Payouts value={payouts}/>
       </div>
