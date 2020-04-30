@@ -30,6 +30,7 @@ class League extends React.Component {
 
   userIcon = <i className="fas fa-user-alt"/>
   barsIcon = <i className="fas fa-bars"/>
+  homeIcon = <i className="fas fa-home"/>
 
   shouldInitialize = (league) => {
     const shouldInitialize = isLoggedIn(league) &&
@@ -61,7 +62,7 @@ class League extends React.Component {
       <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Navbar.Brand>
-            <Link to="/home" className={'nav-home'}>Texas TOC</Link>
+            <Link to="/home" className={'nav-home'}>{this.homeIcon}</Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
