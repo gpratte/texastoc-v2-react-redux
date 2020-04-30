@@ -7,7 +7,7 @@ import Standings from "./Standings";
 class QuarterlySeason extends React.Component {
 
   render() {
-    const {start, end, numGamesPlayed, qTocCollected, players, payouts} = this.props.value;
+    const {start, end, numGamesPlayed, qtocCollected, players, payouts} = this.props.value;
 
     const startDate = moment(start).tz('America/Chicago').format('MM/DD')
     const endDate = moment(end).tz('America/Chicago').format('MM/DD')
@@ -30,7 +30,7 @@ class QuarterlySeason extends React.Component {
           </tr>
           <tr>
             <td>Quarterly TOC</td>
-            <td>${qTocCollected}</td>
+            <td>${qtocCollected}</td>
           </tr>
           </tbody>
         </Table>

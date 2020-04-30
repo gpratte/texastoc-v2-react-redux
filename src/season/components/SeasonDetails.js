@@ -1,13 +1,12 @@
 import React from 'react'
 import moment from 'moment-timezone'
 import Table from 'react-bootstrap/Table';
-import Payouts from './Payouts'
 
 class SeasonDetails extends React.Component {
 
   render() {
     const {
-      start, end, numGamesPlayed, totalCombinedAnnualTocCalculated, kittyCalculated, payouts} = this.props.value;
+      start, end, numGamesPlayed, totalCombinedAnnualTocCalculated, kittyCalculated} = this.props.value;
 
     const startDate = moment(start).tz('America/Chicago').format('MM/DD/YYYY')
     const endDate = moment(end).tz('America/Chicago').format('MM/DD/YYYY')
@@ -39,7 +38,6 @@ class SeasonDetails extends React.Component {
           </tbody>
         </Table>
 
-        <Payouts value={payouts}/>
       </div>
     );
   }
