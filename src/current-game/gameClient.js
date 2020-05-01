@@ -7,7 +7,6 @@ import {
   CURRENT_GAME_NOT_FOUND,
   SEATING_NOTIFIED
 } from './gameActions'
-import _ from 'lodash';
 import {getCurrentSeason} from "../season/seasonClient";
 
 export function addNewGame(month, day, year, hostId) {
@@ -179,17 +178,23 @@ export function deletePlayer(gamePlayerId) {
 }
 
 export function toggleKnockedOut(gamePlayerId) {
-  // find the player
-  const gamePlayers = leagueStore.getState().game.data.players;
-  const gamePlayer = _.filter(gamePlayers, ['id', gamePlayerId])[0];
-  updatePlayer(gamePlayer.id,
-    !!gamePlayer.buyInCollected,
-    !!gamePlayer.annualTocCollected,
-    !!gamePlayer.quarterlyTocCollected,
-    !!gamePlayer.rebuyAddOnCollected,
-    gamePlayer.place ? gamePlayer.place : null,
-    !!gamePlayer.knockedOut,
-    gamePlayer.chop ? gamePlayer.chop : null);
+  const token = leagueStore.getState().token.token;
+  const gameId = leagueStore.getState().game.data.id;
+
+  API.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.knockout+json'
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+
 }
 
 export function seating(numSeatsPerTable, tableRequests) {

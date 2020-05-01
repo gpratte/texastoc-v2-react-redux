@@ -4,10 +4,25 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Game from "./Game";
+import {redirect, shouldRedirect} from "../../utils/util";
+import {unfinalize, goToGame} from "../seasonClient";
 
 class Games extends React.Component {
 
+  unlock = (id) => {
+    unfinalize(id);
+  }
+
+  goTo = (id) => {
+    goToGame(id);
+  }
+
   render() {
+    let redirectTo;
+    if ((redirectTo = shouldRedirect(this.props.league))) {
+      return redirect(redirectTo);
+    }
+
     const games = this.props.value;
     if (games) {
       return games.map((game, index) => {
@@ -18,6 +33,18 @@ class Games extends React.Component {
                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
                   {moment(game.date).tz('America/Chicago').format('MM/DD/YYYY')}
                 </Accordion.Toggle>
+                {
+                  game.finalized &&
+                  <Button variant="link" onClick={() => this.unlock(game.id)}>
+                    <i className="fas fa-lock"/>
+                  </Button>
+                }
+                {
+                  !game.finalized &&
+                  <Button variant="link" onClick={() => this.unlock(game.id)}>
+                    <i className="fas fa-lock-open"/>
+                  </Button>
+                }
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body><Game value={game}/></Card.Body>
