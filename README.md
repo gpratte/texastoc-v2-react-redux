@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-30-final-shake-down](#step-30-final-shake-down)
 * [step-29-production-build](#step-29-production-build)
 * [step-28-clean-up-ui](#step-28-clean-up-ui)
 * [step-27-forgot-password](#step-27-forgot-password)
@@ -40,6 +41,13 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-30-final-shake-down
+This is the last branch that made up version 2.0 Minimal Viable Product (MVP)!
+
+A bunch of little things that came up when testing in a production environment. 
+For example use home/lock/unlock icons, only pass the year when creating a season, 
+toggling a player as knocked out was broken, ... .
 
 ## step-29-production-build
 Created a pom.xml to build a war that can be deployed to tomcat.

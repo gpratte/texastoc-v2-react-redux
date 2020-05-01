@@ -110,7 +110,7 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>http://localhost:8080</PUBLIC_URL>
+                                <PUBLIC_URL>https://texastoc.com</PUBLIC_URL>
 <!--                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
                             </environmentVariables>
                         </configuration>
