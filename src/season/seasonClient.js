@@ -1,7 +1,8 @@
 import API from '../utils/api'
 import leagueStore from "../league/leagueStore";
-import {API_ERROR, REFRESH} from "../league/leagueActions";
+import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
+import {getCurrentGame} from "../current-game/gameClient";
 
 export function addNewSeason(year) {
   const token = leagueStore.getState().token.token;
@@ -50,3 +51,33 @@ export function getCurrentSeason(token) {
     });
 }
 
+export function unfinalize(gameId) {
+  const token = leagueStore.getState().token.token;
+
+  API.put('/api/v2/games/' + gameId, {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.unfinalize+json'
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+      getCurrentSeason(token);
+      leagueStore.dispatch({type: REDIRECT, to: '/current-game'})
+    })
+    .catch(function (error) {
+      let message;
+      if (error.response && error.response.status && error.response.status === 409) {
+        message = "You cannot unlock a game when another game is unlocked";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
+
+export function goToGame(gameId) {
+  const token = leagueStore.getState().token.token;
+  getCurrentGame(token);
+  leagueStore.dispatch({type: REDIRECT, to: '/current-game'})
+}

@@ -5,6 +5,9 @@ import {REDIRECT} from "../league/leagueActions";
 
 
 export function shouldRedirect(league, skipLoginCheck) {
+  if (!league) {
+    league = leagueStore.getState();
+  }
   if (!skipLoginCheck && !isLoggedIn(league)) {
     return '/login';
   }

@@ -10,7 +10,7 @@ class Finalize extends React.Component {
     if (finalized) {
       return (
         <Button variant="primary" onClick={() => unfinalize(gameId)}>
-          Edit Game
+          <i className="fas fa-lock"/>
         </Button>
       );
     }
@@ -21,9 +21,8 @@ class Finalize extends React.Component {
 
     return (
       <div>
-        <h3>If the game is over then click the Finalize button</h3>
         <Button variant="primary" onClick={() => finalize(gameId)}>
-          Finalize
+          End the game to close the lock <i className="fas fa-lock-open"/>
         </Button>
       </div>
     );
