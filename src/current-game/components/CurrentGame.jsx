@@ -32,11 +32,20 @@ class CurrentGame extends React.Component {
 
   componentDidMount() {
     this.shouldInitialize(this.props.league);
+    this.timer = setInterval(this.check, 4000);
   }
 
   componentDidUpdate() {
     this.shouldInitialize(this.props.league);
   }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  check = () => {
+    getCurrentGame();
+  };
 
   // TODO move to utils
   refreshGame = () => {
