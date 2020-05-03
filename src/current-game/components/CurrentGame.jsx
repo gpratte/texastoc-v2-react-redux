@@ -3,7 +3,6 @@ import './currentGame.css'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Spinner from "react-bootstrap/Spinner";
 import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
@@ -15,7 +14,7 @@ import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getCurrentGame} from "../gameClient";
 import {gameOver} from "../gameUtils";
 import {shouldRedirect, redirect} from '../../utils/util';
-import {refreshing, isRefreshing} from '../../league/leagueClient'
+import {refreshing} from '../../league/leagueClient'
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
