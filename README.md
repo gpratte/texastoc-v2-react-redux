@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-31-clear-game-cache](#step-31-clear-game-cache)
 * [step-30-final-shake-down](#step-30-final-shake-down)
 * [step-29-production-build](#step-29-production-build)
 * [step-28-clean-up-ui](#step-28-clean-up-ui)
@@ -41,6 +42,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-31-clear-game-cache
+Call the server to clear the game cache when refreshing from home page.
+
+Remove the refresh button from the game page.
 
 ## step-30-final-shake-down
 This is the last branch that made up version 2.0 Minimal Viable Product (MVP)!

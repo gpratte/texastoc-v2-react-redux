@@ -65,6 +65,23 @@ export function getCurrentGame(token) {
     });
 }
 
+export function clearCacheCurrentGame(token) {
+  if (!token) {
+    token = leagueStore.getState().token.token;
+  }
+  API.get('/api/v2/games', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.clear-cache+json'
+    },
+    data: {}
+  })
+    .then(result => {
+    })
+    .catch(function (error) {
+    });
+}
+
 export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
   const gameId = leagueStore.getState().game.data.id;
   let createGamePlayerRequest = {};

@@ -95,25 +95,6 @@ class CurrentGame extends React.Component {
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Details
               </Accordion.Toggle>
-              {
-                !isRefreshing(league) &&
-                <Button variant="link" className={'refresh'} onClick={() => this.refreshGame()}>
-                  <i className="fas fa-sync-alt"/>
-                </Button>
-              }
-              {
-                isRefreshing(league) &&
-                <Button variant="link" disabled={true}>
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">Loading...</span>
-                </Button>
-              }
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body><Details game={game}/></Card.Body>

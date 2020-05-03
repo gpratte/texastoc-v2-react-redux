@@ -3,6 +3,7 @@ import leagueStore from "./leagueStore";
 import {API_ERROR, GOT_LEAGUE_PLAYERS, RESET, REFRESH} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
+import {clearCacheCurrentGame} from "../current-game/gameClient";
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -22,6 +23,7 @@ export function refreshLeague() {
   leagueStore.dispatch({type: GETTING_SEASON, flag: true})
   getPlayers(league.token.token);
   getCurrentSeason(league.token.token);
+  clearCacheCurrentGame();
 }
 
 export function getPlayers(token) {
