@@ -16,6 +16,17 @@ import {gameOver} from "../gameUtils";
 
 class GamePlayers extends React.Component {
 
+  isThereChop(gamePlayers) {
+    if (!gamePlayers) return false;
+
+    for (let i = 0; i < gamePlayers.length; i++) {
+      if (gamePlayers[i].chop) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   toggleKnockedOut(id) {
     toggleKnockedOut(id);
   }
@@ -39,7 +50,7 @@ class GamePlayers extends React.Component {
     )
   }
 
-  renderGamePlayers(gamePlayers) {
+  renderGamePlayers(gamePlayers, isChop) {
     if (!gamePlayers) {
       return;
     }
@@ -50,14 +61,9 @@ class GamePlayers extends React.Component {
       } = gamePlayer;
       return (
         <tr key={id}>
-          <td>
-            <Button variant="link" onClick={() => {
-              this.toggleKnockedOut(id);
-            }}>
-              {knockedOut ? <i className="fas fa-user-slash knocked-out"></i> : <i className="fas fa-user"></i>}
-            </Button>
-          </td>
-
+          <td><Button variant="link" onClick={() => {this.toggleKnockedOut(id);}}>
+            {knockedOut ? <i className="fas fa-user-slash knocked-out"/> : <i className="fas fa-user"/>}
+          </Button></td>
           <td>{place ? (place < 11 ? place : '') : ''}</td>
           <td>
             <Button variant="link" onClick={() => {
@@ -72,7 +78,9 @@ class GamePlayers extends React.Component {
           <td>{rebuyAddOnCollected ? String.fromCharCode(10004) : ''}</td>
           <td>{annualTocCollected ? String.fromCharCode(10004) : ''}</td>
           <td>{quarterlyTocCollected ? String.fromCharCode(10004) : ''}</td>
-          <td>{chop ? chop : ''}</td>
+          {
+            isChop && <td>{chop ? chop : ''}</td>
+          }
           <td>{points ? points : ''}</td>
         </tr>
       )
@@ -84,6 +92,7 @@ class GamePlayers extends React.Component {
     const gamePlayers = game.data.players;
     const players = this.props.players;
     const isGameOver = gameOver(gamePlayers);
+    const isChop = this.isThereChop(gamePlayers);
 
     return (
       <div>
@@ -93,17 +102,19 @@ class GamePlayers extends React.Component {
             <th></th>
             <th>Fin</th>
             <th>Name</th>
-            <th>Buy<br/>In</th>
-            <th>Re<br/>Buy</th>
-            <th>TOC</th>
-            <th>QTOC</th>
-            <th>Chop</th>
+            <th>B<br/>u<br/>y<br/>I<br/>n</th>
+            <th>R<br/>e<br/>B<br/>u<br/>y</th>
+            <th>T<br/>O<br/>C</th>
+            <th>Q<br/>T<br/>O<br/>C</th>
+            {
+              isChop && <th>Chop</th>
+            }
             <th>Pts</th>
 
           </tr>
           </thead>
           <tbody>
-          {this.renderGamePlayers(gamePlayers)}
+          {this.renderGamePlayers(gamePlayers, isChop)}
           </tbody>
         </Table>
 

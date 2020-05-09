@@ -3,7 +3,18 @@ import Table from 'react-bootstrap/Table';
 
 class GameStandings extends React.Component {
 
-  renderStandings(players) {
+  isThereChop(players) {
+    if (!players) return false;
+
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].chop) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  renderStandings(players, isChop) {
     if (players) {
       return players.map((player, index) => {
         const {
@@ -18,7 +29,9 @@ class GameStandings extends React.Component {
             <td>{rebuyAddOnCollected ? String.fromCharCode(10004) : ''}</td>
             <td>{annualTocCollected ? String.fromCharCode(10004) : ''}</td>
             <td>{quarterlyTocCollected ? String.fromCharCode(10004) : ''}</td>
-            <td>{chop ? chop : ''}</td>
+            {
+              isChop && <td>{chop ? chop : ''}</td>
+            }
             <td>{points ? points : ''}</td>
           </tr>
         )
@@ -28,6 +41,7 @@ class GameStandings extends React.Component {
 
   render() {
     const {players} = this.props.value;
+    const isChop = this.isThereChop(players);
 
     return (
       <Table striped bordered size="sm">
@@ -35,16 +49,18 @@ class GameStandings extends React.Component {
         <tr>
           <th>Fin</th>
           <th>Name</th>
-          <th>Buy<br/>In</th>
-          <th>Re<br/>Buy</th>
-          <th>TOC</th>
-          <th>QTOC</th>
-          <th>Chp</th>
+          <th>B<br/>u<br/>y<br/>I<br/>n</th>
+          <th>R<br/>e<br/>B<br/>u<br/>y</th>
+          <th>T<br/>O<br/>C</th>
+          <th>Q<br/>T<br/>O<br/>C</th>
+          {
+            isChop && <th>Chp</th>
+          }
           <th>Pts</th>
         </tr>
         </thead>
         <tbody>
-        {this.renderStandings(players)}
+        {this.renderStandings(players, isChop)}
         </tbody>
       </Table>
     );
