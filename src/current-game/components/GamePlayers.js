@@ -61,7 +61,7 @@ class GamePlayers extends React.Component {
       } = gamePlayer;
       return (
         <tr key={id}>
-          <td><Button variant="link" onClick={() => {this.toggleKnockedOut(id);}}>
+          <td className={'knockedout-toggle'}><Button variant="link" className={'knockedout-toggle'} onClick={() => {this.toggleKnockedOut(id);}}>
             {knockedOut ? <i className="fas fa-user-slash knocked-out"/> : <i className="fas fa-user"/>}
           </Button></td>
           <td>{place ? (place < 11 ? place : '') : ''}</td>
@@ -100,7 +100,7 @@ class GamePlayers extends React.Component {
           <thead>
           <tr>
             <th></th>
-            <th>Fin</th>
+            <th><i className="fas fa-clipboard-list"/></th>
             <th>Name</th>
             <th>B<br/>u<br/>y<br/>I<br/>n</th>
             <th>R<br/>e<br/>B<br/>u<br/>y</th>
