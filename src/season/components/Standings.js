@@ -9,9 +9,9 @@ class Standings extends React.Component {
         const {id, place, name, points, entries} = player
         return (
           <tr key={id}>
-            <td>{place}</td>
+            <td>{place ? place : ''}</td>
             <td>{name}</td>
-            <td>{points}</td>
+            <td>{points ? points : ''}</td>
             { hideEntries ? <td></td> : <td>{entries}</td>}
           </tr>
         )
