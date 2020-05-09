@@ -50,7 +50,7 @@ class GamePlayers extends React.Component {
     )
   }
 
-  renderGamePlayers(gamePlayers, isChop) {
+  renderGamePlayers(gamePlayers, isChop, isGameOver) {
     if (!gamePlayers) {
       return;
     }
@@ -61,9 +61,11 @@ class GamePlayers extends React.Component {
       } = gamePlayer;
       return (
         <tr key={id}>
-          <td className={'knockedout-toggle'}><Button variant="link" className={'knockedout-toggle'} onClick={() => {this.toggleKnockedOut(id);}}>
-            {knockedOut ? <i className="fas fa-user-slash knocked-out"/> : <i className="fas fa-user"/>}
-          </Button></td>
+          {
+            !isGameOver && <td className={'knockedout-toggle'}><Button variant="link" className={'knockedout-toggle'} onClick={() => {this.toggleKnockedOut(id);}}>
+              {knockedOut ? <i className="fas fa-user-slash knocked-out"/> : <i className="fas fa-user"/>}
+            </Button></td>
+          }
           <td>{place ? (place < 11 ? place : '') : ''}</td>
           <td>
             <Button variant="link" onClick={() => {
@@ -99,7 +101,9 @@ class GamePlayers extends React.Component {
         <Table striped bordered size="sm">
           <thead>
           <tr>
-            <th></th>
+            {
+              !isGameOver && <th></th>
+            }
             <th><i className="fas fa-clipboard-list"/></th>
             <th>Name</th>
             <th>B<br/>u<br/>y<br/>I<br/>n</th>
@@ -114,7 +118,7 @@ class GamePlayers extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.renderGamePlayers(gamePlayers, isChop)}
+          {this.renderGamePlayers(gamePlayers, isChop, isGameOver)}
           </tbody>
         </Table>
 
