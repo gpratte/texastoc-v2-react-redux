@@ -47,7 +47,7 @@ class GameStandings extends React.Component {
       <Table striped bordered size="sm">
         <thead>
         <tr>
-          <th>Fin</th>
+          <th><i className="fas fa-clipboard-list"/></th>
           <th>Name</th>
           <th>B<br/>u<br/>y<br/>I<br/>n</th>
           <th>R<br/>e<br/>B<br/>u<br/>y</th>
