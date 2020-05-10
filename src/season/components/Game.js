@@ -7,8 +7,9 @@ import GameStandings from "./GameStandings";
 class Game extends React.Component {
 
   render() {
-    const {date, hostName, seasonGameNum, quarterlyGameNum, totalCollected, totalCombinedTocCalculated, payouts, players} = this.props.value;
+    const {date, hostName, seasonGameNum, quarterlyGameNum, totalCollected, annualTocCollected, annualTocFromRebuyAddOnCalculated, payouts, players, prizePotCalculated, quarterlyTocCollected, kittyCalculated} = this.props.value;
 
+    const annualToc = annualTocCollected + annualTocFromRebuyAddOnCalculated;
     const gameDate = moment(date).tz('America/Chicago').format('MM/DD/YYYY')
 
     return (
@@ -37,11 +38,23 @@ class Game extends React.Component {
           </tr>
           <tr>
             <td>Amount collected</td>
-            <td>{totalCollected}</td>
+            <td>${totalCollected}</td>
           </tr>
           <tr>
             <td>TOC amount</td>
-            <td>{totalCombinedTocCalculated}</td>
+            <td>${annualToc}</td>
+          </tr>
+          <tr>
+            <td>Quarterly TOC amount</td>
+            <td>${quarterlyTocCollected}</td>
+          </tr>
+          <tr>
+            <td>Kitty</td>
+            <td>${kittyCalculated}</td>
+          </tr>
+          <tr>
+            <td>Prize Pot</td>
+            <td>${prizePotCalculated}</td>
           </tr>
           </tbody>
         </Table>
