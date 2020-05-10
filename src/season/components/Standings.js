@@ -26,7 +26,7 @@ class Standings extends React.Component {
       <Table striped bordered size="sm">
         <thead>
         <tr>
-          <th>Place</th>
+          <th><i className="fas fa-clipboard-list"/></th>
           <th>Name</th>
           <th>Points</th>
           { hideEntries ? <th></th> : <th>Entries</th> }
