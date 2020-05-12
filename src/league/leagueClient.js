@@ -1,4 +1,4 @@
-import API from '../utils/api'
+import {server, ui} from '../utils/api'
 import leagueStore from "./leagueStore";
 import {API_ERROR,
   GOT_LEAGUE_PLAYERS,
@@ -33,7 +33,7 @@ export function refreshLeague() {
 }
 
 export function getPlayers(token) {
-  API.get('/api/v2/players', {
+  server.get('/api/v2/players', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -58,7 +58,7 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
 
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/players/' + playerId, updatePlayerRequest, {
+  server.put('/api/v2/players/' + playerId, updatePlayerRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -78,10 +78,11 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
 }
 
 export function checkDeployedVersion() {
+  console.log("checking version at " + (new Date()));
   if (leagueStore.getState().newVersion) {
     return;
   }
-  API.get('/version.json')
+  ui.get('/version.json')
     .then(result => {
       if (INTERNAL_VERSION !== result.data.version) {
         leagueStore.dispatch({type: NEW_VERSION})

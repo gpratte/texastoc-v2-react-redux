@@ -1,4 +1,4 @@
-import API from '../utils/api'
+import {server} from '../utils/api'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR} from "../league/leagueActions";
 
@@ -6,7 +6,7 @@ export function getClock(callback) {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.get('/api/v2/games/' + gameId + '/clock', {
+  server.get('/api/v2/games/' + gameId + '/clock', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -24,7 +24,7 @@ export function resume() {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/clock', {}, {
+  server.post('/api/v2/games/' + gameId + '/clock', {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.clock-resume+json'
@@ -43,7 +43,7 @@ export function pause() {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/clock', {}, {
+  server.post('/api/v2/games/' + gameId + '/clock', {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.clock-pause+json'
@@ -62,7 +62,7 @@ export function back() {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/clock', {}, {
+  server.post('/api/v2/games/' + gameId + '/clock', {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.clock-back+json'
@@ -81,7 +81,7 @@ export function forward() {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/clock', {}, {
+  server.post('/api/v2/games/' + gameId + '/clock', {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.clock-forward+json'

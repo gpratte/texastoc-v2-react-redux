@@ -1,4 +1,4 @@
-import API from '../utils/api'
+import {server} from '../utils/api'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
@@ -9,7 +9,7 @@ export function addNewSeason(year) {
   const seasonStart = {};
   seasonStart['startYear'] = year;
 
-  API.post('/api/v2/seasons', seasonStart, {
+  server.post('/api/v2/seasons', seasonStart, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -32,7 +32,7 @@ export function getCurrentSeason(token) {
   if (!token) {
     token = leagueStore.getState().token.token;
   }
-  API.get('/api/v2/seasons/current', {
+  server.get('/api/v2/seasons/current', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -54,7 +54,7 @@ export function getCurrentSeason(token) {
 export function unfinalize(gameId) {
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId, {}, {
+  server.put('/api/v2/games/' + gameId, {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.unfinalize+json'

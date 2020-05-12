@@ -51,8 +51,9 @@ class League extends React.Component {
 
   componentDidMount() {
     this.shouldInitialize(this.props.league);
-    // Check interval to every hour
-    this.timer = setInterval(this.checkForUpdate, 60 * 60 * 1000);
+    this.checkForUpdate();
+    // Check every hour
+    this.timer = setInterval(this.checkForUpdate, 3600000);
   }
 
   componentDidUpdate() {
