@@ -15,6 +15,7 @@ import {getCurrentGame} from "../gameClient";
 import {gameOver} from "../gameUtils";
 import {shouldRedirect, redirect} from '../../utils/util';
 import {refreshing} from '../../league/leagueClient'
+import NewVersion from "../../league/components/NewVersion";
 
 class CurrentGame extends React.Component {
   shouldInitialize = (league) => {
@@ -53,12 +54,17 @@ class CurrentGame extends React.Component {
   }
 
   render() {
+    const league = this.props.league;
+    if (league.newVersion) {
+      return <NewVersion/>
+    }
+
     let redirectTo;
-    if ((redirectTo = shouldRedirect(this.props.league))) {
+    if ((redirectTo = shouldRedirect(league))) {
       return redirect(redirectTo);
     }
 
-    if (this.props.league.game.currentGameNotFound === true) {
+    if (league.game.currentGameNotFound === true) {
       return (
         <div>
           <br/>
@@ -72,7 +78,7 @@ class CurrentGame extends React.Component {
       );
     }
 
-    if (this.props.league.game.data == null) {
+    if (league.game.data == null) {
       return (
         <div>
           <br/>
@@ -82,7 +88,6 @@ class CurrentGame extends React.Component {
       );
     }
 
-    const league = this.props.league;
     const game = league.game;
     const isGameOver = gameOver(game.data.players);
 

@@ -1,4 +1,4 @@
-import League from './League'
+import League from './components/League'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => {

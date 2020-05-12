@@ -5,6 +5,7 @@ import leagueStore from "../leagueStore";
 import {EDIT_LEAGUE_PLAYER} from "../leagueActions";
 import {obfuscatePhone, obfuscateEmail, shouldRedirect, redirect} from '../../utils/util'
 import EditLeaguePlayer from "./EditLeaguePlayer";
+import NewVersion from "./NewVersion";
 
 class LeaguePlayers extends React.Component {
 
@@ -38,12 +39,16 @@ class LeaguePlayers extends React.Component {
   }
 
   render() {
+    const league = this.props.league;
+    if (league.newVersion) {
+      return <NewVersion/>
+    }
+
     let redirectTo;
-    if ((redirectTo = shouldRedirect(this.props.league))) {
+    if ((redirectTo = shouldRedirect(league))) {
       return redirect(redirectTo);
     }
 
-    const league = this.props.league;
     const leaguePlayers = league.players;
 
     return (

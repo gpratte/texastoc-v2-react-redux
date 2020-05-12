@@ -7,7 +7,8 @@ import {API_ERROR,
   EDIT_LEAGUE_PLAYER,
   REDIRECT,
   RESET,
-  REFRESH} from "./leagueActions";
+  REFRESH,
+  NEW_VERSION} from "./leagueActions";
 
 function leagueReducer(league, action) {
   switch (action.type) {
@@ -23,6 +24,8 @@ function leagueReducer(league, action) {
       return Object.assign({}, seed, {token: league.token});
     case REFRESH:
       return Object.assign({}, league, {refresh: action.refresh});
+    case NEW_VERSION:
+      return Object.assign({}, league, {newVersion: true});
     default:
       return Object.assign({}, league,
         {apiError: null},

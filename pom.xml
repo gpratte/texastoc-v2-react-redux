@@ -93,6 +93,22 @@
                     </environmentVariables>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>show-profiles</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>active-profiles</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -110,7 +126,7 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>https://texastoc.com</PUBLIC_URL>
+                                <PUBLIC_URL>http://localhost:8080</PUBLIC_URL>
 <!--                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
                             </environmentVariables>
                         </configuration>
@@ -129,7 +145,7 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>http://localhost:8080</PUBLIC_URL>
+                                <PUBLIC_URL>https://texastoc.com</PUBLIC_URL>
 <!--                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
                             </environmentVariables>
                         </configuration>

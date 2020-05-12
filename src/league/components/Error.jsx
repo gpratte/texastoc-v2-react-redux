@@ -1,9 +1,9 @@
 import React from 'react'
-import leagueStore from './leagueStore'
+import leagueStore from '../leagueStore'
 import Button from 'react-bootstrap/Button';
 import {
   API_ERROR_DONE
-} from './leagueActions'
+} from '../leagueActions'
 
 class Error extends React.Component {
   render() {

@@ -1,9 +1,15 @@
 import API from '../utils/api'
 import leagueStore from "./leagueStore";
-import {API_ERROR, GOT_LEAGUE_PLAYERS, RESET, REFRESH} from "./leagueActions";
+import {API_ERROR,
+  GOT_LEAGUE_PLAYERS,
+  RESET,
+  REFRESH,
+  NEW_VERSION} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
 import {clearCacheCurrentGame} from "../current-game/gameClient";
+
+const INTERNAL_VERSION = 2.0;
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -70,3 +76,19 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function checkDeployedVersion() {
+  if (leagueStore.getState().newVersion) {
+    return;
+  }
+  API.get('/version.json')
+    .then(result => {
+      if (INTERNAL_VERSION !== result.data.version) {
+        leagueStore.dispatch({type: NEW_VERSION})
+      }
+    })
+    .catch(function (error) {
+      // do nothing
+    });
+}
+

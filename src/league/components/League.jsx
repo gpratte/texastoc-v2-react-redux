@@ -9,22 +9,23 @@ import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/NavLink';
 import {Link, Route, Switch} from 'react-router-dom';
 import Error from './Error'
-import Home from '../home/Home'
-import Login from '../login/components/Login'
-import ForgotPassword from '../login/components/ForgotPassword'
-import ForgotPasswordCode from '../login/components/ForgotPasswordCode'
-import Season from '../season/components/Season'
-import NewSeason from '../season/components/NewSeason'
-import CurrentGame from '../current-game/components/CurrentGame'
-import NewGame from '../current-game/components/NewGame'
-import LeaguePlayers from './components/LeaguePlayers'
+import NewVersion from './NewVersion'
+import Home from '../../home/Home'
+import Login from '../../login/components/Login'
+import ForgotPassword from '../../login/components/ForgotPassword'
+import ForgotPasswordCode from '../../login/components/ForgotPasswordCode'
+import Season from '../../season/components/Season'
+import NewSeason from '../../season/components/NewSeason'
+import CurrentGame from '../../current-game/components/CurrentGame'
+import NewGame from '../../current-game/components/NewGame'
+import LeaguePlayers from './LeaguePlayers'
 import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
-import leagueStore from "./leagueStore";
-import {GETTING_SEASON} from "../season/seasonActions";
-import {getCurrentSeason} from "../season/seasonClient";
-import {isLoggedIn, shouldShowGame} from "../utils/util";
-import {getPlayers} from "./leagueClient";
+import leagueStore from "./../leagueStore";
+import {GETTING_SEASON} from "../../season/seasonActions";
+import {getCurrentSeason} from "../../season/seasonClient";
+import {isLoggedIn, shouldShowGame} from "../../utils/util";
+import {getPlayers, checkDeployedVersion} from "./../leagueClient";
 
 class League extends React.Component {
 
@@ -44,12 +45,22 @@ class League extends React.Component {
     }
   }
 
+  checkForUpdate = () => {
+    checkDeployedVersion()
+  };
+
   componentDidMount() {
     this.shouldInitialize(this.props.league);
+    // Check interval to every hour
+    this.timer = setInterval(this.checkForUpdate, 60 * 60 * 1000);
   }
 
   componentDidUpdate() {
     this.shouldInitialize(this.props.league);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   render() {
@@ -157,6 +168,9 @@ class League extends React.Component {
                 </Route>
                 <Route path='/league/players'>
                   <LeaguePlayers league={league}/>
+                </Route>
+                <Route path='/new-version'>
+                  <NewVersion/>
                 </Route>
               </Switch>
             </Col>

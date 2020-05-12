@@ -5,9 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import {redirect, shouldRedirect} from "../utils/util";
 import {refreshLeague, isRefreshing} from '../league/leagueClient'
+import NewVersion from "../league/components/NewVersion";
 
 const Home = (props) => {
   const league = props.league;
+  if (league.newVersion) {
+    return <NewVersion/>
+  }
 
   let redirectTo;
   if ((redirectTo = shouldRedirect(league))) {
