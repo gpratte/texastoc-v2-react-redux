@@ -1,10 +1,10 @@
-import API from '../utils/api'
+import {server} from '../utils/api'
 import {LOGGED_IN} from './loginActions'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR, REDIRECT} from "../league/leagueActions";
 
 export function login(email, password) {
-  API.post('/login', {email: email, password: password})
+  server.post('/login', {email: email, password: password})
     .then(result => {
       leagueStore.dispatch({type: LOGGED_IN, token: result.data.token})
       leagueStore.dispatch({type: REDIRECT, to: '/home'})
@@ -15,7 +15,7 @@ export function login(email, password) {
 }
 
 export function forgot(email) {
-  API.post('/password/reset', {email: email}, {
+  server.post('/password/reset', {email: email}, {
     headers: {
       'Content-Type': 'application/vnd.texastoc.password-forgot+json'
     }
@@ -29,7 +29,7 @@ export function forgot(email) {
 }
 
 export function resetPassword(code, password) {
-  API.post('/password/reset', {code, password}, {
+  server.post('/password/reset', {code, password}, {
     headers: {
       'Content-Type': 'application/vnd.texastoc.password-reset+json'
     }

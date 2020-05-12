@@ -15,6 +15,7 @@ import leagueStore from "../../league/leagueStore";
 import {GETTING_SEASON} from "../seasonActions";
 import {getCurrentSeason} from "../seasonClient";
 import {redirect, shouldRedirect} from "../../utils/util";
+import NewVersion from "../../league/components/NewVersion";
 
 class Season extends React.Component {
 
@@ -40,12 +41,17 @@ class Season extends React.Component {
 
 
   render() {
+    const league = this.props.league;
+    if (league.newVersion) {
+      return <NewVersion/>
+    }
+
     let redirectTo;
-    if ((redirectTo = shouldRedirect(this.props.league))) {
+    if ((redirectTo = shouldRedirect(league))) {
       return redirect(redirectTo);
     }
 
-    if (this.props.league.season.seasonNotFound === true) {
+    if (league.season.seasonNotFound === true) {
       return (
         <div>
           <br/>
@@ -58,7 +64,7 @@ class Season extends React.Component {
       );
     }
 
-    if (this.props.league.season.data == null) {
+    if (league.season.data == null) {
       return (
         <div>
           <br/>
@@ -68,7 +74,7 @@ class Season extends React.Component {
       );
     }
 
-    const season = this.props.league.season.data;
+    const season = league.season.data;
     const startDate = moment(season.start).tz('America/Chicago').format('YYYY')
     const endDate = moment(season.end).tz('America/Chicago').format('YYYY')
 

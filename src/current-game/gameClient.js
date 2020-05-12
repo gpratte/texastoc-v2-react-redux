@@ -1,4 +1,4 @@
-import API from '../utils/api'
+import {server} from '../utils/api'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {
@@ -18,7 +18,7 @@ export function addNewGame(month, day, year, hostId) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games', createGameRequest, {
+  server.post('/api/v2/games', createGameRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -44,7 +44,7 @@ export function getCurrentGame(token) {
   if (!token) {
     token = leagueStore.getState().token.token;
   }
-  API.get('/api/v2/games', {
+  server.get('/api/v2/games', {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.current+json'
@@ -69,7 +69,7 @@ export function clearCacheCurrentGame(token) {
   if (!token) {
     token = leagueStore.getState().token.token;
   }
-  API.get('/api/v2/games', {
+  server.get('/api/v2/games', {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.clear-cache+json'
@@ -93,7 +93,7 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/players', createGamePlayerRequest, {
+  server.post('/api/v2/games/' + gameId + '/players', createGamePlayerRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -120,7 +120,7 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/players', firstTimeGamePlayer, {
+  server.post('/api/v2/games/' + gameId + '/players', firstTimeGamePlayer, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.new-player+json'
@@ -152,7 +152,7 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
 
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, updateGamePlayerRequest, {
+  server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, updateGamePlayerRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -175,7 +175,7 @@ export function deletePlayer(gamePlayerId) {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.delete('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {
+  server.delete('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -198,7 +198,7 @@ export function toggleKnockedOut(gamePlayerId) {
   const token = leagueStore.getState().token.token;
   const gameId = leagueStore.getState().game.data.id;
 
-  API.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
+  server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.knockout+json'
@@ -223,7 +223,7 @@ export function seating(numSeatsPerTable, tableRequests) {
 
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/seats', seatingRequest, {
+  server.post('/api/v2/games/' + gameId + '/seats', seatingRequest, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.assign-seats+json'
@@ -243,7 +243,7 @@ export function notifySeating() {
   const gameId = leagueStore.getState().game.data.id;
   const token = leagueStore.getState().token.token;
 
-  API.post('/api/v2/games/' + gameId + '/seats', {}, {
+  server.post('/api/v2/games/' + gameId + '/seats', {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.notify-seats+json'
@@ -261,7 +261,7 @@ export function notifySeating() {
 export function finalize(gameId) {
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId, {}, {
+  server.put('/api/v2/games/' + gameId, {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.finalize+json'
@@ -280,7 +280,7 @@ export function finalize(gameId) {
 export function unfinalize(gameId) {
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/games/' + gameId, {}, {
+  server.put('/api/v2/games/' + gameId, {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.unfinalize+json'

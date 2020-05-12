@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-32-forced-update](#step-32-forced-update)
 * [step-31-clear-game-cache](#step-31-clear-game-cache)
 * [step-30-final-shake-down](#step-30-final-shake-down)
 * [step-29-production-build](#step-29-production-build)
@@ -42,6 +43,10 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-32-forced-update
+Every hour check the internal version against the deployed version and 
+if they differ force an html reload to pick up the deployed code.
 
 ## step-31-clear-game-cache
 Call the server to clear the game cache when refreshing from home page.

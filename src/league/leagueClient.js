@@ -1,9 +1,15 @@
-import API from '../utils/api'
+import {server, ui} from '../utils/api'
 import leagueStore from "./leagueStore";
-import {API_ERROR, GOT_LEAGUE_PLAYERS, RESET, REFRESH} from "./leagueActions";
+import {API_ERROR,
+  GOT_LEAGUE_PLAYERS,
+  RESET,
+  REFRESH,
+  NEW_VERSION} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
 import {clearCacheCurrentGame} from "../current-game/gameClient";
+
+const INTERNAL_VERSION = 2.0;
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -27,7 +33,7 @@ export function refreshLeague() {
 }
 
 export function getPlayers(token) {
-  API.get('/api/v2/players', {
+  server.get('/api/v2/players', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -52,7 +58,7 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
 
   const token = leagueStore.getState().token.token;
 
-  API.put('/api/v2/players/' + playerId, updatePlayerRequest, {
+  server.put('/api/v2/players/' + playerId, updatePlayerRequest, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -70,3 +76,20 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function checkDeployedVersion() {
+  console.log("checking version at " + (new Date()));
+  if (leagueStore.getState().newVersion) {
+    return;
+  }
+  ui.get('/version.json')
+    .then(result => {
+      if (INTERNAL_VERSION !== result.data.version) {
+        leagueStore.dispatch({type: NEW_VERSION})
+      }
+    })
+    .catch(function (error) {
+      // do nothing
+    });
+}
+
