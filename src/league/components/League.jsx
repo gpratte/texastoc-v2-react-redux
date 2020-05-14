@@ -51,20 +51,14 @@ class League extends React.Component {
 
   componentDidMount() {
     this.shouldInitialize(this.props.league);
-    this.checkForUpdate();
-    // Check every hour
-    this.timer = setInterval(this.checkForUpdate, 3600000);
   }
 
   componentDidUpdate() {
     this.shouldInitialize(this.props.league);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer)
-  }
-
   render() {
+    checkDeployedVersion();
     const league = this.props.league;
 
     // Do not show anything about a game if there is not season.

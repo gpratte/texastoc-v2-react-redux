@@ -1,15 +1,14 @@
-import {server, ui} from '../utils/api'
+import {server} from '../utils/api'
 import leagueStore from "./leagueStore";
 import {API_ERROR,
   GOT_LEAGUE_PLAYERS,
   RESET,
   REFRESH,
+  VERSION_CHECK,
   NEW_VERSION} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
 import {clearCacheCurrentGame} from "../current-game/gameClient";
-
-const INTERNAL_VERSION = 2.0;
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -33,6 +32,9 @@ export function refreshLeague() {
 }
 
 export function getPlayers(token) {
+  if (!token) {
+    token = leagueStore.getState().token.token;
+  }
   server.get('/api/v2/players', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -77,19 +79,36 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
     });
 }
 
+const INTERNAL_VERSION = "2.0";
+const DELAY_VERSION_CHECK_MILLIS = 3600000;
+
 export function checkDeployedVersion() {
-  console.log("checking version at " + (new Date()));
   if (leagueStore.getState().newVersion) {
+    // Have already flagged that a new version is available
     return;
   }
-  ui.get('/version.json')
-    .then(result => {
-      if (INTERNAL_VERSION !== result.data.version) {
-        leagueStore.dispatch({type: NEW_VERSION})
-      }
-    })
-    .catch(function (error) {
-      // do nothing
-    });
+
+  let checkVersion = false;
+  let versionCheck = leagueStore.getState().versionCheck;
+  if (!versionCheck) {
+    checkVersion = true;
+  } else {
+    if ((new Date()) - versionCheck > DELAY_VERSION_CHECK_MILLIS) {
+       checkVersion = true;
+    }
+  }
+
+  if (checkVersion) {
+    leagueStore.dispatch({type: VERSION_CHECK})
+    server.get('/api/v2/versions')
+      .then(result => {
+        if (INTERNAL_VERSION !== result.data.ui) {
+          leagueStore.dispatch({type: NEW_VERSION})
+        }
+      })
+      .catch(function (error) {
+        // do nothing
+      });
+  }
 }
 

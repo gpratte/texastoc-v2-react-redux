@@ -31,7 +31,8 @@ class CurrentGame extends React.Component {
   }
 
   componentDidMount() {
-    this.shouldInitialize(this.props.league);
+    leagueStore.dispatch({type: GETTING_CURRENT_GAME, flag: true})
+    getCurrentGame();
     this.timer = setInterval(this.check, 4000);
   }
 

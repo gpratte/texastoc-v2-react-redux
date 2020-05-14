@@ -32,7 +32,8 @@ class Season extends React.Component {
   }
 
   componentDidMount() {
-    this.shouldInitialize(this.props.league);
+    leagueStore.dispatch({type: GETTING_SEASON, flag: true})
+    getCurrentSeason();
   }
 
   componentDidUpdate() {
