@@ -48,6 +48,9 @@ To see what was done on a branch compare the code to the previous branch.
 Every hour check the internal version against the deployed version and 
 if they differ force an html reload to pick up the deployed code.
 
+Had to put an API on the server since attempting to read a _version.json_
+file from tomcat proved too difficult (CORS and caching).
+
 ## step-31-clear-game-cache
 Call the server to clear the game cache when refreshing from home page.
 

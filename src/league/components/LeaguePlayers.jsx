@@ -6,8 +6,13 @@ import {EDIT_LEAGUE_PLAYER} from "../leagueActions";
 import {obfuscatePhone, obfuscateEmail, shouldRedirect, redirect} from '../../utils/util'
 import EditLeaguePlayer from "./EditLeaguePlayer";
 import NewVersion from "./NewVersion";
+import {getPlayers} from '../leagueClient';
 
 class LeaguePlayers extends React.Component {
+
+  componentDidMount() {
+    getPlayers();
+  }
 
   renderLeaguePlayers(leaguePlayers) {
     if (!leaguePlayers) {

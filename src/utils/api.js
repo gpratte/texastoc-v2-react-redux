@@ -5,8 +5,3 @@ export const server = axios.create({
   timeout: 30000,
 });
 
-export const ui = axios.create({
-  baseURL: `https://texastoc.com`,
-  timeout: 30000,
-});
-
