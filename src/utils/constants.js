@@ -1,4 +1,4 @@
 
-export const VERSION = "2.0";
-export const CLIENT_URL = "http://localhost:3000"
-export const SERVER_URL = "http://localhost:8080"
+export const VERSION = "2.1";
+export const CLIENT_URL = "https://texastoc.com";
+export const SERVER_URL = "https://texastoc.com/server";

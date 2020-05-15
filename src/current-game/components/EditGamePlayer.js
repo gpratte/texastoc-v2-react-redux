@@ -16,8 +16,30 @@ const tenPlaces = [10,9,8,7,6,5,4,3,2,1]
 
 class EditGamePlayer extends React.Component {
 
-  renderPlaces() {
-    return tenPlaces.map((place) => {
+  renderPlaces(gamePlayer, gamePlayers) {
+    if (!gamePlayer || !gamePlayers) {
+      return null;
+    }
+    // Build an array of the places taken
+    const taken = [];
+    for (let i = 0; i < gamePlayers.length; i++) {
+      if (gamePlayer.id === gamePlayers[i].id) {
+        continue;
+      }
+      if (gamePlayers[i].place && gamePlayers[i].place < 11) {
+        taken.push(gamePlayers[i].place);
+      }
+    }
+
+    // Build an array of 10 places
+    let placesLeft = [...tenPlaces];
+
+    // Remove places taken
+    for (let i = 0; i < taken.length; i++) {
+      placesLeft = placesLeft.filter(plc => plc !== taken[i])
+    }
+
+    return placesLeft.map((place) => {
       return (
         <option key={place} value={place}>{place}</option>
       )
@@ -40,7 +62,8 @@ class EditGamePlayer extends React.Component {
 
   render() {
     const game = this.props.game;
-    let gamePlayer = _.find(game.data.players, {'id': game.editGamePlayerId});
+    const gamePlayers = game.data.players;
+    let gamePlayer = _.find(gamePlayers, {'id': game.editGamePlayerId});
 
     return (
       <div>
@@ -98,7 +121,7 @@ class EditGamePlayer extends React.Component {
                 <Col>
                   <Form.Control as="select" defaultValue={gamePlayer ? (gamePlayer.place ? gamePlayer.place : 11) : 11} id="placeId">
                     <option key={11} value={11}> </option>
-                    {this.renderPlaces()}
+                    {this.renderPlaces(gamePlayer, gamePlayers)}
                   </Form.Control>
                 </Col>
               </Form.Group>

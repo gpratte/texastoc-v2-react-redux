@@ -91,13 +91,19 @@ class GamePlayers extends React.Component {
 
   render() {
     const game = this.props.game;
+    if (!game) {
+      return null;
+    }
+
     const gamePlayers = game.data.players;
     const players = this.props.players;
     const isGameOver = gameOver(gamePlayers);
     const isChop = this.isThereChop(gamePlayers);
+    const numPaidPlayers = game.data.numPaidPlayers;
 
     return (
       <div>
+        <p>Paid Players: {numPaidPlayers}</p>
         <Table striped bordered size="sm">
           <thead>
           <tr>
