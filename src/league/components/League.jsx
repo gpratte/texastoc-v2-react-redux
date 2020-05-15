@@ -19,6 +19,7 @@ import NewSeason from '../../season/components/NewSeason'
 import CurrentGame from '../../current-game/components/CurrentGame'
 import NewGame from '../../current-game/components/NewGame'
 import LeaguePlayers from './LeaguePlayers'
+import Footer from'./Footer'
 import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
 import leagueStore from "./../leagueStore";
@@ -168,6 +169,11 @@ class League extends React.Component {
                   <NewVersion/>
                 </Route>
               </Switch>
+            </Col>
+          </Row>
+          <Row className="justify-content-center text-center">
+            <Col>
+              <Footer league={league}/>
             </Col>
           </Row>
         </Container>
