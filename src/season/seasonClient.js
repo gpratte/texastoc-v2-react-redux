@@ -5,7 +5,11 @@ import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
 import {getCurrentGame} from "../current-game/gameClient";
 
 export function addNewSeason(year) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
+
   const seasonStart = {};
   seasonStart['startYear'] = year;
 
@@ -28,10 +32,12 @@ export function addNewSeason(year) {
     });
 }
 
-export function getCurrentSeason(token) {
-  if (!token) {
-    token = leagueStore.getState().token.token;
+export function getCurrentSeason() {
+  if (!leagueStore.getState().token) {
+    return;
   }
+  const token = leagueStore.getState().token.token;
+
   server.get('/api/v2/seasons/current', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -52,6 +58,9 @@ export function getCurrentSeason(token) {
 }
 
 export function unfinalize(gameId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
 
   server.put('/api/v2/games/' + gameId, {}, {
@@ -77,7 +86,11 @@ export function unfinalize(gameId) {
 }
 
 export function goToGame(gameId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
+
   getCurrentGame(token);
   leagueStore.dispatch({type: REDIRECT, to: '/current-game'})
 }

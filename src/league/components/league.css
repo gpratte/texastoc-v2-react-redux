@@ -8,4 +8,6 @@
     right: 0;
     left: auto;
 }
-
+.shim {
+    margin-top: 5px;
+}

@@ -31,10 +31,12 @@ export function refreshLeague() {
   clearCacheCurrentGame();
 }
 
-export function getPlayers(token) {
-  if (!token) {
-    token = leagueStore.getState().token.token;
+export function getPlayers() {
+  if (!leagueStore.getState().token) {
+    return;
   }
+  const token = leagueStore.getState().token.token;
+
   server.get('/api/v2/players', {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -49,6 +51,11 @@ export function getPlayers(token) {
 }
 
 export function updatePlayer(playerId, firstName, lastName, phone, email, password) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   const updatePlayerRequest = {
     id: parseInt('' + playerId),
     firstName: firstName,
@@ -57,8 +64,6 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
     email: email,
     password: password
   };
-
-  const token = leagueStore.getState().token.token;
 
   server.put('/api/v2/players/' + playerId, updatePlayerRequest, {
     headers: {
@@ -79,7 +84,6 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
     });
 }
 
-const INTERNAL_VERSION = "2.0";
 const DELAY_VERSION_CHECK_MILLIS = 3600000;
 
 export function checkDeployedVersion() {
@@ -87,6 +91,7 @@ export function checkDeployedVersion() {
     // Have already flagged that a new version is available
     return;
   }
+  const internalVersion = leagueStore.getState().version;
 
   let checkVersion = false;
   let versionCheck = leagueStore.getState().versionCheck;
@@ -102,7 +107,8 @@ export function checkDeployedVersion() {
     leagueStore.dispatch({type: VERSION_CHECK})
     server.get('/api/v2/versions')
       .then(result => {
-        if (INTERNAL_VERSION !== result.data.ui) {
+        const externalVersion = '' + result.data.ui;
+        if (internalVersion !== externalVersion) {
           leagueStore.dispatch({type: NEW_VERSION})
         }
       })

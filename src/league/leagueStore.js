@@ -19,7 +19,8 @@ export const seed = {
     seasonNotFound: false
   },
   token: null,
-  apiError: null
+  apiError: null,
+  version: "2.0"
 }
 
 const store = createStore(leagueReducer, seed);

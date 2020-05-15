@@ -10,13 +10,17 @@ import {
 import {getCurrentSeason} from "../season/seasonClient";
 
 export function addNewGame(month, day, year, hostId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   let createGameRequest = {};
   createGameRequest.hostId = parseInt('' + hostId);
   createGameRequest.date = year + '-' + month + '-' + day;
   createGameRequest.transportRequired = false;
   createGameRequest.doubleBuyIn = false;
 
-  const token = leagueStore.getState().token.token;
 
   server.post('/api/v2/games', createGameRequest, {
     headers: {
@@ -40,10 +44,12 @@ export function addNewGame(month, day, year, hostId) {
     });
 }
 
-export function getCurrentGame(token) {
-  if (!token) {
-    token = leagueStore.getState().token.token;
+export function getCurrentGame() {
+  if (!leagueStore.getState().token) {
+    return;
   }
+  const token = leagueStore.getState().token.token;
+
   server.get('/api/v2/games', {
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -65,10 +71,12 @@ export function getCurrentGame(token) {
     });
 }
 
-export function clearCacheCurrentGame(token) {
-  if (!token) {
-    token = leagueStore.getState().token.token;
+export function clearCacheCurrentGame() {
+  if (!leagueStore.getState().token) {
+    return;
   }
+  const token = leagueStore.getState().token.token;
+
   server.get('/api/v2/games', {
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -83,6 +91,11 @@ export function clearCacheCurrentGame(token) {
 }
 
 export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   const gameId = leagueStore.getState().game.data.id;
   let createGamePlayerRequest = {};
   createGamePlayerRequest.gameId = parseInt('' + gameId);
@@ -90,8 +103,6 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
   createGamePlayerRequest.buyInCollected = buyIn;
   createGamePlayerRequest.annualTocCollected = toc;
   createGamePlayerRequest.quarterlyTocCollected = qtoc;
-
-  const token = leagueStore.getState().token.token;
 
   server.post('/api/v2/games/' + gameId + '/players', createGamePlayerRequest, {
     headers: {
@@ -108,6 +119,11 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
 }
 
 export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   const gameId = leagueStore.getState().game.data.id;
   let firstTimeGamePlayer = {};
   firstTimeGamePlayer.gameId = gameId;
@@ -117,8 +133,6 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
   firstTimeGamePlayer.buyInCollected = buyIn;
   firstTimeGamePlayer.annualTocCollected = toc;
   firstTimeGamePlayer.quarterlyTocCollected = qtoc;
-
-  const token = leagueStore.getState().token.token;
 
   server.post('/api/v2/games/' + gameId + '/players', firstTimeGamePlayer, {
     headers: {
@@ -136,6 +150,11 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
 }
 
 export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knockedOut, clockAlert, chop) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   const gameId = leagueStore.getState().game.data.id;
   const updateGamePlayerRequest = {
     gamePlayerId: parseInt('' + gamePlayerId),
@@ -149,8 +168,6 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
     roundUpdates: clockAlert,
     chop: chop
   };
-
-  const token = leagueStore.getState().token.token;
 
   server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, updateGamePlayerRequest, {
     headers: {
@@ -172,8 +189,12 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
 }
 
 export function deletePlayer(gamePlayerId) {
-  const gameId = leagueStore.getState().game.data.id;
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
+
+  const gameId = leagueStore.getState().game.data.id;
 
   server.delete('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {
     headers: {
@@ -195,7 +216,11 @@ export function deletePlayer(gamePlayerId) {
 }
 
 export function toggleKnockedOut(gamePlayerId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
+
   const gameId = leagueStore.getState().game.data.id;
 
   server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
@@ -215,13 +240,16 @@ export function toggleKnockedOut(gamePlayerId) {
 }
 
 export function seating(numSeatsPerTable, tableRequests) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
   const gameId = leagueStore.getState().game.data.id;
   let seatingRequest = {};
   seatingRequest.gameId = parseInt('' + gameId);
   seatingRequest.numSeatsPerTable = numSeatsPerTable;
   seatingRequest.tableRequests = tableRequests;
-
-  const token = leagueStore.getState().token.token;
 
   server.post('/api/v2/games/' + gameId + '/seats', seatingRequest, {
     headers: {
@@ -240,8 +268,12 @@ export function seating(numSeatsPerTable, tableRequests) {
 }
 
 export function notifySeating() {
-  const gameId = leagueStore.getState().game.data.id;
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
+
+  const gameId = leagueStore.getState().game.data.id;
 
   server.post('/api/v2/games/' + gameId + '/seats', {}, {
     headers: {
@@ -259,6 +291,9 @@ export function notifySeating() {
 }
 
 export function finalize(gameId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
 
   server.put('/api/v2/games/' + gameId, {}, {
@@ -278,6 +313,9 @@ export function finalize(gameId) {
 }
 
 export function unfinalize(gameId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
   const token = leagueStore.getState().token.token;
 
   server.put('/api/v2/games/' + gameId, {}, {
