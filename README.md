@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-34-reload](#step-34-reload)
 * [step-33-footer](#step-33-footer)
 * [step-32-forced-update](#step-32-forced-update)
 * [step-31-clear-game-cache](#step-31-clear-game-cache)
@@ -44,6 +45,10 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-34-reload
+The home page Refresh button changed to Reload. Reload does an http request
+for the html page (Refresh was calling apis to update the redux store).
 
 ## step-33-footer
 Added a component at the bottom of the main page that shows the 

@@ -2,10 +2,9 @@ import React from "react";
 import './Home.css';
 import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import {redirect, shouldRedirect} from "../utils/util";
-import {refreshLeague, isRefreshing} from '../league/leagueClient'
 import NewVersion from "../league/components/NewVersion";
+import {CLIENT_URL} from "../utils/constants";
 
 const Home = (props) => {
   const league = props.league;
@@ -43,30 +42,11 @@ const Home = (props) => {
       <p className={'main-p'}><Link to="/league/players">
         <Button variant="outline-secondary">Players</Button> </Link>
       </p>
-      {
-        !isRefreshing(league) &&
-        <p className={'main-p'}>
-          <Button variant="outline-secondary" onClick={() => refreshLeague()}>
-          Refresh
-          </Button>
-        </p>
-      }
-      {
-        isRefreshing(league) &&
-        <p className={'main-p'}>
-          <Button variant="outline-secondary">
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-            />
-            <span className="sr-only">Loading...</span>
-            {'  '}Refresh
-          </Button>
-        </p>
-      }
+      <p className={'main-p'}>
+        <Button variant="outline-secondary" href={CLIENT_URL}>
+          Reload
+        </Button>
+      </p>
 
     </div>
   )
