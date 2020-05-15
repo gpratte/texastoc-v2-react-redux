@@ -173,7 +173,7 @@ class League extends React.Component {
           </Row>
           <Row className="justify-content-center text-center">
             <Col>
-              <Footer league={league}/>
+              <Footer/>
             </Col>
           </Row>
         </Container>

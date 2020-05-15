@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {SERVER_URL} from './constants'
 
 export const server = axios.create({
-  baseURL: `https://texastoc.com/server`,
+  baseURL: SERVER_URL,
   timeout: 30000,
 });
 

@@ -1,10 +1,11 @@
 import React from "react";
 import './league.css'
+import {VERSION} from '../../utils/constants'
 
 const Footer = (props) => {
   return (
     <div className={'shim'}>
-      <p>V{props.league.version}</p>
+      <p>V{VERSION}</p>
     </div>
   )
 }

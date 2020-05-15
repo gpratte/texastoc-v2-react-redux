@@ -9,6 +9,7 @@ import {API_ERROR,
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
 import {clearCacheCurrentGame} from "../current-game/gameClient";
+import {VERSION} from '../utils/constants'
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -91,7 +92,6 @@ export function checkDeployedVersion() {
     // Have already flagged that a new version is available
     return;
   }
-  const internalVersion = leagueStore.getState().version;
 
   let checkVersion = false;
   let versionCheck = leagueStore.getState().versionCheck;
@@ -108,7 +108,7 @@ export function checkDeployedVersion() {
     server.get('/api/v2/versions')
       .then(result => {
         const externalVersion = '' + result.data.ui;
-        if (internalVersion !== externalVersion) {
+        if (VERSION !== externalVersion) {
           leagueStore.dispatch({type: NEW_VERSION})
         }
       })
