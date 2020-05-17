@@ -242,7 +242,29 @@ export function toggleKnockedOut(gamePlayerId) {
       const message = error.message ? error.message : error.toString();
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
+}
 
+export function toggleRebuy(gamePlayerId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
+  const gameId = leagueStore.getState().game.data.id;
+
+  server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.rebuy+json'
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
 }
 
 export function seating(numSeatsPerTable, tableRequests) {

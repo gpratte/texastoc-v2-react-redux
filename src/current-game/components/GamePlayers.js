@@ -11,7 +11,7 @@ import {
 import AddExistingPlayer from "./AddExistingPlayer";
 import AddNewPlayer from "./AddNewPlayer";
 import EditGamePlayer from "./EditGamePlayer";
-import {toggleKnockedOut} from "../gameClient";
+import {toggleKnockedOut, toggleRebuy} from "../gameClient";
 import {gameOver} from "../gameUtils";
 
 class GamePlayers extends React.Component {
@@ -29,6 +29,10 @@ class GamePlayers extends React.Component {
 
   toggleKnockedOut(id) {
     toggleKnockedOut(id);
+  }
+
+  toggleRebuy(id) {
+    toggleRebuy(id);
   }
 
   renderAddPlayerButtons(isGameOver) {
@@ -77,7 +81,18 @@ class GamePlayers extends React.Component {
             </Button>
           </td>
           <td>{buyInCollected ? String.fromCharCode(10004) : ''}</td>
-          <td>{rebuyAddOnCollected ? String.fromCharCode(10004) : ''}</td>
+          <td>
+            {
+              isGameOver &&
+              rebuyAddOnCollected ? String.fromCharCode(10004) : ''
+            }
+            {
+              !isGameOver &&
+              <Button variant="link" onClick={() => {this.toggleRebuy(id);}}>
+                {rebuyAddOnCollected ? String.fromCharCode(10004) : String.fromCharCode(248)}
+              </Button>
+            }
+          </td>
           <td>{annualTocCollected ? String.fromCharCode(10004) : ''}</td>
           <td>{quarterlyTocCollected ? String.fromCharCode(10004) : ''}</td>
           {
