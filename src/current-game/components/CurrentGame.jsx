@@ -11,7 +11,7 @@ import Seating from './Seating'
 import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
-import {getCurrentGame} from "../gameClient";
+import {getCurrentGame, getCurrentGameIfNotFinalized} from "../gameClient";
 import {gameOver} from "../gameUtils";
 import {shouldRedirect, redirect} from '../../utils/util';
 import {refreshing} from '../../league/leagueClient'
@@ -45,7 +45,7 @@ class CurrentGame extends React.Component {
   }
 
   check = () => {
-    getCurrentGame();
+    getCurrentGameIfNotFinalized();
   };
 
   // TODO move to utils

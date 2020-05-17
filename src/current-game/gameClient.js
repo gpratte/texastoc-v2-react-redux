@@ -71,6 +71,12 @@ export function getCurrentGame() {
     });
 }
 
+export function getCurrentGameIfNotFinalized() {
+  if (leagueStore.getState().game && leagueStore.getState().game.data && !leagueStore.getState().game.data.finalized) {
+    getCurrentGame();
+  }
+}
+
 export function clearCacheCurrentGame() {
   if (!leagueStore.getState().token) {
     return;
