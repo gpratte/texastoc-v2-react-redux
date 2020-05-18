@@ -49,7 +49,10 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 01 create development environment](#step-01-create-development-environment)
 
 ## step-36-feedback
-https://www.npmjs.com/package/react-datepicker
+Implemented some feedback.
+
+* added a date picker for new game - see https://www.npmjs.com/package/react-datepicker
+* one touch to mark a rebuy
 
 ## step-35-paid-players
 Show the number of paid players in the current game.
