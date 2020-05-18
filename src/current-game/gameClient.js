@@ -15,12 +15,14 @@ export function addNewGame(month, day, year, hostId) {
   }
   const token = leagueStore.getState().token.token;
 
+  month = ('' + ++month).padStart(2, '0');
+  day = ('' + day).padStart(2, '0');
+
   let createGameRequest = {};
   createGameRequest.hostId = parseInt('' + hostId);
   createGameRequest.date = year + '-' + month + '-' + day;
   createGameRequest.transportRequired = false;
   createGameRequest.doubleBuyIn = false;
-
 
   server.post('/api/v2/games', createGameRequest, {
     headers: {
