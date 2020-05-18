@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-36-feedback](#step-36-feedback)
 * [step-35-paid-players](#step-35-paid-players)
 * [step-34-reload](#step-34-reload)
 * [step-33-footer](#step-33-footer)
@@ -46,6 +47,9 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-36-feedback
+https://www.npmjs.com/package/react-datepicker
 
 ## step-35-paid-players
 Show the number of paid players in the current game.
