@@ -53,6 +53,7 @@ Implemented some feedback.
 
 * added a date picker for new game - see https://www.npmjs.com/package/react-datepicker
 * one touch to mark a rebuy
+* notification when a new version is available
 
 ## step-35-paid-players
 Show the number of paid players in the current game.
