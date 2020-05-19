@@ -55,6 +55,8 @@ Implemented some feedback.
 * one touch to mark a rebuy
 * notification when a new version is available
 
+Version 2.3
+
 ## step-35-paid-players
 Show the number of paid players in the current game.
 
