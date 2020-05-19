@@ -26,13 +26,14 @@ import leagueStore from "./../leagueStore";
 import {GETTING_SEASON} from "../../season/seasonActions";
 import {getCurrentSeason} from "../../season/seasonClient";
 import {isLoggedIn, shouldShowGame} from "../../utils/util";
-import {getPlayers, checkDeployedVersion} from "./../leagueClient";
+import {getPlayers, checkDeployedVersion, isNewVersion} from "./../leagueClient";
 
 class League extends React.Component {
 
   userIcon = <i className="fas fa-user-alt"/>
   barsIcon = <i className="fas fa-bars"/>
   homeIcon = <i className="fas fa-home"/>
+  bellIcon = <i className="far fa-bell"/>
 
   shouldInitialize = (league) => {
     const shouldInitialize = isLoggedIn(league) &&
@@ -45,10 +46,6 @@ class League extends React.Component {
       getCurrentSeason(league.token.token);
     }
   }
-
-  checkForUpdate = () => {
-    checkDeployedVersion()
-  };
 
   componentDidMount() {
     this.shouldInitialize(this.props.league);
@@ -74,6 +71,18 @@ class League extends React.Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto"/>
+            {
+              isNewVersion() &&
+              <Nav>
+                <NavDropdown title={this.bellIcon} id="collasible-nav-dropdown">
+                  <LinkContainer exact to={"/new-version"}>
+                    <NavLink>
+                      <Button variant="link">New Version</Button>
+                    </NavLink>
+                  </LinkContainer>
+                </NavDropdown>
+              </Nav>
+            }
             <Nav>
               <NavDropdown title={this.userIcon} id="collasible-nav-dropdown">
                 <LinkContainer exact to={"/login"}>

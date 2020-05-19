@@ -15,7 +15,6 @@ import leagueStore from "../../league/leagueStore";
 import {GETTING_SEASON} from "../seasonActions";
 import {getCurrentSeason} from "../seasonClient";
 import {redirect, shouldRedirect} from "../../utils/util";
-import NewVersion from "../../league/components/NewVersion";
 
 class Season extends React.Component {
 
@@ -43,9 +42,6 @@ class Season extends React.Component {
 
   render() {
     const league = this.props.league;
-    if (league.newVersion) {
-      return <NewVersion/>
-    }
 
     let redirectTo;
     if ((redirectTo = shouldRedirect(league))) {
