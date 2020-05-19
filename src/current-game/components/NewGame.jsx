@@ -1,10 +1,23 @@
 import React from 'react'
+import "react-datepicker/dist/react-datepicker.css";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {addNewGame} from '../gameClient'
 import {shouldRedirect, redirect} from '../../utils/util';
+import DatePicker from "react-datepicker";
 
 class NewGame extends React.Component {
+
+  state = {
+    startDate: new Date()
+  };
+
+  handleChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
 
   renderPlayers(players) {
     return players.map((player, index) => {
@@ -19,12 +32,11 @@ class NewGame extends React.Component {
 
   addNewGame = (e) => {
     e.preventDefault();
-    const date = e.target.elements.dateId.value;
-    const mmddyyyy = date.split('/')
-
     const hostId = e.target.elements.hostId.value;
-
-    addNewGame(mmddyyyy[0], mmddyyyy[1], mmddyyyy[2], hostId);
+    addNewGame(this.state.startDate.getMonth(),
+      this.state.startDate.getDate(),
+      this.state.startDate.getFullYear(),
+      hostId);
   }
 
 
@@ -44,7 +56,11 @@ class NewGame extends React.Component {
         <Form onSubmit={this.addNewGame}>
           <Form.Group>
             <Form.Label>Date</Form.Label>
-            <Form.Control type="text" placeholder="mm/dd/yyyy" id={'dateId'}/>
+              <br/>
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+              />
           </Form.Group>
           <Form.Group>
             <Form.Label>Host</Form.Label>

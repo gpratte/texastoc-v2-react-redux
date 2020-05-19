@@ -11,7 +11,7 @@ import {
 import AddExistingPlayer from "./AddExistingPlayer";
 import AddNewPlayer from "./AddNewPlayer";
 import EditGamePlayer from "./EditGamePlayer";
-import {toggleKnockedOut} from "../gameClient";
+import {toggleKnockedOut, toggleRebuy} from "../gameClient";
 import {gameOver} from "../gameUtils";
 
 class GamePlayers extends React.Component {
@@ -29,6 +29,10 @@ class GamePlayers extends React.Component {
 
   toggleKnockedOut(id) {
     toggleKnockedOut(id);
+  }
+
+  toggleRebuy(id) {
+    toggleRebuy(id);
   }
 
   renderAddPlayerButtons(isGameOver) {
@@ -50,7 +54,7 @@ class GamePlayers extends React.Component {
     )
   }
 
-  renderGamePlayers(gamePlayers, isChop, isGameOver) {
+  renderGamePlayers(gamePlayers, isChop, isGameOver, canRebuy) {
     if (!gamePlayers) {
       return;
     }
@@ -77,7 +81,18 @@ class GamePlayers extends React.Component {
             </Button>
           </td>
           <td>{buyInCollected ? String.fromCharCode(10004) : ''}</td>
-          <td>{rebuyAddOnCollected ? String.fromCharCode(10004) : ''}</td>
+          <td>
+            {
+              (isGameOver || !canRebuy) &&
+              rebuyAddOnCollected ? String.fromCharCode(10004) : ''
+            }
+            {
+              (!isGameOver && canRebuy) &&
+              <Button variant="link" onClick={() => {this.toggleRebuy(id);}}>
+                {rebuyAddOnCollected ? String.fromCharCode(10004) : String.fromCharCode(248)}
+              </Button>
+            }
+          </td>
           <td>{annualTocCollected ? String.fromCharCode(10004) : ''}</td>
           <td>{quarterlyTocCollected ? String.fromCharCode(10004) : ''}</td>
           {
@@ -91,7 +106,7 @@ class GamePlayers extends React.Component {
 
   render() {
     const game = this.props.game;
-    if (!game) {
+    if (!game || !game.data) {
       return null;
     }
 
@@ -100,6 +115,7 @@ class GamePlayers extends React.Component {
     const isGameOver = gameOver(gamePlayers);
     const isChop = this.isThereChop(gamePlayers);
     const numPaidPlayers = game.data.numPaidPlayers;
+    const canRebuy = game.data.canRebuy;
 
     return (
       <div>
@@ -124,7 +140,7 @@ class GamePlayers extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.renderGamePlayers(gamePlayers, isChop, isGameOver)}
+          {this.renderGamePlayers(gamePlayers, isChop, isGameOver, canRebuy)}
           </tbody>
         </Table>
 

@@ -3,14 +3,10 @@ import './Home.css';
 import {Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import {redirect, shouldRedirect} from "../utils/util";
-import NewVersion from "../league/components/NewVersion";
 import {CLIENT_URL} from "../utils/constants";
 
 const Home = (props) => {
   const league = props.league;
-  if (league.newVersion) {
-    return <NewVersion/>
-  }
 
   let redirectTo;
   if ((redirectTo = shouldRedirect(league))) {

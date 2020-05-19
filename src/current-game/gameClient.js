@@ -15,12 +15,14 @@ export function addNewGame(month, day, year, hostId) {
   }
   const token = leagueStore.getState().token.token;
 
+  month = ('' + ++month).padStart(2, '0');
+  day = ('' + day).padStart(2, '0');
+
   let createGameRequest = {};
   createGameRequest.hostId = parseInt('' + hostId);
   createGameRequest.date = year + '-' + month + '-' + day;
   createGameRequest.transportRequired = false;
   createGameRequest.doubleBuyIn = false;
-
 
   server.post('/api/v2/games', createGameRequest, {
     headers: {
@@ -69,6 +71,12 @@ export function getCurrentGame() {
         leagueStore.dispatch({type: API_ERROR, message: (error.message ? error.message : error.toString())})
       }
     });
+}
+
+export function getCurrentGameIfNotFinalized() {
+  if (leagueStore.getState().game && leagueStore.getState().game.data && !leagueStore.getState().game.data.finalized) {
+    getCurrentGame();
+  }
 }
 
 export function clearCacheCurrentGame() {
@@ -236,7 +244,29 @@ export function toggleKnockedOut(gamePlayerId) {
       const message = error.message ? error.message : error.toString();
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
+}
 
+export function toggleRebuy(gamePlayerId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+
+  const gameId = leagueStore.getState().game.data.id;
+
+  server.put('/api/v2/games/' + gameId + '/players/' + gamePlayerId, {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.rebuy+json'
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
 }
 
 export function seating(numSeatsPerTable, tableRequests) {

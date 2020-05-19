@@ -118,3 +118,11 @@ export function checkDeployedVersion() {
   }
 }
 
+export function isNewVersion() {
+  if (leagueStore.getState().newVersion) {
+    // Have already flagged that a new version is available
+    return true;
+  }
+  return false;
+}
+
