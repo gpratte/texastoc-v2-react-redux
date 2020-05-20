@@ -11,3 +11,6 @@
 .shim {
     margin-top: 5px;
 }
+.nav-bar-right {
+    display: inline;
+}

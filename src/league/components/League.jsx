@@ -4,9 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/NavLink';
+import Dropdown from 'react-bootstrap/Dropdown'
 import {Link, Route, Switch} from 'react-router-dom';
 import Error from './Error'
 import NewVersion from './NewVersion'
@@ -20,7 +18,6 @@ import CurrentGame from '../../current-game/components/CurrentGame'
 import NewGame from '../../current-game/components/NewGame'
 import LeaguePlayers from './LeaguePlayers'
 import Footer from'./Footer'
-import {LinkContainer} from "react-router-bootstrap";
 import Button from 'react-bootstrap/Button';
 import leagueStore from "./../leagueStore";
 import {GETTING_SEASON} from "../../season/seasonActions";
@@ -64,76 +61,88 @@ class League extends React.Component {
 
     return (
       <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand>
+        <Navbar expand="lg" bg="dark" variant="dark">
+          <Col>
             <Link to="/home" className={'nav-home'}>{this.homeIcon}</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto"/>
-            {
-              isNewVersion() &&
-              <Nav>
-                <NavDropdown title={this.bellIcon} id="collasible-nav-dropdown">
-                  <LinkContainer exact to={"/new-version"}>
-                    <NavLink>
-                      <Button variant="link">New Version</Button>
-                    </NavLink>
-                  </LinkContainer>
-                </NavDropdown>
-              </Nav>
-            }
-            <Nav>
-              <NavDropdown title={this.userIcon} id="collasible-nav-dropdown">
-                <LinkContainer exact to={"/login"}>
-                  <NavLink>
-                    <Button variant="link">Log In/Out</Button>
-                  </NavLink>
-                </LinkContainer>
-              </NavDropdown>
-            </Nav>
-            <Nav>
-              <NavDropdown title={this.barsIcon} id="collasible-nav-dropdown">
-                <LinkContainer exact to={"/home"}>
-                  <NavLink>
-                    <Button variant="link">Home</Button>
-                  </NavLink>
-                </LinkContainer>
-                {
-                  isLoggedIn(league) &&
-                  <LinkContainer exact to={"/season"}>
-                    <NavLink>
-                      <Button variant="link">Season</Button>
-                    </NavLink>
-                  </LinkContainer>
-                }
-                {
-                  isLoggedIn(league) && showGame &&
-                  <LinkContainer exact to={"/current-game"}>
-                    <NavLink>
-                      <Button variant="link">Game</Button>
-                    </NavLink>
-                  </LinkContainer>
-                }
-                {
-                  isLoggedIn(league) && showGame &&
-                  <LinkContainer exact to={"/game/new"}>
-                    <NavLink>
-                      <Button variant="link">New game</Button>
-                    </NavLink>
-                  </LinkContainer>
-                }
-                {
-                  isLoggedIn(league) &&
-                  <LinkContainer exact to={"/league/players"}>
-                    <NavLink>
-                      <Button variant="link">Players</Button>
-                    </NavLink>
-                  </LinkContainer>
-                }
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
+          </Col>
+          <Col>
+            <div className="float-right">
+              {
+                isNewVersion() &&
+                <Dropdown className={'nav-bar-right nav-home'}>
+                  <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
+                    {this.bellIcon}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <Link to="/new-version">
+                        <Button variant="link">New Version</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              }
+
+              <Dropdown className={'nav-bar-right'}>
+                <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
+                  {this.userIcon}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <Link to="/login">
+                      <Button variant="link">Log In/Out</Button>
+                    </Link>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+
+              <Dropdown className={'nav-bar-right'}>
+                <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
+                  {this.barsIcon}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <Link exact to="/home">
+                      <Button variant="link">Home</Button>
+                    </Link>
+                  </Dropdown.Item>
+                  {
+                    isLoggedIn(league) &&
+                    <Dropdown.Item>
+                      <Link exact to="/Season">
+                        <Button variant="link">Season</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  }
+                  {
+                    isLoggedIn(league) && showGame &&
+                    <Dropdown.Item>
+                      <Link exact to="/current-game">
+                        <Button variant="link">Game</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  }
+                  {
+                    isLoggedIn(league) && showGame &&
+                    <Dropdown.Item>
+                      <Link exact to="/game/new">
+                        <Button variant="link">New Game</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  }
+                  {
+                    isLoggedIn(league) &&
+                    <Dropdown.Item>
+                      <Link exact to="/league/players">
+                        <Button variant="link">Players</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  }
+                </Dropdown.Menu>
+              </Dropdown>
+
+            </div>
+          </Col>
         </Navbar>
         <Container className="main-view">
           <Row className="justify-content-center text-center gp">
