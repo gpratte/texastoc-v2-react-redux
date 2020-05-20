@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-37-navbar-icons](#step-37-navbar-icons)
 * [step-36-feedback](#step-36-feedback)
 * [step-35-paid-players](#step-35-paid-players)
 * [step-34-reload](#step-34-reload)
@@ -47,6 +48,12 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-37-navbar-icons
+Always show the nav bar icons. Put another way, do not collapse them when
+the webpage is narrow.
+
+Version 2.4
 
 ## step-36-feedback
 Implemented some feedback.
