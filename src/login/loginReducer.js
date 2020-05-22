@@ -1,3 +1,4 @@
+import {seed} from '../league/leagueStore';
 import {
   LOGGED_IN, LOGGED_OUT
 } from './loginActions'
@@ -8,7 +9,7 @@ function loginReducer(league, action) {
     case LOGGED_IN:
       return Object.assign({}, league, {token: action.token});
     case LOGGED_OUT:
-      return Object.assign({}, league, {token: action.token});
+      return seed;
     default:
   }
 

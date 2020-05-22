@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-38-expired-token](#step-38-expired-token)
 * [step-37-navbar-icons](#step-37-navbar-icons)
 * [step-36-feedback](#step-36-feedback)
 * [step-35-paid-players](#step-35-paid-players)
@@ -48,6 +49,17 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-38-expired-token
+Before calling server check if the token is expired.
+If it is then log out and set the store back to the seed data.
+
+When logging in initialize the store by getting the season, game and players.
+
+Used the jsonwebtoken library to decode the token.
+* npm install jsonwebtoken --save
+
+Version 2.5
 
 ## step-37-navbar-icons
 Always show the nav bar icons. Put another way, do not collapse them when

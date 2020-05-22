@@ -8,12 +8,18 @@ import {
   SEATING_NOTIFIED
 } from './gameActions'
 import {getCurrentSeason} from "../season/seasonClient";
+import {isTokenExpired} from "../utils/util";
 
 export function addNewGame(month, day, year, hostId) {
   if (!leagueStore.getState().token) {
     return;
   }
   const token = leagueStore.getState().token.token;
+
+  if (isTokenExpired(token)) {
+    return;
+  }
+
 
   month = ('' + ++month).padStart(2, '0');
   day = ('' + day).padStart(2, '0');
@@ -46,11 +52,16 @@ export function addNewGame(month, day, year, hostId) {
     });
 }
 
-export function getCurrentGame() {
-  if (!leagueStore.getState().token) {
+export function getCurrentGame(token) {
+  if (!token) {
+    if (!leagueStore.getState().token) {
+      return;
+    }
+    token = leagueStore.getState().token.token;
+  }
+  if (isTokenExpired(token)) {
     return;
   }
-  const token = leagueStore.getState().token.token;
 
   server.get('/api/v2/games', {
     headers: {
@@ -84,6 +95,9 @@ export function clearCacheCurrentGame() {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   server.get('/api/v2/games', {
     headers: {
@@ -103,6 +117,9 @@ export function addExistingPlayer(playerId, buyIn, toc, qtoc) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
   let createGamePlayerRequest = {};
@@ -131,6 +148,9 @@ export function addNewPlayer(firstName, lastName, email, buyIn, toc, qtoc) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
   let firstTimeGamePlayer = {};
@@ -162,6 +182,9 @@ export function updatePlayer(gamePlayerId, buyIn, toc, qtoc, rebuy, place, knock
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
   const updateGamePlayerRequest = {
@@ -201,6 +224,9 @@ export function deletePlayer(gamePlayerId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
 
@@ -228,6 +254,9 @@ export function toggleKnockedOut(gamePlayerId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
 
@@ -251,6 +280,9 @@ export function toggleRebuy(gamePlayerId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
 
@@ -274,6 +306,9 @@ export function seating(numSeatsPerTable, tableRequests) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
   let seatingRequest = {};
@@ -302,6 +337,9 @@ export function notifySeating() {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const gameId = leagueStore.getState().game.data.id;
 
@@ -325,6 +363,9 @@ export function finalize(gameId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   server.put('/api/v2/games/' + gameId, {}, {
     headers: {
@@ -347,6 +388,9 @@ export function unfinalize(gameId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   server.put('/api/v2/games/' + gameId, {}, {
     headers: {

@@ -8,8 +8,9 @@ import {API_ERROR,
   NEW_VERSION} from "./leagueActions";
 import {getCurrentSeason} from "../season/seasonClient";
 import {GETTING_SEASON} from "../season/seasonActions";
-import {clearCacheCurrentGame} from "../current-game/gameClient";
+import {clearCacheCurrentGame, getCurrentGame} from "../current-game/gameClient";
 import {VERSION} from '../utils/constants'
+import {isTokenExpired} from "../utils/util";
 
 export function refreshing(delayMillis) {
   leagueStore.dispatch({type: REFRESH, refresh: true})
@@ -22,21 +23,36 @@ export function isRefreshing(league) {
   return !!league.refresh;
 }
 
-export function refreshLeague() {
-  const league = leagueStore.getState();
+export function refreshLeague(token) {
+  if (!token) {
+    if (!leagueStore.getState().token) {
+      return;
+    }
+    token = leagueStore.getState().token.token;
+  }
+  if (isTokenExpired(token)) {
+    return;
+  }
+
   leagueStore.dispatch({type: RESET})
   leagueStore.dispatch({type: REFRESH, refresh: true})
   leagueStore.dispatch({type: GETTING_SEASON, flag: true})
-  getPlayers(league.token.token);
-  getCurrentSeason(league.token.token);
+  getPlayers(token);
+  getCurrentSeason(token);
+  getCurrentGame(token);
   clearCacheCurrentGame();
 }
 
-export function getPlayers() {
-  if (!leagueStore.getState().token) {
+export function getPlayers(token) {
+  if (!token) {
+    if (!leagueStore.getState().token) {
+      return;
+    }
+    token = leagueStore.getState().token.token;
+  }
+  if (isTokenExpired(token)) {
     return;
   }
-  const token = leagueStore.getState().token.token;
 
   server.get('/api/v2/players', {
     headers: {
@@ -56,6 +72,9 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const updatePlayerRequest = {
     id: parseInt('' + playerId),
