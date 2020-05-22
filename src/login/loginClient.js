@@ -2,12 +2,15 @@ import {server} from '../utils/api'
 import {LOGGED_IN} from './loginActions'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR, REDIRECT} from "../league/leagueActions";
+import {refreshLeague} from "../league/leagueClient";
 
 export function login(email, password) {
   server.post('/login', {email: email, password: password})
     .then(result => {
       leagueStore.dispatch({type: LOGGED_IN, token: result.data.token})
       leagueStore.dispatch({type: REDIRECT, to: '/home'})
+      // Initialize
+      refreshLeague(result.data.token);
     })
     .catch(function (error) {
       leagueStore.dispatch({type: API_ERROR, message: error.toString()})

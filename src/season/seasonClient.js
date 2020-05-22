@@ -1,14 +1,19 @@
 import {server} from '../utils/api'
+import {isTokenExpired} from '../utils/util'
 import leagueStore from "../league/leagueStore";
 import {API_ERROR, REDIRECT, REFRESH} from "../league/leagueActions";
 import {ADDED_NEW_SEASON, GOT_SEASON, SEASON_NOT_FOUND} from './seasonActions'
 import {getCurrentGame} from "../current-game/gameClient";
+
 
 export function addNewSeason(year) {
   if (!leagueStore.getState().token) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   const seasonStart = {};
   seasonStart['startYear'] = year;
@@ -32,11 +37,16 @@ export function addNewSeason(year) {
     });
 }
 
-export function getCurrentSeason() {
-  if (!leagueStore.getState().token) {
+export function getCurrentSeason(token) {
+  if (!token) {
+    if (!leagueStore.getState().token) {
+      return;
+    }
+    token = leagueStore.getState().token.token;
+  }
+  if (isTokenExpired(token)) {
     return;
   }
-  const token = leagueStore.getState().token.token;
 
   server.get('/api/v2/seasons/current', {
     headers: {
@@ -62,6 +72,9 @@ export function unfinalize(gameId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   server.put('/api/v2/games/' + gameId, {}, {
     headers: {
@@ -90,6 +103,9 @@ export function goToGame(gameId) {
     return;
   }
   const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
 
   getCurrentGame(token);
   leagueStore.dispatch({type: REDIRECT, to: '/current-game'})

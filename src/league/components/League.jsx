@@ -19,11 +19,8 @@ import NewGame from '../../current-game/components/NewGame'
 import LeaguePlayers from './LeaguePlayers'
 import Footer from'./Footer'
 import Button from 'react-bootstrap/Button';
-import leagueStore from "./../leagueStore";
-import {GETTING_SEASON} from "../../season/seasonActions";
-import {getCurrentSeason} from "../../season/seasonClient";
 import {isLoggedIn, shouldShowGame} from "../../utils/util";
-import {getPlayers, checkDeployedVersion, isNewVersion} from "./../leagueClient";
+import {checkDeployedVersion, isNewVersion} from "./../leagueClient";
 
 class League extends React.Component {
 
@@ -31,26 +28,6 @@ class League extends React.Component {
   barsIcon = <i className="fas fa-bars"/>
   homeIcon = <i className="fas fa-home"/>
   bellIcon = <i className="far fa-bell"/>
-
-  shouldInitialize = (league) => {
-    const shouldInitialize = isLoggedIn(league) &&
-      league.season.data === null &&
-      league.season.gettingSeason === false &&
-      league.season.seasonNotFound === false;
-    if (shouldInitialize) {
-      getPlayers(league.token.token);
-      leagueStore.dispatch({type: GETTING_SEASON, flag: true})
-      getCurrentSeason(league.token.token);
-    }
-  }
-
-  componentDidMount() {
-    this.shouldInitialize(this.props.league);
-  }
-
-  componentDidUpdate() {
-    this.shouldInitialize(this.props.league);
-  }
 
   render() {
     checkDeployedVersion();

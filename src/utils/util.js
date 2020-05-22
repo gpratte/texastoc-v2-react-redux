@@ -2,7 +2,8 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import leagueStore from "../league/leagueStore";
 import {REDIRECT} from "../league/leagueActions";
-
+import {decode} from "jsonwebtoken";
+import {LOGGED_OUT} from "../login/loginActions";
 
 export function shouldRedirect(league, skipLoginCheck) {
   if (!league) {
@@ -47,3 +48,23 @@ export function obfuscateEmail(email) {
   }
   return obfuscatedEmail;
 }
+
+export function isTokenExpired(token) {
+  if (!token) {
+    return false;
+  }
+  if (!leagueStore.getState().token || !leagueStore.getState().token.token) {
+    return false;
+  }
+
+  const decoded = decode(leagueStore.getState().token.token);
+  const expires = new Date(decoded.exp * 1000);
+  const now = new Date();
+  if (now < expires) {
+    return false;
+  } else {
+    leagueStore.dispatch({type: LOGGED_OUT, token: null})
+    return true;
+  }
+}
+
