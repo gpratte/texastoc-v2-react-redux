@@ -56,6 +56,9 @@ If it is then log out and set the store back to the seed data.
 
 When logging in initialize the store by getting the season, game and players.
 
+Used the jsonwebtoken library to decode the token.
+* npm install jsonwebtoken --save
+
 Version 2.5
 
 ## step-37-navbar-icons
