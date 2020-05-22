@@ -11,7 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-38-expired-token
+* [step-38-expired-token](#step-38-expired-token)
 * [step-37-navbar-icons](#step-37-navbar-icons)
 * [step-36-feedback](#step-36-feedback)
 * [step-35-paid-players](#step-35-paid-players)
