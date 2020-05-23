@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
-import Clock from './Clock'
+import Clock2 from './Clock2'
 import Seating from './Seating'
 import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
@@ -105,7 +105,7 @@ class CurrentGame extends React.Component {
 
         {
           !isGameOver &&
-          <Clock game={game}/>
+          <Clock2 game={game}/>
         }
 
         {/* TODO <GamePlayersRemaining game={game}/>*/}
