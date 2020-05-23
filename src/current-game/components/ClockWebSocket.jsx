@@ -1,32 +1,73 @@
 import React from 'react'
+import './GamePlayers.css'
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
+import {SERVER_URL} from '../../utils/constants';
 import Button from "react-bootstrap/Button";
-import {getClock, resume, pause, back, forward} from '../clockClient'
+import {back, forward, pause, resume} from "../clockClient";
 
 /*
- *
+ * Websocket functionality taken from https://dev.to/finallynero/using-websockets-in-react-4fkp
  */
-class Clock extends React.Component {
-
+class ClockWebSocket extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {clock: null};
-  }
+    // had to connect in the constructor because doing it in the
+    // did mount had a race condition with the will unmount and
+    // in that case the socket would never get closed
+    const socket = this.connect();
 
-  componentDidMount() {
-    this.timer = setInterval(this.check, 900);
+    this.state = {
+      clock: {
+        minutes: 20,
+        seconds: 0,
+        playing: false,
+        thisRound: {
+          name: 'Round 1',
+          smallBlind: 25,
+          bigBlind: 50,
+          ante: 0,
+          duration: 20
+        },
+        nextRound: {
+          name: 'Round 2',
+          smallBlind: 50,
+          bigBlind: 100,
+          ante: 0,
+          duration: 20
+        }
+      },
+      ws: socket
+    };
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer)
+    if (this.state.ws != null) {
+      this.state.ws.close();
+    }
   }
 
-  check = () => {
-    getClock(this.updateClock)
+  connect = () => {
+    let socket = null;
+    try {
+      socket = new SockJS(SERVER_URL + '/socket');
+      const stompClient = Stomp.over(socket);
+      const that = this;
+      stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/clock', data => {
+          const clock = JSON.parse(data.body.replace('\\"', '"'));
+          that.setState({clock});
+        });
+      });
+
+      // Take over the function that prints debug messages
+      stompClient.debug = function (str) {
+        // do nothing
+      };
+    } finally {
+      return socket;
+    }
   };
-
-  updateClock = (clock) => {
-    this.setState({clock: clock})
-  }
 
   render() {
     const clock = this.state.clock;
@@ -92,4 +133,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Clock
+export default ClockWebSocket
