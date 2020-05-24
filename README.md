@@ -54,7 +54,7 @@ step-39-web-sockets-for-real
 ## step-39-web-sockets-for-real
 Using the older stompjs library to listen to the web socket to get the clock.
 
-I had an interesting (frustrating) problem trying to do the right thing and
+For the clock I had an interesting (frustrating) problem trying to do the right thing and
 connect on the componentDidMount function and close the web socket on 
 componentWillUnmount function. When two Clock components are created
 and one is unmounted then there was a race condition where the call to
@@ -63,8 +63,16 @@ websocket was not closed.
 
 Worked around the problem by connecting to the web socket in the constructor.
 
-There is no connection retry logic because I want to move up to a newer
-library that does the connection retry under the covers. 
+Both the clock and the game are using web sockets. The clock component 
+gets the clock data from the web socket and updates the state. The 
+game component igornes the payload of the web socket and calls the 
+getCurrentGame endpoint. Hence the game web socket is used as an event
+that the game has changed.
+
+Every 10 seconds the web socket will be checked. If is it not working then
+it will be closed and a new web socket will attempted to be open. If 
+there is a problem then the clock/game will polled.
+
 
 ## step-38-expired-token
 Before calling server check if the token is expired.
