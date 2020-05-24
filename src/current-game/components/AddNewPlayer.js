@@ -28,6 +28,7 @@ class AddNewPlayer extends React.Component {
     return (
       <div>
         <Modal show={game.showAddNewPlayer}
+               backdrop={'static'}
                onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.addNewGamePlayer}>

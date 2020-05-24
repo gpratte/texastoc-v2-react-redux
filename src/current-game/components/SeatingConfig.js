@@ -112,6 +112,7 @@ class SeatingConfig extends React.Component {
     return (
       <div>
         <Modal show={game.showConfigureSeating}
+               backdrop={'static'}
                onHide={() => leagueStore.dispatch({type: TOGGLE_CONFIGURE_SEATING, show: false})}>
           <Modal.Body>
             <Form onSubmit={this.requestSeating}>

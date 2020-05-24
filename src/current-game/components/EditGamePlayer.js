@@ -67,7 +67,9 @@ class EditGamePlayer extends React.Component {
 
     return (
       <div>
-        <Modal show={game.editGamePlayerId !== null} onHide={() => leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
+        <Modal show={game.editGamePlayerId !== null}
+               backdrop={'static'}
+               onHide={() => leagueStore.dispatch({type: EDIT_GAME_PLAYER, id: null})}>
           <Modal.Body>
             <p className="text-center">
               {gamePlayer ? gamePlayer.firstName : ''}
