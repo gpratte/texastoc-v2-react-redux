@@ -3,6 +3,7 @@ import './currentGame.css'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Spinner from "react-bootstrap/Spinner";
 import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
@@ -14,7 +15,7 @@ import {GETTING_CURRENT_GAME} from "../gameActions";
 import {getCurrentGame} from "../gameClient";
 import {gameOver} from "../gameUtils";
 import {shouldRedirect, redirect} from '../../utils/util';
-import {refreshing} from '../../league/leagueClient'
+import {refreshing, isRefreshing} from '../../league/leagueClient'
 import * as SockJS from "sockjs-client";
 import {SERVER_URL} from "../../utils/constants";
 import * as Stomp from "stompjs";
@@ -133,6 +134,25 @@ class CurrentGame extends React.Component {
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Details
               </Accordion.Toggle>
+              {
+                !isRefreshing(league) &&
+                <Button variant="link" className={'refresh'} onClick={() => this.refreshGame()}>
+                  <i className="fas fa-sync-alt"></i>
+                </Button>
+              }
+              {
+                isRefreshing(league) &&
+                <Button variant="link" disabled={true}>
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Loading...</span>
+                </Button>
+              }
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body><Details game={game}/></Card.Body>
