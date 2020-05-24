@@ -3,20 +3,32 @@ import './currentGame.css'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Spinner from "react-bootstrap/Spinner";
 import {Link} from 'react-router-dom';
 import Details from './Details'
 import GamePlayers from './GamePlayers'
-import Clock from './Clock'
+import ClockWebSocket from './ClockWebSocket'
 import Seating from './Seating'
 import Finalize from './Finalize'
 import leagueStore from "../../league/leagueStore";
 import {GETTING_CURRENT_GAME} from "../gameActions";
-import {getCurrentGame, getCurrentGameIfNotFinalized} from "../gameClient";
+import {getCurrentGame} from "../gameClient";
 import {gameOver} from "../gameUtils";
 import {shouldRedirect, redirect} from '../../utils/util';
-import {refreshing} from '../../league/leagueClient'
+import {refreshing, isRefreshing} from '../../league/leagueClient'
+import * as SockJS from "sockjs-client";
+import {SERVER_URL} from "../../utils/constants";
+import * as Stomp from "stompjs";
 
 class CurrentGame extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      ws: null
+    };
+  }
+
   shouldInitialize = (league) => {
     const shouldInitialize = league.token !== null &&
       league.token.token !== null &&
@@ -30,9 +42,9 @@ class CurrentGame extends React.Component {
   }
 
   componentDidMount() {
+    this.timer = setInterval(this.check, 10000);
     leagueStore.dispatch({type: GETTING_CURRENT_GAME, flag: true})
-    getCurrentGame();
-    this.timer = setInterval(this.check, 4000);
+    this.connect();
   }
 
   componentDidUpdate() {
@@ -43,8 +55,34 @@ class CurrentGame extends React.Component {
     clearInterval(this.timer)
   }
 
+  connect = () => {
+    let socket = null;
+    try {
+      socket = new SockJS(SERVER_URL + '/socket');
+
+      const stompClient = Stomp.over(socket);
+      stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/game', data => {
+          // Game changed, go get it
+          getCurrentGame();
+        });
+      });
+
+      // Take over the function that prints debug messages
+      stompClient.debug = function (str) {
+        // do nothing
+      };
+    } finally {
+      this.setState({ws: socket})
+      getCurrentGame();
+      return socket;
+    }
+  };
+
   check = () => {
-    getCurrentGameIfNotFinalized();
+    //check if websocket instance is closed, if so call `connect` function.
+    const { ws } = this.state;
+    if (!ws || ws.readyState === WebSocket.CLOSED) this.connect();
   };
 
   // TODO move to utils
@@ -96,6 +134,25 @@ class CurrentGame extends React.Component {
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Details
               </Accordion.Toggle>
+              {
+                !isRefreshing(league) &&
+                <Button variant="link" className={'refresh'} onClick={() => this.refreshGame()}>
+                  <i className="fas fa-sync-alt"></i>
+                </Button>
+              }
+              {
+                isRefreshing(league) &&
+                <Button variant="link" disabled={true}>
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  <span className="sr-only">Loading...</span>
+                </Button>
+              }
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body><Details game={game}/></Card.Body>
@@ -105,7 +162,7 @@ class CurrentGame extends React.Component {
 
         {
           !isGameOver &&
-          <Clock game={game}/>
+          <ClockWebSocket game={game}/>
         }
 
         {/* TODO <GamePlayersRemaining game={game}/>*/}

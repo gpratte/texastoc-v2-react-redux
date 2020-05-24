@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+step-39-web-sockets-for-real
 * [step-38-expired-token](#step-38-expired-token)
 * [step-37-navbar-icons](#step-37-navbar-icons)
 * [step-36-feedback](#step-36-feedback)
@@ -49,6 +50,29 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-39-web-sockets-for-real
+Using the older stompjs library to listen to the web socket to get the clock.
+
+For the clock I had an interesting (frustrating) problem trying to do the right thing and
+connect on the componentDidMount function and close the web socket on 
+componentWillUnmount function. When two Clock components are created
+and one is unmounted then there was a race condition where the call to
+setState on the component being unmounted was ignored and hence the 
+websocket was not closed.
+
+Worked around the problem by connecting to the web socket in the constructor.
+
+Both the clock and the game are using web sockets. The clock component 
+gets the clock data from the web socket and updates the state. The 
+game component igornes the payload of the web socket and calls the 
+getCurrentGame endpoint. Hence the game web socket is used as an event
+that the game has changed.
+
+Every 10 seconds the web socket will be checked. If is it not working then
+it will be closed and a new web socket will attempted to be open. If 
+there is a problem then the clock/game will polled.
+
 
 ## step-38-expired-token
 Before calling server check if the token is expired.

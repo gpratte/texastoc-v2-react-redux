@@ -1,12 +1,11 @@
 import React from 'react'
 import './GamePlayers.css'
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
+import {Stomp} from "@stomp/stompjs"
 
 /*
  * Websocket functionality taken from https://dev.to/finallynero/using-websockets-in-react-4fkp
  */
-class Clock extends React.Component {
+class Clock1 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,15 +44,38 @@ class Clock extends React.Component {
    */
   connect = () => {
 
-    const socket = new SockJS('http://localhost:8080/socket');
-    const stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-      console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/greetings', function (data) {
-        console.log('!!! received ' + data)
-      });
-    });
-  };
+    let stompClient;
+
+    const stompConfig = {
+      // Broker URL, should start with ws:// or wss:// - adjust for your broker setup
+      brokerURL: "ws://localhost:8080/socket",
+
+      // Keep it off for production, it can be quit verbose
+      // Skip this key to disable
+      debug: function (str) {
+        console.log('STOMP: ' + str);
+      },
+
+      // If disconnected, it will retry after 200ms
+      reconnectDelay: 200,
+
+      // Subscriptions should be done inside onConnect as those need to reinstated when the broker reconnects
+      onConnect: function (frame) {
+        // The return object has a method called `unsubscribe`
+        stompClient.subscribe('/topic/greetings', function (message) {
+          const payload = JSON.parse(message.body);
+          console.log('!!! ' + payload.message);
+        });
+      }
+    };
+
+    // Create an instance
+    stompClient = Stomp.client(stompConfig);
+
+    // You can set additional configuration here
+
+    // Attempt to connect
+    stompClient.activate();  };
 
   /**
    * utilited by the @function connect to check if the connection is close,
@@ -76,4 +98,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Clock
+export default Clock1

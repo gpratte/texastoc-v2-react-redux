@@ -5,7 +5,7 @@ import {getClock, resume, pause, back, forward} from '../clockClient'
 /*
  *
  */
-class Clock extends React.Component {
+class ClockPolling extends React.Component {
 
   constructor(props) {
     super(props);
@@ -92,4 +92,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Clock
+export default ClockPolling
