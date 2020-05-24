@@ -4,7 +4,7 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {SERVER_URL} from '../../utils/constants';
 import Button from "react-bootstrap/Button";
-import {back, forward, pause, resume} from "../clockClient";
+import {back, forward, pause, resume, getClock} from "../clockClient";
 
 /*
  * Websocket functionality taken from https://dev.to/finallynero/using-websockets-in-react-4fkp
@@ -18,41 +18,33 @@ class ClockWebSocket extends React.Component {
     const socket = this.connect();
 
     this.state = {
-      clock: {
-        minutes: 20,
-        seconds: 0,
-        playing: false,
-        thisRound: {
-          name: 'Round 1',
-          smallBlind: 25,
-          bigBlind: 50,
-          ante: 0,
-          duration: 20
-        },
-        nextRound: {
-          name: 'Round 2',
-          smallBlind: 50,
-          bigBlind: 100,
-          ante: 0,
-          duration: 20
-        }
-      },
+      clock: null,
       ws: socket
     };
   }
 
+  componentDidMount() {
+    this.mounted = true;
+    this.timer = setInterval(this.check, 10000);
+    getClock(this.updateClock)
+  }
+
   componentWillUnmount() {
+    this.mounted = false;
     if (this.state.ws != null) {
       this.state.ws.close();
     }
+    clearInterval(this.timer)
   }
 
   connect = () => {
     let socket = null;
     try {
       socket = new SockJS(SERVER_URL + '/socket');
-      const stompClient = Stomp.over(socket);
+
       const that = this;
+
+      const stompClient = Stomp.over(socket);
       stompClient.connect({}, function (frame) {
         stompClient.subscribe('/topic/clock', data => {
           const clock = JSON.parse(data.body.replace('\\"', '"'));
@@ -65,9 +57,23 @@ class ClockWebSocket extends React.Component {
         // do nothing
       };
     } finally {
+      if (this.mounted) {
+        this.setState({ws: socket})
+        getClock(this.updateClock)
+      }
       return socket;
     }
   };
+
+  check = () => {
+    //check if websocket instance is closed, if so call `connect` function.
+    const { ws } = this.state;
+    if (!ws || ws.readyState === WebSocket.CLOSED) this.connect();
+  };
+
+  updateClock = (clock) => {
+    this.setState({clock: clock})
+  }
 
   render() {
     const clock = this.state.clock;
