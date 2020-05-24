@@ -72,7 +72,9 @@ class ClockWebSocket extends React.Component {
   };
 
   updateClock = (clock) => {
-    this.setState({clock: clock})
+    if (this.mounted) {
+      this.setState({clock: clock})
+    }
   }
 
   render() {
