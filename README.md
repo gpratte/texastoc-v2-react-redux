@@ -73,6 +73,7 @@ Every 10 seconds the web socket will be checked. If is it not working then
 it will be closed and a new web socket will attempted to be open. If 
 there is a problem then the clock/game will polled.
 
+Version 2.6
 
 ## step-38-expired-token
 Before calling server check if the token is expired.

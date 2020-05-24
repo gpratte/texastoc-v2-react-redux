@@ -104,6 +104,7 @@ export function updatePlayer(playerId, firstName, lastName, phone, email, passwo
     });
 }
 
+// 1 hour
 const DELAY_VERSION_CHECK_MILLIS = 3600000;
 
 export function checkDeployedVersion() {
