@@ -166,7 +166,9 @@ class CurrentGame extends React.Component {
         }
 
         {/* TODO <GamePlayersRemaining game={game}/>*/}
-        <GamePlayers game={game} players={this.props.league.players}/>
+        <GamePlayers game={game}
+                     players={league.players}
+                     seasonPlayers={league.season.data.players}/>
         <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
 
         {

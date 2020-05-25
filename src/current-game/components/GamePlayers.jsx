@@ -112,6 +112,7 @@ class GamePlayers extends React.Component {
 
     const gamePlayers = game.data.players;
     const players = this.props.players;
+    const seasonPlayers = this.props.seasonPlayers;
     const isGameOver = gameOver(gamePlayers);
     const isChop = this.isThereChop(gamePlayers);
     const numPaidPlayers = game.data.numPaidPlayers;
@@ -144,7 +145,7 @@ class GamePlayers extends React.Component {
           </tbody>
         </Table>
 
-        <AddExistingPlayer game={game} players={players}/>
+        <AddExistingPlayer game={game} players={players} seasonPlayers={seasonPlayers}/>
         <AddNewPlayer game={game}/>
         <EditGamePlayer game={game}/>
 
