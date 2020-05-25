@@ -19,15 +19,31 @@ import NewGame from '../../current-game/components/NewGame'
 import LeaguePlayers from './LeaguePlayers'
 import Footer from'./Footer'
 import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast'
 import {isLoggedIn, shouldShowGame} from "../../utils/util";
 import {checkDeployedVersion, isNewVersion} from "./../leagueClient";
 
 class League extends React.Component {
 
-  userIcon = <i className="fas fa-user-alt"/>
-  barsIcon = <i className="fas fa-bars"/>
-  homeIcon = <i className="fas fa-home"/>
-  bellIcon = <i className="far fa-bell"/>
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showNotification: false,
+      notificationShown: false
+    };
+  }
+
+  toggleOffShowNotification() {
+    this.setState({showNotification: false, notificationShown: true})
+  }
+
+  componentDidUpdate() {
+    if (isNewVersion() && !this.state.notificationShown) {
+      this.setState({showNotification: true, notificationShown: true})
+    }
+  }
+
 
   render() {
     checkDeployedVersion();
@@ -40,7 +56,9 @@ class League extends React.Component {
       <div>
         <Navbar expand="lg" bg="dark" variant="dark">
           <Col>
-            <Link to="/home" className={'nav-home'}>{this.homeIcon}</Link>
+            <Link to="/home" className={'nav-home'}>
+              <i className="fas fa-home"/>
+            </Link>
           </Col>
           <Col>
             <div className="float-right">
@@ -48,12 +66,12 @@ class League extends React.Component {
                 isNewVersion() &&
                 <Dropdown className={'nav-bar-right nav-home'}>
                   <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
-                    {this.bellIcon}
+                    <i className="far fa-bell"/>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item>
                       <Link to="/new-version">
-                        <Button variant="link">New Version</Button>
+                        <Button variant="link">New Version Available</Button>
                       </Link>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -62,7 +80,7 @@ class League extends React.Component {
 
               <Dropdown className={'nav-bar-right'}>
                 <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
-                  {this.userIcon}
+                  <i className="fas fa-user-alt"/>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item>
@@ -75,7 +93,7 @@ class League extends React.Component {
 
               <Dropdown className={'nav-bar-right'}>
                 <Dropdown.Toggle className={'nav-home'} variant="link" id="dropdown-basic">
-                  {this.barsIcon}
+                  <i className="fas fa-bars"/>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item>
@@ -125,6 +143,23 @@ class League extends React.Component {
           <Row className="justify-content-center text-center gp">
             <Col>
               <Error league={league}/>
+            </Col>
+          </Row>
+          <Row className="justify-content-center text-center">
+            <Col>
+              {
+                this.state.showNotification &&
+                <Toast show={this.state.showNotification}
+                       onClose={() => this.toggleOffShowNotification()}
+                       className={'notification-alert'}>
+                  <Toast.Header>
+                    <strong className="mr-auto">New Notification</strong>
+                  </Toast.Header>
+                  <Toast.Body>
+                    Click/press the bell icon on the top bar.
+                  </Toast.Body>
+                </Toast>
+              }
             </Col>
           </Row>
           <Row className="justify-content-center text-center gp">
