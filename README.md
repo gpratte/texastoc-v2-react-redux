@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-41-notification-popup](#step-41-notification-popup)
 * [step-40-toc-players-first-when-adding-to-game](#step-40-toc-players-first-when-adding-to-game)
 * [step-39-web-sockets-for-real](#step-39-web-sockets-for-real)
 * [step-38-expired-token](#step-38-expired-token)
@@ -51,6 +52,13 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-41-notification-popup
+Show a notification popup (bootstrap Toast) when a new version is found.
+
+The popup is dismissable.
+
+Version 2.8
 
 ## step-40-toc-players-first-when-adding-to-game
 Show the toc players sorted by name, then a separator, then the 
