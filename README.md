@@ -11,7 +11,8 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-39-web-sockets-for-real
+* [step-40-toc-players-first-when-adding-to-game](#step-40-toc-players-first-when-adding-to-game)
+* [step-39-web-sockets-for-real](#step-39-web-sockets-for-real)
 * [step-38-expired-token](#step-38-expired-token)
 * [step-37-navbar-icons](#step-37-navbar-icons)
 * [step-36-feedback](#step-36-feedback)
@@ -50,6 +51,12 @@ step-39-web-sockets-for-real
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-40-toc-players-first-when-adding-to-game
+Show the toc players sorted by name, then a separator, then the 
+other players sorted by name when adding a player to a game.
+
+Version 2.7
 
 ## step-39-web-sockets-for-real
 Using the older stompjs library to listen to the web socket to get the clock.
