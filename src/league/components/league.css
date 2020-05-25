@@ -14,3 +14,6 @@
 .nav-bar-right {
     display: inline;
 }
+.notification-alert {
+    background-color: lightblue;
+}
