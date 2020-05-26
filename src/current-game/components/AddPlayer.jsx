@@ -4,13 +4,21 @@ import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import {
-  TOGGLE_ADD_EXISTING_PLAYER_TO_GAME
-} from '../gameActions'
-import {addExistingPlayer} from "../gameClient";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import {TOGGLE_ADD_PLAYER_TO_GAME} from '../gameActions'
+import {addExistingPlayer, addNewPlayer} from "../gameClient";
 import _ from 'lodash';
 
-class AddExistingPlayer extends React.Component {
+class AddPlayer extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: 'league-player'
+    };
+  }
+
 
   renderPlayers(players, seasonPlayers, gamePlayers) {
     // Remove players already in game
@@ -55,7 +63,9 @@ class AddExistingPlayer extends React.Component {
     );
 
     // Separator
-    seasonPlayersFiltered.push({id: 0, name: '----------------------'})
+    if (seasonPlayersFiltered && seasonPlayersFiltered.length > 0) {
+      seasonPlayersFiltered.push({id: 0, name: '----------------------'})
+    }
 
     // Combine season players followed by players
     seasonPlayersFiltered.push(...playersFiltered2);
@@ -82,16 +92,26 @@ class AddExistingPlayer extends React.Component {
     })
   }
 
-  addExistingPlayer = (e) => {
+  addPlayer = (e) => {
     e.preventDefault();
-    if (e.target.elements.playerId.value === '0') {
-      return;
+    if (this.state.tab === 'league-player') {
+      if (e.target.elements.playerId.value === '0') {
+        return;
+      }
+      leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
+      addExistingPlayer(e.target.elements.playerId.value,
+        e.target.elements.buyInId.checked,
+        e.target.elements.tocId.checked,
+        e.target.elements.qtocId.checked);
+    } else {
+      leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
+      addNewPlayer(e.target.elements.firstNameId.value,
+        e.target.elements.lastNameId.value,
+        e.target.elements.emailId.value,
+        e.target.elements.buyInId.checked,
+        e.target.elements.tocId.checked,
+        e.target.elements.qtocId.checked);
     }
-    leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})
-    addExistingPlayer(e.target.elements.playerId.value,
-      e.target.elements.buyInId.checked,
-      e.target.elements.tocId.checked,
-      e.target.elements.qtocId.checked);
   }
 
   render() {
@@ -105,16 +125,38 @@ class AddExistingPlayer extends React.Component {
 
     return (
       <div>
-        <Modal show={game.showAddExistingPlayer}
+        <Modal show={game.showAddPlayer}
                backdrop={'static'}
-               onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})}>
+               onHide={() => leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})}>
           <Modal.Body>
-            <Form onSubmit={this.addExistingPlayer}>
-              <Form.Group>
-                <Form.Control as="select" id="playerId">
-                  {this.renderPlayers(players, seasonPlayers, gamePlayers)}
-                </Form.Control>
-              </Form.Group>
+            <Form onSubmit={this.addPlayer}>
+              <Tabs className="style1"
+                    defaultActiveKey="league-player"
+                    onSelect = {key => this.setState({tab: key}) }
+                    id="uncontrolled-tab-example">
+                <Tab className="style2" eventKey="league-player" title="League Player&nbsp;&nbsp;&nbsp;&nbsp;">
+                  <Form.Group>
+                    <Form.Control as="select" id="playerId">
+                      {this.renderPlayers(players, seasonPlayers, gamePlayers)}
+                    </Form.Control>
+                  </Form.Group>
+                </Tab>
+                <Tab className="style2" eventKey="new-player" title="&nbsp;&nbsp;&nbsp;&nbsp;New Player">
+                  <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="First" id={'firstNameId'}/>
+                    <Form.Control type="text" placeholder="Last" id={'lastNameId'}/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" id={'emailId'}/>
+                    <Form.Text className="text-muted">
+                      Needed to login
+                    </Form.Text>
+                  </Form.Group>
+                </Tab>
+              </Tabs>
+
               <Form.Check inline
                           type={'checkbox'}
                           id={'buyInId'}
@@ -132,7 +174,7 @@ class AddExistingPlayer extends React.Component {
               />
               <Modal.Footer>
                 <Button variant="secondary" onClick={() => {
-                  leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: false})
+                  leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
                 }}>
                   Cancel
                 </Button>
@@ -148,4 +190,4 @@ class AddExistingPlayer extends React.Component {
   }
 }
 
-export default AddExistingPlayer
+export default AddPlayer

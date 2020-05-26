@@ -1,6 +1,5 @@
 import {
-  TOGGLE_ADD_EXISTING_PLAYER_TO_GAME,
-  TOGGLE_ADD_NEW_PLAYER_TO_GAME,
+  TOGGLE_ADD_PLAYER_TO_GAME,
   TOGGLE_CONFIGURE_SEATING,
   EDIT_GAME_PLAYER,
   GETTING_CURRENT_GAME,
@@ -14,10 +13,8 @@ import {
 function currentGameReducer(game, action) {
 
   switch (action.type) {
-    case TOGGLE_ADD_EXISTING_PLAYER_TO_GAME:
-      return Object.assign({}, game, {showAddExistingPlayer: action.show});
-    case TOGGLE_ADD_NEW_PLAYER_TO_GAME:
-      return Object.assign({}, game, {showAddNewPlayer: action.show});
+    case TOGGLE_ADD_PLAYER_TO_GAME:
+      return Object.assign({}, game, {showAddPlayer: action.show});
     case TOGGLE_CONFIGURE_SEATING:
       return Object.assign({}, game,
         {showConfigureSeating: action.show},

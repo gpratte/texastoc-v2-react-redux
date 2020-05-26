@@ -5,8 +5,7 @@ export const seed = {
   players: [],
   game: {
     data: null,
-    showAddExistingPlayer: false,
-    showAddNewPlayer: false,
+    showAddPlayer: false,
     showConfigureSeating: false,
     showConfigureSeatingKey: 1,
     editGamePlayerId: null,
