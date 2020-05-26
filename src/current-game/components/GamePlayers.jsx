@@ -4,12 +4,10 @@ import leagueStore from '../../league/leagueStore'
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import {
-  TOGGLE_ADD_EXISTING_PLAYER_TO_GAME,
-  TOGGLE_ADD_NEW_PLAYER_TO_GAME,
+  TOGGLE_ADD_PLAYER_TO_GAME,
   EDIT_GAME_PLAYER
 } from '../gameActions'
-import AddExistingPlayer from "./AddExistingPlayer";
-import AddNewPlayer from "./AddNewPlayer";
+import AddPlayer from "./AddPlayer";
 import EditGamePlayer from "./EditGamePlayer";
 import {toggleKnockedOut, toggleRebuy} from "../gameClient";
 import {gameOver} from "../gameUtils";
@@ -42,13 +40,8 @@ class GamePlayers extends React.Component {
     return (
       <div>
         <Button variant="primary"
-                onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_EXISTING_PLAYER_TO_GAME, show: true})}>
+                onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: true})}>
           Add Player
-        </Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="primary"
-                onClick={() => leagueStore.dispatch({type: TOGGLE_ADD_NEW_PLAYER_TO_GAME, show: true})}>
-          Add New Player
         </Button>
       </div>
     )
@@ -145,8 +138,7 @@ class GamePlayers extends React.Component {
           </tbody>
         </Table>
 
-        <AddExistingPlayer game={game} players={players} seasonPlayers={seasonPlayers}/>
-        <AddNewPlayer game={game}/>
+        <AddPlayer game={game} players={players} seasonPlayers={seasonPlayers}/>
         <EditGamePlayer game={game}/>
 
         {this.renderAddPlayerButtons(isGameOver)}
