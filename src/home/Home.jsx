@@ -26,8 +26,14 @@ const Home = (props) => {
         </p>
         : ''
       }
-      <p className={'main-p'}><Link to="/season">
-        <Button variant="outline-secondary"> Season </Button> </Link>
+      <p className={'main-p'}>
+        <Link to="/seasons">
+          <Button variant="outline-secondary">Past Seasons</Button>
+        </Link>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Link to="/season">
+          <Button variant="outline-secondary">Current Season</Button>
+        </Link>
       </p>
       {
         showGame &&
