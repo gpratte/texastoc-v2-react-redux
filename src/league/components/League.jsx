@@ -13,6 +13,7 @@ import Login from '../../login/components/Login'
 import ForgotPassword from '../../login/components/ForgotPassword'
 import ForgotPasswordCode from '../../login/components/ForgotPasswordCode'
 import Season from '../../season/components/Season'
+import PastSeasons from '../../past-seasons/PastSeasons'
 import NewSeason from '../../season/components/NewSeason'
 import CurrentGame from '../../current-game/components/CurrentGame'
 import NewGame from '../../current-game/components/NewGame'
@@ -102,34 +103,10 @@ class League extends React.Component {
                     </Link>
                   </Dropdown.Item>
                   {
-                    isLoggedIn(league) &&
-                    <Dropdown.Item>
-                      <Link exact to="/Season">
-                        <Button variant="link">Season</Button>
-                      </Link>
-                    </Dropdown.Item>
-                  }
-                  {
-                    isLoggedIn(league) && showGame &&
-                    <Dropdown.Item>
-                      <Link exact to="/current-game">
-                        <Button variant="link">Game</Button>
-                      </Link>
-                    </Dropdown.Item>
-                  }
-                  {
                     isLoggedIn(league) && showGame &&
                     <Dropdown.Item>
                       <Link exact to="/game/new">
                         <Button variant="link">New Game</Button>
-                      </Link>
-                    </Dropdown.Item>
-                  }
-                  {
-                    isLoggedIn(league) &&
-                    <Dropdown.Item>
-                      <Link exact to="/league/players">
-                        <Button variant="link">Players</Button>
                       </Link>
                     </Dropdown.Item>
                   }
@@ -182,6 +159,9 @@ class League extends React.Component {
                 </Route>
                 <Route exact path='/season'>
                   <Season league={league}/>
+                </Route>
+                <Route exact path='/seasons'>
+                  <PastSeasons/>
                 </Route>
                 <Route path='/season/new'>
                   <NewSeason league={league}/>
