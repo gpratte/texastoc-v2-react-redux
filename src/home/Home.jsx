@@ -30,7 +30,7 @@ const Home = (props) => {
         <Link to="/seasons">
           <Button variant="outline-secondary">Past Seasons</Button>
         </Link>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;
         <Link to="/season">
           <Button variant="outline-secondary">Current Season</Button>
         </Link>

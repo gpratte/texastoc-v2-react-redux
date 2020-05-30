@@ -104,6 +104,9 @@ class AddPlayer extends React.Component {
         e.target.elements.tocId.checked,
         e.target.elements.qtocId.checked);
     } else {
+      if (!e.target.elements.firstNameId.value && !e.target.elements.lastNameId.value) {
+        return;
+      }
       leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
       addNewPlayer(e.target.elements.firstNameId.value,
         e.target.elements.lastNameId.value,
