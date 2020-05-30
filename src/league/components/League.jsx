@@ -14,6 +14,7 @@ import ForgotPassword from '../../login/components/ForgotPassword'
 import ForgotPasswordCode from '../../login/components/ForgotPasswordCode'
 import Season from '../../season/components/Season'
 import PastSeasons from '../../past-seasons/PastSeasons'
+import Rounds from './Rounds'
 import NewSeason from '../../season/components/NewSeason'
 import CurrentGame from '../../current-game/components/CurrentGame'
 import NewGame from '../../current-game/components/NewGame'
@@ -162,6 +163,9 @@ class League extends React.Component {
                 </Route>
                 <Route exact path='/seasons'>
                   <PastSeasons/>
+                </Route>
+                <Route exact path='/league/rounds'>
+                  <Rounds/>
                 </Route>
                 <Route path='/season/new'>
                   <NewSeason league={league}/>

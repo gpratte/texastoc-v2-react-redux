@@ -26,15 +26,6 @@ const Home = (props) => {
         </p>
         : ''
       }
-      <p>
-        <Link to="/seasons">
-          <Button variant="outline-secondary">Past Seasons</Button>
-        </Link>
-        &nbsp;
-        <Link to="/season">
-          <Button variant="outline-secondary">Current Season</Button>
-        </Link>
-      </p>
       {
         showGame &&
         <p>
@@ -44,8 +35,21 @@ const Home = (props) => {
         </p>
       }
       <p>
+        <Link to="/season">
+          <Button variant="outline-secondary">Current Season</Button>
+        </Link>
+        &nbsp;
+        <Link to="/seasons">
+          <Button variant="outline-secondary">&nbsp;Past Seasons&nbsp;</Button>
+        </Link>
+      </p>
+      <p>
         <Link to="/league/players">
           <Button variant="outline-secondary">Players</Button>
+        </Link>
+        &nbsp;
+        <Link to="/league/rounds">
+          <Button variant="outline-secondary">Rounds</Button>
         </Link>
       </p>
       <p>
