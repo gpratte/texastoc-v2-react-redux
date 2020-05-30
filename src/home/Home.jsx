@@ -26,32 +26,45 @@ const Home = (props) => {
         </p>
         : ''
       }
+      <p>The stuff you are most interested in...</p>
       {
         showGame &&
         <p>
+          <Link to="/season">
+            <Button variant="outline-secondary">Current Season</Button>
+          </Link>
+          &nbsp;
           <Link to="/current-game">
             <Button variant="outline-secondary"> Game </Button>
           </Link>
         </p>
       }
+      {
+        !showGame &&
+        <p>
+          <Link to="/season">
+            <Button variant="outline-secondary">Current Season</Button>
+          </Link>
+        </p>
+      }
+      <p>The other stuff you'll look at from time to time...</p>
       <p>
-        <Link to="/season">
-          <Button variant="outline-secondary">Current Season</Button>
-        </Link>
-        &nbsp;
         <Link to="/seasons">
           <Button variant="outline-secondary">&nbsp;Past Seasons&nbsp;</Button>
         </Link>
-      </p>
-      <p>
+        &nbsp;
         <Link to="/league/players">
           <Button variant="outline-secondary">Players</Button>
         </Link>
+      </p>
+      <p>The other stuff you might look at once...</p>
+      <p>
         &nbsp;
         <Link to="/league/rounds">
           <Button variant="outline-secondary">Rounds</Button>
         </Link>
       </p>
+      <p>If the application doesn't seem to be working right...</p>
       <p>
         <Button variant="outline-secondary" href={CLIENT_URL}>
           Reload
