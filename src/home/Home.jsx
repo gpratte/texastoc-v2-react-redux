@@ -26,7 +26,7 @@ const Home = (props) => {
         </p>
         : ''
       }
-      <p className={'main-p'}>
+      <p>
         <Link to="/seasons">
           <Button variant="outline-secondary">Past Seasons</Button>
         </Link>
@@ -37,14 +37,18 @@ const Home = (props) => {
       </p>
       {
         showGame &&
-        <p className={'main-p'}><Link to="/current-game">
-          <Button variant="outline-secondary"> Game </Button> </Link>
+        <p>
+          <Link to="/current-game">
+            <Button variant="outline-secondary"> Game </Button>
+          </Link>
         </p>
       }
-      <p className={'main-p'}><Link to="/league/players">
-        <Button variant="outline-secondary">Players</Button> </Link>
+      <p>
+        <Link to="/league/players">
+          <Button variant="outline-secondary">Players</Button>
+        </Link>
       </p>
-      <p className={'main-p'}>
+      <p>
         <Button variant="outline-secondary" href={CLIENT_URL}>
           Reload
         </Button>

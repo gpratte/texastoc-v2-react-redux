@@ -54,18 +54,6 @@ class PastSeasons extends React.Component {
     )
   }
 
-  renderPastSeasons(pastSeasons) {
-    if (!pastSeasons) {
-      return;
-    }
-    return pastSeasons.map((pastSeason, index) => {
-      return (
-        this.renderPastSeason(pastSeason)
-      )
-    })
-  }
-
-
   render() {
     if (!this.state.seasons) {
       return (
@@ -77,12 +65,11 @@ class PastSeasons extends React.Component {
       );
     }
 
-    return (
-      <div>
-        <h1>Past Seasons</h1>
-        {this.renderPastSeasons(this.state.seasons)}
-      </div>
-    )
+    return this.state.seasons.map((pastSeason, index) => {
+      return (
+        this.renderPastSeason(pastSeason)
+      )
+    })
 
   }
 }

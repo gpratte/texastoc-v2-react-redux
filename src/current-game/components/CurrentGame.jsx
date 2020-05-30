@@ -135,13 +135,13 @@ class CurrentGame extends React.Component {
                 Details
               </Accordion.Toggle>
               {
-                !isRefreshing(league) &&
+                !isGameOver && !isRefreshing(league) &&
                 <Button variant="link" className={'refresh'} onClick={() => this.refreshGame()}>
                   <i className="fas fa-sync-alt"></i>
                 </Button>
               }
               {
-                isRefreshing(league) &&
+                !isGameOver && isRefreshing(league) &&
                 <Button variant="link" disabled={true}>
                   <Spinner
                     as="span"
