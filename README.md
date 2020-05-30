@@ -11,7 +11,8 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
-step-43-past-seasons
+* [step-44-clock-rounds](#step-44-clock-rounds)
+* [step-43-past-seasons](#step-43-past-seasons)
 * [step-42-combine-add-player](#step-42-combine-add-player)
 * [step-41-notification-popup](#step-41-notification-popup)
 * [step-40-toc-players-first-when-adding-to-game](#step-40-toc-players-first-when-adding-to-game)
@@ -54,6 +55,11 @@ step-43-past-seasons
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-44-clock-rounds
+Link on the home page to a component that shows the clock rounds.
+
+Version 2.11
 
 ## step-43-past-seasons
 Show the past seasons.
