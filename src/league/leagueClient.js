@@ -191,3 +191,33 @@ export function getPoints(callback) {
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function deletePlayer(playerId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
+
+  server.delete('/api/v2/players/' + playerId, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      getPlayers(token);
+    })
+    .catch(function (error) {
+      let message;
+      if (error.response && error.response.status && error.response.status === 403) {
+        message = "You are not authorized to delete the player";
+      } else if (error.response && error.response.status && error.response.status === 409) {
+        message = "Cannot delete a player that has played in a game";
+      } else {
+        message = error.message ? error.message : error.toString();
+      }
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
