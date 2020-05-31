@@ -96,6 +96,7 @@ class AddPlayer extends React.Component {
     e.preventDefault();
     if (this.state.tab === 'league-player') {
       if (e.target.elements.playerId.value === '0') {
+        alert("Select a player");
         return;
       }
       leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
@@ -105,6 +106,7 @@ class AddPlayer extends React.Component {
         e.target.elements.qtocId.checked);
     } else {
       if (!e.target.elements.firstNameId.value && !e.target.elements.lastNameId.value) {
+        alert("Enter a name");
         return;
       }
       leagueStore.dispatch({type: TOGGLE_ADD_PLAYER_TO_GAME, show: false})
