@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+step-45-points
 * [step-44-clock-rounds](#step-44-clock-rounds)
 * [step-43-past-seasons](#step-43-past-seasons)
 * [step-42-combine-add-player](#step-42-combine-add-player)
@@ -55,6 +56,12 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-45-points
+Show a table of the points allocated for 1st through 10th for the number 
+of players in a game.
+
+Version 2.12
 
 ## step-44-clock-rounds
 Link on the home page to a component that shows the clock rounds.

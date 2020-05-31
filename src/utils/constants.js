@@ -1,5 +1,5 @@
 
-export const VERSION = "2.11";
+export const VERSION = "2.12";
 
 // Local non-tomcat
 // export const CLIENT_URL = "http://localhost:3000";
