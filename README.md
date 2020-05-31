@@ -11,6 +11,7 @@ Each step can be found on the corresponding branch.
 To see what was done on a branch compare the code to the previous branch.
 
 ## Branches
+* [step-47-delete-league-player](#step-47-delete-league-player)
 * [step-46-faq](#step-46-faq)
 * [step-45-points](#step-45-points)
 * [step-44-clock-rounds](#step-44-clock-rounds)
@@ -57,6 +58,11 @@ To see what was done on a branch compare the code to the previous branch.
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-47-delete-league-player
+Only admins can delete a league player and only if the player has never been in a game.
+
+Version 2.14
 
 ## step-46-faq
 Show the Frequently Asked Questions (FAQ)

@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import {EDIT_LEAGUE_PLAYER} from '../leagueActions'
 import _ from "lodash";
 import {obfuscateEmail, obfuscatePhone} from "../../utils/util";
-import {updatePlayer} from '../leagueClient'
+import {updatePlayer, deletePlayer} from '../leagueClient'
 
 class EditLeaguePlayer extends React.Component {
 
@@ -95,6 +95,16 @@ class EditLeaguePlayer extends React.Component {
                               placeholder="Enter password" id={'passwordId'}/>
               </Form.Group>
               <Modal.Footer>
+                <Button variant="danger" className='mr-auto' onClick={() => {
+                  // eslint-disable-next-line no-restricted-globals
+                  const doit = confirm('are you sure?');
+                  if (doit) {
+                    leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: null})
+                    deletePlayer(leaguePlayer.id);
+                  }
+                }}>
+                  Delete
+                </Button>
                 <Button variant="secondary" onClick={() => {
                   leagueStore.dispatch({type: EDIT_LEAGUE_PLAYER, id: null})
                 }}>
