@@ -70,7 +70,7 @@ class GamePlayers extends React.Component {
             }}>
               {roundUpdates ? <i className="far fa-bell"/> : ''}
               {roundUpdates ? ' ' : ''}
-              {name}
+              {name ? name : 'unknown'}
             </Button>
           </td>
           <td>{buyInCollected ? String.fromCharCode(10004) : ''}</td>
