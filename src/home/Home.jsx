@@ -67,6 +67,11 @@ const Home = (props) => {
           <Button variant="outline-secondary">Points</Button>
         </Link>
       </p>
+      <p>
+        <Link to="/league/faq">
+          <Button variant="outline-secondary">FAQ</Button>
+        </Link>
+      </p>
       <p>If the application doesn't seem to be working right...</p>
       <p>
         <Button variant="outline-secondary" href={CLIENT_URL}>
