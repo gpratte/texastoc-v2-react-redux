@@ -47,7 +47,7 @@ const Home = (props) => {
           </Link>
         </p>
       }
-      <p>The other stuff you'll look at from time to time...</p>
+      <p>The stuff you'll look at from time to time...</p>
       <p>
         <Link to="/seasons">
           <Button variant="outline-secondary">&nbsp;Past Seasons&nbsp;</Button>
@@ -57,7 +57,7 @@ const Home = (props) => {
           <Button variant="outline-secondary">Players</Button>
         </Link>
       </p>
-      <p>The other stuff you might look at once...</p>
+      <p>The stuff you might look at once...</p>
       <p>
         <Link to="/league/rounds">
           <Button variant="outline-secondary">Rounds</Button>
@@ -66,13 +66,12 @@ const Home = (props) => {
         <Link to="/league/points">
           <Button variant="outline-secondary">Points</Button>
         </Link>
-      </p>
-      <p>
+        &nbsp;
         <Link to="/league/faq">
           <Button variant="outline-secondary">FAQ</Button>
         </Link>
       </p>
-      <p>If the application doesn't seem to be working right...</p>
+      <p>If the app doesn't seem to be working right...</p>
       <p>
         <Button variant="outline-secondary" href={CLIENT_URL}>
           Reload
