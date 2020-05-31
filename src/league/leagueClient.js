@@ -168,3 +168,26 @@ export function getRounds(callback) {
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
 }
+
+export function getPoints(callback) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
+
+  server.get('/api/v2/league/points', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(result => {
+      callback(result.data);
+    })
+    .catch(function (error) {
+      const message = error.message ? error.message : error.toString();
+      leagueStore.dispatch({type: API_ERROR, message: message})
+    });
+}
