@@ -59,9 +59,12 @@ const Home = (props) => {
       </p>
       <p>The other stuff you might look at once...</p>
       <p>
-        &nbsp;
         <Link to="/league/rounds">
           <Button variant="outline-secondary">Rounds</Button>
+        </Link>
+        &nbsp;
+        <Link to="/league/points">
+          <Button variant="outline-secondary">Points</Button>
         </Link>
       </p>
       <p>If the application doesn't seem to be working right...</p>
