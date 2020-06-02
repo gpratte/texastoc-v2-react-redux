@@ -7,7 +7,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import SeasonDetails from './SeasonDetails'
-import Standings from './Standings'
+import SeasonStandings from './SeasonStandings'
 import Quarters from './Quarters'
 import Games from './Games'
 import {Link} from "react-router-dom";
@@ -91,7 +91,7 @@ class Season extends React.Component {
           </Card>
         </Accordion>
 
-        <Standings value={ {players: season.players} }/>
+        <SeasonStandings value={ {players: season.players} }/>
 
         <Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">
           <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">
