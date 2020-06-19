@@ -145,19 +145,15 @@
     <profiles>
         <profile>
             <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-
                         <configuration>
                             <environmentVariables>
                                 <PUBLIC_URL>http://localhost:8080</PUBLIC_URL>
-<!--                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
+                                <!-- <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
                             </environmentVariables>
                         </configuration>
                     </plugin>
@@ -167,16 +163,18 @@
 
         <profile>
             <id>heroku</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-
                         <configuration>
                             <environmentVariables>
                                 <PUBLIC_URL>https://texastoc.herokuapp.com</PUBLIC_URL>
-                                <!--                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
+                                <!-- <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>-->
                             </environmentVariables>
                         </configuration>
                     </plugin>
