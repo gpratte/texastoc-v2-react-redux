@@ -10,6 +10,30 @@ Each step can be found on the corresponding branch.
 
 To see what was done on a branch compare the code to the previous branch.
 
+## Running 
+The urls for the client and server are defined in the constants.js file. Here is what they are set to when deploying to production.
+
+```
+// Local non-tomcat
+// export const CLIENT_URL = "http://localhost:3000";
+// export const SERVER_URL = "http://localhost:8080";
+
+// Local tomcat
+// export const CLIENT_URL = "http://localhost:8080";
+// export const SERVER_URL = "http://localhost:8080/server";
+
+// Prod
+export const CLIENT_URL = "https://texastoc.com";
+export const SERVER_URL = "https://texastoc.com/server";
+```
+
+Run the client locally by running
+* npm start
+
+Build war for tomcat
+* mvn -P prod clean package
+
+
 ## Branches
 * [step-47-delete-league-player](#step-47-delete-league-player)
 * [step-46-faq](#step-46-faq)
