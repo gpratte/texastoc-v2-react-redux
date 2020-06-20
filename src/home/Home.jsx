@@ -71,7 +71,7 @@ const Home = (props) => {
           <Button variant="outline-secondary">FAQ</Button>
         </Link>
       </p>
-      <p>If the app doesn't seem to be working right...</p>
+      <p>If the app does not seem to be working right...</p>
       <p>
         <Button variant="outline-secondary" href={CLIENT_URL}>
           Reload
