@@ -10,7 +10,7 @@ Each step can be found on the corresponding branch.
 
 To see what was done on a branch compare the code to the previous branch.
 
-## Running 
+# Profiles, Building and Running
 The urls for the client and server are defined in the constants.js file. Here is what they are set to when deploying to production.
 
 ```
@@ -22,19 +22,41 @@ The urls for the client and server are defined in the constants.js file. Here is
 // export const CLIENT_URL = "http://localhost:8080";
 // export const SERVER_URL = "http://localhost:8080/server";
 
+// Heroku
+export const CLIENT_URL = "https://texastoc.herokuapp.com";
+export const SERVER_URL = "https://texastoc-server.herokuapp.com";
+
 // Prod
 export const CLIENT_URL = "https://texastoc.com";
 export const SERVER_URL = "https://texastoc.com/server";
 ```
 
-Run the client locally by running
-* npm start
+### Maven Profile
+The default profile is `heroku` and the production profile is `prod`.
 
-Build war for tomcat
-* mvn -P prod clean package
+To build the default profile
+* `mvn clean package`
+
+To build the prod profile
+* `mvn -P prod clean package`
+
+### Build locally and deploy to Heroku
+Build war for and deploy it to Heroku
+* `mvn -P heroku clean heroku:deploy-war`
+To tail the Heroku logs
+* `heroku logs --app texastoc --tail`
+
+
+### Run locally
+Run the client locally by running
+* `npm start`
+
+### Deploying the prod war instruction
+TODO
 
 
 ## Branches
+* [step-48-CICD-deploy](#step-48-CICD-deploy)
 * [step-47-delete-league-player](#step-47-delete-league-player)
 * [step-46-faq](#step-46-faq)
 * [step-45-points](#step-45-points)
@@ -82,6 +104,13 @@ Build war for tomcat
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-48-CICD-deploy
+Build the war and deploy to travis-ci when code in merged to master.
+
+See the .travis.yml file.
+
+The really odd thing about this is that the code is Javascript but the deploy is Java since a war is being built.
 
 ## step-47-delete-league-player
 Only admins can delete a league player and only if the player has never been in a game.
