@@ -40,19 +40,26 @@ To build the default profile
 To build the prod profile
 * `mvn -P prod clean package`
 
-### Build locally and deploy to Heroku
-Build war for and deploy it to Heroku
-* `mvn -P heroku clean heroku:deploy-war`
+### Build and Run commands
+Run the client locally by running
+* `npm start`
+
+Build the war to run locally on port 9090
+* `mvn -P local clean package`<br/>
+And run it
+* `java -jar target/dependency/webapp-runner.jar --port 9090 target/texastoc-v2-ui.war`
+
+Build the war locally and deploy to Heroku
+* `mvn clean heroku:deploy-war`<br/>
 To tail the Heroku logs
 * `heroku logs --app texastoc --tail`
 
 
-### Run locally
-Run the client locally by running
-* `npm start`
-
 ### Deploying the prod war instruction
-TODO
+Build the war for prod
+* `mvn -P prod clean package`
+
+TODO the rest of the instructions to deploy to production
 
 
 ## Branches
