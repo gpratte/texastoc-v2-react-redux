@@ -44,8 +44,11 @@ To build the prod profile
 Run the client locally by running
 * `npm start`
 
-Build the war to run locally on port 9090
+Build the war to run locally deployed to installed tomcat
 * `mvn -P local clean package`<br/>
+
+Build the war to run locally on port 9090
+* `mvn -P local-webapp-runner clean package`<br/>
 And run it
 * `java -jar target/dependency/webapp-runner.jar --port 9090 target/texastoc-v2-ui.war`
 
