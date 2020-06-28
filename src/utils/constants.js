@@ -1,5 +1,5 @@
 
-export const VERSION = "2.14";
+export const VERSION = "2.15";
 
 // This UI Application (React/Redux)
 // Local non-tomcat
@@ -14,7 +14,7 @@ export const CLIENT_URL = "https://texastoc.herokuapp.com";
 //export const CLIENT_URL = "https://texastoc.com";
 
 
-// Where to find the Server Application (Spring Boot)
+// Where to find the Server Application
 // Local non-tomcat
 //export const SERVER_URL = "http://localhost:8080";
 // Local tomcat
@@ -25,4 +25,3 @@ export const CLIENT_URL = "https://texastoc.herokuapp.com";
 export const SERVER_URL = "https://texastoc-server.herokuapp.com";
 // Production
 //export const SERVER_URL = "https://texastoc.com/server";
-

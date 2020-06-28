@@ -6,6 +6,9 @@ import {login} from '../loginClient'
 import leagueStore from "../../league/leagueStore";
 import {LOGGED_OUT} from "../loginActions";
 import {redirect, shouldRedirect} from "../../utils/util";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
 
 class Login extends React.Component {
 
@@ -23,7 +26,8 @@ class Login extends React.Component {
     if ((redirectTo = shouldRedirect(this.props.league, true))) {
       return redirect(redirectTo);
     }
-    if (this.props.league.token === null || this.props.league.token.token === null) {
+    const league = this.props.league;
+    if (league.token === null || league.token.token === null) {
       return (
         <div>
           <br/>
@@ -37,9 +41,30 @@ class Login extends React.Component {
             <Form.Group>
               <Form.Control type="password" id={'passwordId'} placeholder="Password" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            {
+              !league.waiting &&
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            }
+            {
+              league.waiting &&
+              <Row className="justify-content-center text-center gp">
+                <Col>
+                  <Button variant="primary" disabled={true}>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    <span className="sr-only">Loading...</span>
+                  </Button>
+                </Col>
+              </Row>
+            }
+
           </Form>
           <p className={'main-p'}><Link to="/login/forgot">
             <Button variant="link">Forgot Password</Button> </Link>
