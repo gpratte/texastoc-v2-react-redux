@@ -1,10 +1,11 @@
 import {server} from '../utils/api'
 import {LOGGED_IN} from './loginActions'
 import leagueStore from "../league/leagueStore";
-import {API_ERROR, REDIRECT} from "../league/leagueActions";
+import {API_ERROR, REDIRECT, WAITING} from "../league/leagueActions";
 import {refreshLeague} from "../league/leagueClient";
 
 export function login(email, password) {
+  leagueStore.dispatch({type: WAITING, flag: true})
   server.post('/login', {email: email, password: password})
     .then(result => {
       leagueStore.dispatch({type: LOGGED_IN, token: result.data.token})
@@ -14,6 +15,8 @@ export function login(email, password) {
     })
     .catch(function (error) {
       leagueStore.dispatch({type: API_ERROR, message: error.toString()})
+    }).finally(() => {
+      leagueStore.dispatch({type: WAITING, flag: false})
     });
 }
 

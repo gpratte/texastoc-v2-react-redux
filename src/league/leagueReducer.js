@@ -9,6 +9,7 @@ import {API_ERROR,
   RESET,
   REFRESH,
   VERSION_CHECK,
+  WAITING,
   NEW_VERSION} from "./leagueActions";
 
 function leagueReducer(league, action) {
@@ -29,6 +30,8 @@ function leagueReducer(league, action) {
       return Object.assign({}, league, {newVersion: true});
     case VERSION_CHECK:
       return Object.assign({}, league, {versionCheck: new Date()});
+    case WAITING:
+      return Object.assign({}, league, {waiting: action.flag});
     default:
       return Object.assign({}, league,
         {apiError: null},

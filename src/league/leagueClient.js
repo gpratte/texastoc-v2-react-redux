@@ -125,9 +125,20 @@ export function checkDeployedVersion() {
 
   if (checkVersion) {
     leagueStore.dispatch({type: VERSION_CHECK})
-    server.get('/api/v2/versions')
+
+    let env;
+    const baseUrl = server.defaults.baseURL;
+    if (baseUrl.indexOf('localhost') !== -1) {
+      env = 'local';
+    } else if (baseUrl.indexOf('heroku') !== -1) {
+      env = 'heroku'
+    } else {
+      env = 'prod';
+    }
+
+    server.get('/api/v2/versions?env=' + env)
       .then(result => {
-        const externalVersion = '' + result.data.ui;
+        const externalVersion = '' + result.data;
         if (VERSION !== externalVersion) {
           leagueStore.dispatch({type: NEW_VERSION})
         }
