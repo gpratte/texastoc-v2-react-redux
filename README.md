@@ -66,6 +66,7 @@ TODO the rest of the instructions to deploy to production
 
 
 ## Branches
+* [step-49-spinner-waiting-for-login](#step-49-spinner-waiting-for-login)
 * [step-48-CICD-deploy](#step-48-CICD-deploy)
 * [step-47-delete-league-player](#step-47-delete-league-player)
 * [step-46-faq](#step-46-faq)
@@ -114,6 +115,14 @@ TODO the rest of the instructions to deploy to production
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-49-spinner-waiting-for-login
+Change the word "Login" on the login button to a spinner while waiting for api call to finish.
+
+Since the Heroku server can take a while to be provisioned it was apparent that some visual 
+was needed that the login call was made but waiting for the server to respond.
+
+Also beefed up the call to get the UI version from the server.
 
 ## step-48-CICD-deploy
 Build the war and deploy to travis-ci when code in merged to master.
