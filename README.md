@@ -66,6 +66,7 @@ TODO the rest of the instructions to deploy to production
 
 
 ## Branches
+* [step-50-season-payouts](#step-50-season-payouts)
 * [step-49-spinner-waiting-for-login](#step-49-spinner-waiting-for-login)
 * [step-48-CICD-deploy](#step-48-CICD-deploy)
 * [step-47-delete-league-player](#step-47-delete-league-player)
@@ -115,6 +116,9 @@ TODO the rest of the instructions to deploy to production
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-50-season-payouts
+Show the season payouts after the season standings.
 
 ## step-49-spinner-waiting-for-login
 Change the word "Login" on the login button to a spinner while waiting for api call to finish.
