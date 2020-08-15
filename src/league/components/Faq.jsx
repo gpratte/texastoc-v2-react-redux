@@ -48,7 +48,7 @@ class Faq extends React.Component {
             <li>Guarenteed payout - this is handed over to the top place(s)</li>
             <li>Final Table payouts - these are the payouts for the places for those that qualify to play in the final table</li>
             <li>Cash - there may be a cash payout (this money does not need to go towards an
-                approved WSOP (or equivalent) event</li>
+                approved WSOP equivalent event)</li>
           </ul>
           The payouts are determined by a sliding scale. For example the 2019-2020 season has different
           payouts depending on if the TOC money collected is in the following ranges
