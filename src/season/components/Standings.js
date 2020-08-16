@@ -21,11 +21,12 @@ class Standings extends React.Component {
 
   render() {
     const {players, hideEntries} = this.props.value;
+    let now = new Date();
 
     return (
       <Table striped bordered size="sm">
         <thead>
-        <tr>
+        <tr key={now.getTime()}>
           <th><i className="fas fa-clipboard-list"/></th>
           <th>Name</th>
           <th>Points</th>

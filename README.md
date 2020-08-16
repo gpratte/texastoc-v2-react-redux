@@ -66,6 +66,7 @@ TODO the rest of the instructions to deploy to production
 
 
 ## Branches
+* [step-50-season-payouts](#step-50-season-payouts)
 * [step-49-spinner-waiting-for-login](#step-49-spinner-waiting-for-login)
 * [step-48-CICD-deploy](#step-48-CICD-deploy)
 * [step-47-delete-league-player](#step-47-delete-league-player)
@@ -116,10 +117,13 @@ TODO the rest of the instructions to deploy to production
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
 
+## step-50-season-payouts
+Show the season payouts after the season standings.
+
 ## step-49-spinner-waiting-for-login
 Change the word "Login" on the login button to a spinner while waiting for api call to finish.
 
-Since the Heroku server can take a while to be provisioned it was apparent that some visual 
+Since the Heroku server can take a while to be provisioned it was apparent that some visual
 was needed that the login call was made but waiting for the server to respond.
 
 Also beefed up the call to get the UI version from the server.
@@ -142,7 +146,7 @@ Show the Frequently Asked Questions (FAQ)
 Version 2.13
 
 ## step-45-points
-Show a table of the points allocated for 1st through 10th for the number 
+Show a table of the points allocated for 1st through 10th for the number
 of players in a game.
 
 Version 2.12
@@ -170,7 +174,7 @@ The popup is dismissable.
 Version 2.8
 
 ## step-40-toc-players-first-when-adding-to-game
-Show the toc players sorted by name, then a separator, then the 
+Show the toc players sorted by name, then a separator, then the
 other players sorted by name when adding a player to a game.
 
 Version 2.7
@@ -179,22 +183,22 @@ Version 2.7
 Using the older stompjs library to listen to the web socket to get the clock.
 
 For the clock I had an interesting (frustrating) problem trying to do the right thing and
-connect on the componentDidMount function and close the web socket on 
+connect on the componentDidMount function and close the web socket on
 componentWillUnmount function. When two Clock components are created
 and one is unmounted then there was a race condition where the call to
-setState on the component being unmounted was ignored and hence the 
+setState on the component being unmounted was ignored and hence the
 websocket was not closed.
 
 Worked around the problem by connecting to the web socket in the constructor.
 
-Both the clock and the game are using web sockets. The clock component 
-gets the clock data from the web socket and updates the state. The 
-game component igornes the payload of the web socket and calls the 
+Both the clock and the game are using web sockets. The clock component
+gets the clock data from the web socket and updates the state. The
+game component igornes the payload of the web socket and calls the
 getCurrentGame endpoint. Hence the game web socket is used as an event
 that the game has changed.
 
 Every 10 seconds the web socket will be checked. If is it not working then
-it will be closed and a new web socket will attempted to be open. If 
+it will be closed and a new web socket will attempted to be open. If
 there is a problem then the clock/game will polled.
 
 Version 2.6
@@ -237,11 +241,11 @@ The home page Refresh button changed to Reload. Reload does an http request
 for the html page (Refresh was calling apis to update the redux store).
 
 ## step-33-footer
-Added a component at the bottom of the main page that shows the 
+Added a component at the bottom of the main page that shows the
 version (e.g. 2.0) that is set in the store.
 
 ## step-32-forced-update
-Every hour check the internal version against the deployed version and 
+Every hour check the internal version against the deployed version and
 if they differ force an html reload to pick up the deployed code.
 
 Had to put an API on the server since attempting to read a _version.json_
@@ -255,8 +259,8 @@ Remove the refresh button from the game page.
 ## step-30-final-shake-down
 This is the last branch that made up version 2.0 Minimal Viable Product (MVP)!
 
-A bunch of little things that came up when testing in a production environment. 
-For example use home/lock/unlock icons, only pass the year when creating a season, 
+A bunch of little things that came up when testing in a production environment.
+For example use home/lock/unlock icons, only pass the year when creating a season,
 toggling a player as knocked out was broken, ... .
 
 ## step-29-production-build
@@ -293,13 +297,13 @@ Attempted to use a websocket to get message from the server. Tried three ways
 * Stomp from "@stomp/stompjs
 * browser supported WebSocket (that need no import)
 
-I was able to connect to the websocket and get messages using the first 
-but it is the oldest technology and will 
+I was able to connect to the websocket and get messages using the first
+but it is the oldest technology and will
 require a bunch of code to reconnect.
 
 Was not able to create the websocket for the second.
 
-I was able to connect to the websocket for the third but never received a message. 
+I was able to connect to the websocket for the third but never received a message.
 
 Punting on this for now and will come back to it later.
 
@@ -347,7 +351,7 @@ is made to get the current game and the updated game is dispatched to
 the reducers which updates the UI.
 
 ## step-16-delete-game-player
-Very simple to pass the game player id to a call to the server to delet the game player 
+Very simple to pass the game player id to a call to the server to delet the game player
 and then to call the server to get the game to update the store which updates the UI.
 
 ## step-15-knockout-game-player

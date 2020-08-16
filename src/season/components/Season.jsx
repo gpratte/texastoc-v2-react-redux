@@ -1,15 +1,16 @@
-import React from 'react'
-import './Season.css'
+import React from 'react';
+import './Season.css';
 import moment from 'moment-timezone'
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import SeasonDetails from './SeasonDetails'
-import SeasonStandings from './SeasonStandings'
-import Quarters from './Quarters'
-import Games from './Games'
+import SeasonDetails from './SeasonDetails';
+import SeasonPayouts from './SeasonPayouts';
+import SeasonStandings from './SeasonStandings';
+import Quarters from './Quarters';
+import Games from './Games';
 import {Link} from "react-router-dom";
 import leagueStore from "../../league/leagueStore";
 import {GETTING_SEASON} from "../seasonActions";
@@ -72,8 +73,8 @@ class Season extends React.Component {
     }
 
     const season = league.season.data;
-    const startDate = moment(season.start).tz('America/Chicago').format('YYYY')
-    const endDate = moment(season.end).tz('America/Chicago').format('YYYY')
+    const startDate = moment(season.start).tz('America/Chicago').format('YYYY');
+    const endDate = moment(season.end).tz('America/Chicago').format('YYYY');
 
     return (
       <div>
@@ -92,6 +93,16 @@ class Season extends React.Component {
         </Accordion>
 
         <SeasonStandings value={ {players: season.players} }/>
+
+        {
+          season.estimatedPayouts && season.estimatedPayouts.length > 0 && <p>Estimated Payouts</p>
+        }
+        {
+          season.estimatedPayouts && season.estimatedPayouts.length > 0 && <SeasonPayouts value={season.estimatedPayouts}/>
+        }
+        {
+          season.payouts && season.payouts.length > 0 && <SeasonPayouts value={season.payouts}/>
+        }
 
         <Tabs className="style1" defaultActiveKey="profile" id="uncontrolled-tab-example">
           <Tab className="style2" eventKey="quarters" title="&nbsp;&nbsp;&nbsp;Quarters&nbsp;&nbsp;&nbsp;">

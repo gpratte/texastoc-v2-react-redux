@@ -1,4 +1,5 @@
 import React from 'react'
+import {CLIENT_URL} from '../../utils/constants'
 
 class Faq extends React.Component {
 
@@ -42,9 +43,25 @@ class Faq extends React.Component {
 
         <h3>How is the TOC prize pot determined?</h3>
         <p>
-          If the TOC pot is greater than $10,500 - 1st place gets $2,500; 2nd place gets $2,000; the rest gets played for at the Final Table.
-          <br/><br/>If the TOC pot is between $10,000 and $10,499 - 1st place gets $2,000; 2nd place gets $2,000; the rest gets played for at the Final Table.
-          <br/><br/>If the TOC pot is less than $10,000 - 1st place gets $2,000; the rest gets played for at the Final Table.
+          There are three types of season payouts
+          <ul>
+            <li>Guarenteed payout - this is handed over to the top place(s)</li>
+            <li>Final Table payouts - these are the payouts for the places for those that qualify to play in the final table</li>
+            <li>Cash - there may be a cash payout (this money does not need to go towards an
+                approved WSOP equivalent event)</li>
+          </ul>
+          The payouts are determined by a sliding scale. For example the 2019-2020 season has different
+          payouts depending on if the TOC money collected is in the following ranges
+          <ul>
+            <li>$16,000 - $20,000</li>
+            <li>$20,000 - $24,000</li>
+            <li>$24,000 - $28,000</li>
+          </ul>
+          The season payouts can be seen by looking at the Season this application.
+          <p>
+          See <a href={CLIENT_URL + '/TOCPayoutStructure2019-2020.xlsx'}>TOCPayoutStructure2019-2020.xlsx</a>
+            for the spreadsheet that is used to determine the payouts for the 2019-2020 season.
+          </p>
         </p>
 
         <h3>How does the chop work?</h3>
