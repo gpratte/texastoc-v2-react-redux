@@ -120,6 +120,7 @@ TODO the rest of the instructions to deploy to production
 ## step-50-season-payouts
 Show the season payouts after the season standings.
 
+Version 2.16
 ## step-49-spinner-waiting-for-login
 Change the word "Login" on the login button to a spinner while waiting for api call to finish.
 
