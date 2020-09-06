@@ -47,7 +47,7 @@ class Standings extends React.Component {
                 <td>{name}</td>
                 <td>{points ? points : ''}</td>
                 <td>{entries}</td>
-                <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10060)}</td>
+                <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10005)}</td>
               </tr>
             </>
           )
@@ -67,7 +67,7 @@ class Standings extends React.Component {
                 <td>{name}</td>
                 <td>{points ? points : ''}</td>
                 <td>{entries}</td>
-                <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10060)}</td>
+                <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10005)}</td>
               </tr>
             </>
           )
@@ -78,7 +78,7 @@ class Standings extends React.Component {
             <td>{name}</td>
             <td>{points ? points : ''}</td>
             <td>{entries}</td>
-            <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10060)}</td>
+            <td>{tocPayoutEligible ? String.fromCharCode(10004) : String.fromCharCode(10005)}</td>
           </tr>
         )
       })
