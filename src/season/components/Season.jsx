@@ -16,6 +16,7 @@ import leagueStore from "../../league/leagueStore";
 import {GETTING_SEASON} from "../seasonActions";
 import {getCurrentSeason} from "../seasonClient";
 import {redirect, shouldRedirect} from "../../utils/util";
+import {numGuarenteedPayouts} from '../../utils/util';
 
 class Season extends React.Component {
 
@@ -75,6 +76,7 @@ class Season extends React.Component {
     const season = league.season.data;
     const startDate = moment(season.start).tz('America/Chicago').format('YYYY');
     const endDate = moment(season.end).tz('America/Chicago').format('YYYY');
+    const numGuarenteed = numGuarenteedPayouts(season);
 
     return (
       <div>
@@ -92,7 +94,7 @@ class Season extends React.Component {
           </Card>
         </Accordion>
 
-        <SeasonStandings value={ {players: season.players} }/>
+        <SeasonStandings value={ {players: season.players, guarenteed: numGuarenteed} }/>
 
         {
           season.estimatedPayouts && season.estimatedPayouts.length > 0 && <p>Estimated Payouts</p>

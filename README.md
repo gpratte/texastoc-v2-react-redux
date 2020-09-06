@@ -66,6 +66,7 @@ TODO the rest of the instructions to deploy to production
 
 
 ## Branches
+* [step-51-season-final-table](#step-51-season-final-table)
 * [step-50-season-payouts](#step-50-season-payouts)
 * [step-49-spinner-waiting-for-login](#step-49-spinner-waiting-for-login)
 * [step-48-CICD-deploy](#step-48-CICD-deploy)
@@ -116,6 +117,15 @@ TODO the rest of the instructions to deploy to production
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-51-season-final-table
+The group of 8 in the final table starts after the players that are guareenteed a payout.
+
+If there is 1 player guarenteed the players 2 through 9 are at the final table.
+
+If there are 2 players guarenteed the players 3 through 10 are at the final table.
+
+Et cetera. 
 
 ## step-50-season-payouts
 Show the season payouts after the season standings.
