@@ -68,3 +68,29 @@ export function isTokenExpired(token) {
   }
 }
 
+export function numGuarenteedPayouts(season) {
+  if (!season) {
+    return 0;
+  }
+
+  let payouts;
+
+  if (season.estimatedPayouts) {
+    payouts = season.estimatedPayouts;
+  } else if (season.payouts) {
+    payouts = season.payouts;
+  }
+
+  if (!payouts) {
+    return 0;
+  }
+
+  let numGuarenteed = 0;
+  payouts.forEach(payout => {
+    if (payout.guarenteed) {
+      ++numGuarenteed;
+    }
+  });
+
+  return numGuarenteed;
+}

@@ -1,9 +1,9 @@
 
-export const VERSION = "2.16";
+export const VERSION = "2.18";
 
 // This UI Application (React/Redux)
 // Local non-tomcat
-//export const CLIENT_URL = "http://localhost:3000";
+// export const CLIENT_URL = "http://localhost:3000";
 // Local tomcat
 //export const CLIENT_URL = "http://localhost:8080";
 // Local webapp-runner
@@ -16,7 +16,7 @@ export const CLIENT_URL = "https://texastoc.herokuapp.com";
 
 // Where to find the Server Application
 // Local non-tomcat
-//export const SERVER_URL = "http://localhost:8080";
+// export const SERVER_URL = "http://localhost:8080";
 // Local tomcat
 //export const SERVER_URL = "http://localhost:8080/server";
 // Local webapp-runner
