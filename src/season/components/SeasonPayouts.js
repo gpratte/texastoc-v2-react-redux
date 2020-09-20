@@ -38,7 +38,7 @@ class Payouts extends React.Component {
         <tr>
           <th>Place</th>
           <th>Amount</th>
-          <th>Guarenteed</th>
+          <th>Guaranteed</th>
           <th>Cash</th>
         </tr>
         </thead>

@@ -45,7 +45,7 @@ class Faq extends React.Component {
         <p>
           There are three types of season payouts
           <ul>
-            <li>Guarenteed payout - this is handed over to the top place(s)</li>
+            <li>Guaranteed payout - this is handed over to the top place(s)</li>
             <li>Final Table payouts - these are the payouts for the places for those that qualify to play in the final table</li>
             <li>Cash - there may be a cash payout (this money does not need to go towards an
                 approved WSOP equivalent event)</li>
@@ -57,10 +57,10 @@ class Faq extends React.Component {
             <li>$20,000 - $24,000</li>
             <li>$24,000 - $28,000</li>
           </ul>
-          The season payouts can be seen by looking at the Season this application.
+          The season payouts can be seen by looking at the Season page of this application.
           <p>
           See <a href={CLIENT_URL + '/TOCPayoutStructure2019-2020.xlsx'}>TOCPayoutStructure2019-2020.xlsx</a>
-            for the spreadsheet that is used to determine the payouts for the 2019-2020 season.
+            &nbsp; for the spreadsheet that is used to determine the payouts for the 2019-2020 season.
           </p>
         </p>
 
