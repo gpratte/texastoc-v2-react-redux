@@ -66,6 +66,7 @@ TODO the rest of the instructions to deploy to production
 
 
 ## Branches
+* [step-52-typos-and-grammar](#step-52-typos-and-grammar)
 * [step-51-season-final-table](#step-51-season-final-table)
 * [step-50-season-payouts](#step-50-season-payouts)
 * [step-49-spinner-waiting-for-login](#step-49-spinner-waiting-for-login)
@@ -117,6 +118,9 @@ TODO the rest of the instructions to deploy to production
 * [step 03 navigation bar](#step-03-navigation-bar)
 * [step 02 bootstrap](#step-02-bootstrap)
 * [step 01 create development environment](#step-01-create-development-environment)
+
+## step-52-typos-and-grammar
+Fix misspelled guaranteed in season view and some grammar in the FAQ
 
 ## step-51-season-final-table
 The group of 8 in the final table starts after the players that are guareenteed a payout.

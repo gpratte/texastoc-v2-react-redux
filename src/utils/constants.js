@@ -1,5 +1,5 @@
 
-export const VERSION = "2.18";
+export const VERSION = "2.19";
 
 // This UI Application (React/Redux)
 // Local non-tomcat
