@@ -5,7 +5,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Game from "./Game";
 import {redirect, shouldRedirect} from "../../utils/util";
-import {unfinalize, goToGame} from "../seasonClient";
+import {unfinalize} from "../../current-game/gameClient";
+import {goToGame} from "../seasonClient";
 
 class Games extends React.Component {
 

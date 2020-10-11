@@ -22,7 +22,7 @@ class Finalize extends React.Component {
     return (
       <div>
         <Button variant="primary" onClick={() => finalize(gameId)}>
-          End the game to close the lock <i className="fas fa-lock-open"/>
+          End game  <i className="fas fa-lock-open"/>
         </Button>
       </div>
     );

@@ -17,6 +17,7 @@ import {GETTING_SEASON} from "../seasonActions";
 import {getCurrentSeason} from "../seasonClient";
 import {redirect, shouldRedirect} from "../../utils/util";
 import {numGuarenteedPayouts} from '../../utils/util';
+import Finalize from "./Finalize";
 
 class Season extends React.Component {
 
@@ -114,6 +115,7 @@ class Season extends React.Component {
             <Games value={season.games}/>
           </Tab>
         </Tabs>
+        <Finalize seasonId={season.id} finalized={season.finalized}/>
       </div>
     );
   }

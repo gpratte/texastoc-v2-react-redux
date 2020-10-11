@@ -1,7 +1,7 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
 
-class Standings extends React.Component {
+class SeasonStandings extends React.Component {
 
   renderStandings(players, guarenteed) {
     if (players) {
@@ -35,7 +35,7 @@ class Standings extends React.Component {
         if (showFirstSeperator) {
           return (
             <>
-              <tr key={id + 'x'}>
+              <tr key={id + 1000}>
                 <td>--</td>
                 <td>-------</td>
                 <td>----</td>
@@ -55,7 +55,7 @@ class Standings extends React.Component {
         if (showSecondSeperator) {
           return (
             <>
-              <tr key={id + 'x'}>
+              <tr key={id + 1000}>
                 <td>--</td>
                 <td>-------</td>
                 <td>----</td>
@@ -92,7 +92,7 @@ class Standings extends React.Component {
       <div>
         <Table striped bordered size="sm">
           <thead>
-          <tr>
+          <tr key={0}>
             <th><i className="fas fa-clipboard-list"/></th>
             <th>Name</th>
             <th>Points</th>
@@ -110,4 +110,4 @@ class Standings extends React.Component {
   }
 }
 
-export default Standings
+export default SeasonStandings
