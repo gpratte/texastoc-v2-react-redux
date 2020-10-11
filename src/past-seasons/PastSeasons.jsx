@@ -20,9 +20,15 @@ class PastSeasons extends React.Component {
   }
 
   renderPlayer(player, index) {
-    let name = player.firstName ? player.firstName : '';
-    name += player.firstName && player.lastName ? ' ' : '';
-    name += player.lastName ? player.lastName : '';
+    let name;
+    if (player.name) {
+      name = player.name;
+    } else {
+      name = player.firstName ? player.firstName : '';
+      name += player.firstName && player.lastName ? ' ' : '';
+      name += player.lastName ? player.lastName : '';
+    }
+
     return (
       <tr key={name}>
         <td>{index + 1}</td>

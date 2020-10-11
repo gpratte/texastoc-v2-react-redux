@@ -155,7 +155,9 @@ class CurrentGame extends React.Component {
               }
             </Card.Header>
             <Accordion.Collapse eventKey="0">
-              <Card.Body><Details game={game}/></Card.Body>
+              <Card.Body>
+                <Details game={game}/>
+              </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
@@ -169,8 +171,8 @@ class CurrentGame extends React.Component {
         <GamePlayers game={game}
                      players={league.players}
                      seasonPlayers={league.season.data.players}/>
-        <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
 
+        <Finalize isGameOver={isGameOver} gameId={game.data.id} finalized={game.data.finalized}/>
         {
           !isGameOver &&
           <Accordion>

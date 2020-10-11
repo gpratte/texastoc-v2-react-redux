@@ -67,7 +67,7 @@ export function getCurrentSeason(token) {
     });
 }
 
-export function unfinalize(gameId) {
+export function finalize(seasonId) {
   if (!leagueStore.getState().token) {
     return;
   }
@@ -76,7 +76,32 @@ export function unfinalize(gameId) {
     return;
   }
 
-  server.put('/api/v2/games/' + gameId, {}, {
+  server.put('/api/v2/seasons/' + seasonId, {}, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/vnd.texastoc.finalize+json'
+    }
+  })
+    .then(result => {
+      getCurrentGame(token);
+      getCurrentSeason(token);
+    })
+    .catch(function (error) {
+      leagueStore.dispatch({type: API_ERROR, message: "Cannot end the season, try again later"})
+    });
+}
+
+
+export function unfinalize(seasonId) {
+  if (!leagueStore.getState().token) {
+    return;
+  }
+  const token = leagueStore.getState().token.token;
+  if (isTokenExpired(token)) {
+    return;
+  }
+
+  server.put('/api/v2/seasons/' + seasonId, {}, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/vnd.texastoc.unfinalize+json'
