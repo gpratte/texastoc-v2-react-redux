@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Redirect} from "react-router-dom";
 import {addNewSeason} from '../seasonClient'
 import {redirect, shouldRedirect} from "../../utils/util";
 
@@ -18,12 +17,6 @@ class NewSeason extends React.Component {
     let redirectTo;
     if ((redirectTo = shouldRedirect(this.props.league))) {
       return redirect(redirectTo);
-    }
-
-    if (this.props.league.season.data !== null) {
-      return (
-        <Redirect to='/season'/>
-      )
     }
 
     return (

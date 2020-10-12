@@ -140,6 +140,7 @@ export function checkDeployedVersion() {
       .then(result => {
         const externalVersion = '' + result.data;
         if (VERSION !== externalVersion) {
+          console.log('UI version ' + VERSION + ' is not equal to ' + externalVersion);
           leagueStore.dispatch({type: NEW_VERSION})
         }
       })
