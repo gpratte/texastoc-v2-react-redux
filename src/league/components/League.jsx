@@ -113,6 +113,14 @@ class League extends React.Component {
                       </Link>
                     </Dropdown.Item>
                   }
+                  {
+                    isLoggedIn(league) && showGame &&
+                    <Dropdown.Item>
+                      <Link exact to="/season/new">
+                        <Button variant="link">New Season</Button>
+                      </Link>
+                    </Dropdown.Item>
+                  }
                 </Dropdown.Menu>
               </Dropdown>
 

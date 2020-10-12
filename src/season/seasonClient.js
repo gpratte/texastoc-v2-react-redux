@@ -24,14 +24,15 @@ export function addNewSeason(year) {
     }
   })
     .then(result => {
-      leagueStore.dispatch({type: ADDED_NEW_SEASON, season: result.data})
+      leagueStore.dispatch({type: ADDED_NEW_SEASON, season: result.data});
+      leagueStore.dispatch({type: REDIRECT, to: '/season'})
     })
     .catch(function (error) {
       let message;
       if (error.response && error.response.status && error.response.status === 403) {
         message = "You are not authorized to create a season";
       } else {
-        message = error.message ? error.message : error.toString();
+        message = 'There was a problem creating the new season. Make sure all games are closed and the season is closed.';
       }
       leagueStore.dispatch({type: API_ERROR, message: message})
     });
