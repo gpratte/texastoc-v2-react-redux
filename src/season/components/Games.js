@@ -6,16 +6,11 @@ import Button from "react-bootstrap/Button";
 import Game from "./Game";
 import {redirect, shouldRedirect} from "../../utils/util";
 import {unfinalize} from "../../current-game/gameClient";
-import {goToGame} from "../seasonClient";
 
 class Games extends React.Component {
 
   unlock = (id) => {
     unfinalize(id);
-  }
-
-  goTo = (id) => {
-    goToGame(id);
   }
 
   render() {
