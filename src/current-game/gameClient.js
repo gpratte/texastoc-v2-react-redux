@@ -28,7 +28,6 @@ export function addNewGame(month, day, year, hostId) {
   createGameRequest.hostId = parseInt('' + hostId);
   createGameRequest.date = year + '-' + month + '-' + day;
   createGameRequest.transportRequired = false;
-  createGameRequest.doubleBuyIn = false;
 
   server.post('/api/v2/games', createGameRequest, {
     headers: {
@@ -400,6 +399,8 @@ export function unfinalize(gameId) {
   })
     .then(result => {
       getCurrentGame(token);
+      getCurrentSeason(token);
+      leagueStore.dispatch({type: REDIRECT, to: '/current-game'})
     })
     .catch(function (error) {
       let message;
