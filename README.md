@@ -64,7 +64,5 @@ Build the war for prod
 
 TODO the rest of the instructions to deploy to production
 
-## Current Branch: step-53-end-season
-Add the buttons and API calls to finalize/end/lock a season and to unfinalize/open/unlock.
-
-V2.20
+## Current Branch: 55-unlock-game-from-season
+Unlock a game from the season summary and move to the game view.
